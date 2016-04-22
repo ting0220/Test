@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/zhaoting/Documents/androidStudio/android-sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/support-annotations-23.3.0_e73c43d6482df40ee387af232adaaf9112408be7.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="a9a2dae26826ac723e64fd2e38c5b719d9e2cd56">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/instant-run_494bda37139f8f9fdf8725ef6c5a063030f7305b.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="dad9bb80152467e571dbfbfbc74bc42e5df174b6">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_9c7327f91da9ebd980d189eaca18d4f13c2cf2b9.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.3.0_723d31e0773643cf9b0c046e299cb8601692735e.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.3.0_30715aa4b1d9064c056aec4aafdde468e7ef36a8.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/internal_impl-23.3.0_05fd1409989ed135525838101c5d1f78d5d04869.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.3.0_4ad53160650ef664395927595e7ab42579b87e21.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.3.0_5bdecbde9ae6543c8e67ff5bf16af7c65619e817.jar" />
+    </item>
+
+</items>

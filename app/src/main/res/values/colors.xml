@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <!--白天模式-->
+    <color name="black_day">#333333</color>
+    <color name="orange_day">#EE6E50</color>
+    <color name="white_day">#FFFFFF</color>
+    <color name="gray_day">#808080</color>
+    <color name="night_mask_day">#D9000000</color> <!--透明黑色-->
+
+
+    <!--夜间模式-->
+    <color name="black_night">#8F8F8F</color>
+    <color name="orange_night">#944432</color>
+    <color name="white_night">#222222</color>
+    <color name="gray_night">#2B2B2B</color>
+    <color name="night_mask_night">#D9000000</color>
+
 </resources>
