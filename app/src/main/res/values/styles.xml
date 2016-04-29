@@ -18,4 +18,8 @@
         <item name="background">@color/white_night</item>
     </style>
 
+
+    <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">@color/white_day</item>
+    </style>
 </resources>

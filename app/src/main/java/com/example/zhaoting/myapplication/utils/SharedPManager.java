@@ -3,6 +3,7 @@ package com.example.zhaoting.myapplication.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.bean.LoginMessage;
 
 /**
@@ -84,15 +85,15 @@ public class SharedPManager {
         return getSharedPreferences().getLong("expiration", 0);
     }
 
-//    /**
-//     * theme
-//     */
-//    public void setTheme(int theme){
-//        getSharedPreferences().edit().putInt("theme",theme).commit();
-//    }
-//
-//    public int getTheme(){
-//        return getSharedPreferences().getInt("theme",R.style.App)
-//    }
+    /**
+     * theme
+     */
+    public void setTheme(int theme){
+        getSharedPreferences().edit().putInt("theme",theme).commit();
+    }
+
+    public int getTheme(){
+        return getSharedPreferences().getInt("theme", R.style.AppBaseTheme_Light);
+    }
 
 }

@@ -6,6 +6,7 @@
     <color name="orange_day">#EE6E50</color>
     <color name="white_day">#FFFFFF</color>
     <color name="gray_day">#808080</color>
+    <color name="light_gray">#dfdfdf</color>
     <color name="night_mask_day">#D9000000</color> <!--透明黑色-->
 
 
@@ -15,5 +16,7 @@
     <color name="white_night">#222222</color>
     <color name="gray_night">#2B2B2B</color>
     <color name="night_mask_night">#D9000000</color>
+
+    <color name="blue">#5C99ED</color>
 
 </resources>

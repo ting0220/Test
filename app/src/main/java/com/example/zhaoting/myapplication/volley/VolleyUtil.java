@@ -57,7 +57,7 @@ public class VolleyUtil {
     /**
      * 将Request对象添加进RequestQueue，由于Request有StringRequest,JsonObjectRequest...等多种类型，所以需要用到＊泛型
      */
-    public static <T> void addToRequestQueue(Request<T> req, String tag) {
+    public  <T> void addToRequestQueue(Request<T> req, String tag) {
         //如果tag为空的话，就用默认TAG
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
         getRequestQueue().add(req);
@@ -66,15 +66,15 @@ public class VolleyUtil {
     /**
      * 通过各Request对象的Tag属性取消请求
      */
-    public static void cancelPendingrequesy(Object tag) {
+    public  void cancelPendingrequesy(Object tag) {
         if (reqQueue != null) {
             reqQueue.cancelAll(tag);
         }
     }
 
-    public static void get(String url, final Map<String, String> map, Response.Listener<String> listener, Response.ErrorListener errorListener, String tag) {
+    public  void get(String url, final Map<String, String> map, Response.Listener<String> listener, Response.ErrorListener errorListener, String tag) {
         StringBuilder builder = new StringBuilder(url);
-        builder.append("?");
+//        builder.append("?");
         Set<String> keys = map.keySet();
         Iterator<String> iterator = keys.iterator();
         for (int i = 0; i < map.size(); i++) {
@@ -94,8 +94,10 @@ public class VolleyUtil {
     }
 
 
+
+
     //根据URL获取所需请求的的cache数据
-    public static String getCathe(String url, final Map<String, String> map) {
+    public  String getCathe(String url, final Map<String, String> map) {
         String data = null;
         StringBuilder builder = new StringBuilder(url);
         builder.append("?");

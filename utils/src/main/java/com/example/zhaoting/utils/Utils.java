@@ -35,7 +35,8 @@ public class Utils {
         private static Utils instance = new Utils();
     }
 
-    private Utils() {}
+    private Utils() {
+    }
 
     public static Utils getInstance() {
         return SingletonHolder.instance;
@@ -98,6 +99,8 @@ public class Utils {
         DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
         return dm.heightPixels;
     }
+
+
 
     /**
      * 关闭键盘
@@ -185,6 +188,7 @@ public class Utils {
 
     /**
      * dp转换成px
+     *
      * @param dp
      * @return
      */
@@ -195,6 +199,7 @@ public class Utils {
 
     /**
      * px转换为dp
+     *
      * @param px
      * @return
      */

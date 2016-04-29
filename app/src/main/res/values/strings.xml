@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">知乎日报</string>
+
+    <string name="my_collect">我的收藏</string>
+    <string name="download">离线下载</string>
+    <string name="drawer_home">首页</string>
+    <string name="menu_mode">夜间模式</string>
+    <string name="menu_setting">设置选项</string>
+    <string name="open_string">open</string>
+    <string name="close_string">close</string>
 </resources>
