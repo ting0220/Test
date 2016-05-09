@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.view.main.MainActivity;
-import com.example.zhaoting.myapplication.presenter.start.StartPresenter;
+import com.example.zhaoting.myapplication.presenter.StartPresenter;
 import com.example.zhaoting.utils.Utils;
 import com.squareup.picasso.Picasso;
 

@@ -7,7 +7,8 @@
     <color name="white_day">#FFFFFF</color>
     <color name="gray_day">#808080</color>
     <color name="light_gray">#dfdfdf</color>
-    <color name="night_mask_day">#D9000000</color> <!--透明黑色-->
+    <color name="background_gray">#efefef</color>
+    <color name="night_mask_day">#69000000</color> <!--透明黑色-->
 
 
     <!--夜间模式-->

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/background_gray"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/dp_10"
+              android:paddingRight="@dimen/dp_10"
+              android:paddingTop="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/id_home_list_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="@string/app_name"
+        android:textColor="@color/black_day"
+        android:textSize="@dimen/sp_14"/>
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@color/white_day"
+        card_view:cardCornerRadius="@dimen/dp_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_15">
+
+            <ImageView
+                android:id="@+id/id_home_card_view_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/ic_launcher"/>
+
+            <ImageView
+                android:id="@+id/id_home_card_view_flag"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_10"
+                android:layout_alignBottom="@id/id_home_card_view_img"
+                android:layout_alignParentRight="true"
+                android:background="@color/orange_day"/>
+
+            <TextView
+                android:id="@+id/id_home_card_view_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_toLeftOf="@id/id_home_card_view_img"
+                android:lineSpacingExtra="@dimen/dp_5"
+                android:text="什么，这些云看着都一样？不不不，我来告诉你答案"
+                android:textSize="@dimen/sp_17"
+                android:textStyle="bold"/>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

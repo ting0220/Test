@@ -18,6 +18,9 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by zhaoting on 16/4/20.
@@ -99,7 +102,6 @@ public class Utils {
         DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
         return dm.heightPixels;
     }
-
 
 
     /**
@@ -207,4 +209,55 @@ public class Utils {
         final float scale = mContext.getResources().getDisplayMetrics().density;
         return (int) (px / scale + 0.5f);
     }
+
+    /**
+     * 判断是否是同一天
+     *
+     * @param data
+     * @return
+     */
+    public boolean isToday(String data) {
+        boolean b = false;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String today = sdf.format(new Date());
+        if (today.equals(data)) {
+            b = true;
+        }
+        return b;
+    }
+
+    /**
+     * shu
+     */
+    public String getDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        int month = 0;
+        int day = 0;
+        String week = "";
+        try {
+            Date newDate = sdf.parse(date);
+            month = newDate.getMonth()+1;
+            day = newDate.getDate();
+            if (newDate.getDay() == 0) {
+                week += "天";
+            } else if (newDate.getDay() == 1) {
+                week += "一";
+            } else if (newDate.getDay() == 2) {
+                week += "二";
+            } else if (newDate.getDay() == 3) {
+                week += "三";
+            } else if (newDate.getDay() == 4) {
+                week += "四";
+            } else if (newDate.getDay() == 5) {
+                week += "五";
+            } else if (newDate.getDay() == 6) {
+                week += "六";
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return String.valueOf(month) + "月" + String.valueOf(day) + "日 " + "星期" + week;
+    }
+
 }

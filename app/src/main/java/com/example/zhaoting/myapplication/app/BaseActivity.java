@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.zhaoting.myapplication.R;
-import com.example.zhaoting.myapplication.utils.SharedPManager;
 
 
 /**
@@ -19,8 +18,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int themeId = SharedPManager.getInstance().getTheme();
-        setTheme(themeId);
+//        int themeId = SharedPManager.getInstance().getTheme();
+//        setTheme(themeId);
     }
 
     public BaseFragment getCurrentFragment() {

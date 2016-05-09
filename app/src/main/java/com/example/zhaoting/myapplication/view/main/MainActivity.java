@@ -3,7 +3,6 @@ package com.example.zhaoting.myapplication.view.main;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,16 +14,19 @@ import android.view.View;
 
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.adapter.DrawerItemAdapter;
+import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.DrawerBean;
-import com.example.zhaoting.myapplication.presenter.main.MainPresenter;
+import com.example.zhaoting.myapplication.presenter.MainPresenter;
+import com.example.zhaoting.myapplication.view.home.HomeFragment;
 import com.example.zhaoting.utils.Utils;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainView, Toolbar.OnMenuItemClickListener {
+public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMenuItemClickListener {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
+    private HomeFragment mHomeFragment;
 
     private DrawerItemAdapter mAdapter;
 
@@ -40,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements MainView, Toolbar
         setUpDrawer();
     }
 
+    @Override
+    public int getFragmentContainerId() {
+        return R.id.id_main_view;
+    }
+
     private void initViews() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.id_main_layout);
         mRecyclerView = (RecyclerView) findViewById(R.id.id_main_drawer);
@@ -48,9 +55,11 @@ public class MainActivity extends AppCompatActivity implements MainView, Toolbar
         setSupportActionBar(mToolbar);
         mToolbar.setOnMenuItemClickListener(this);
         mToolbar.setTitleTextColor(getResources().getColor(R.color.white_day));
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.open_string, R.string.close_string);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open_string, R.string.close_string);
         actionBarDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
+        mHomeFragment = newInstanceFragment(HomeFragment.class);
+        changeFragment(mHomeFragment);
     }
 
 
