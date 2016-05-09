@@ -11,7 +11,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by zhaoting on 16/4/29.
@@ -30,8 +29,6 @@ public class HomeModelImpl implements HomeModel {
                 String result = response.body().string();
                 Gson gson = new Gson();
                 final HomeBean homeBean = gson.fromJson(result, HomeBean.class);
-                final List<HomeBean.StoriesBean> mList = homeBean.getStories();
-                final List<HomeBean.TopStoriesBean> mTopList = homeBean.getTop_stories();
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {

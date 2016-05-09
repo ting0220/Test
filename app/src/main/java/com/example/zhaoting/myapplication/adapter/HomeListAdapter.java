@@ -62,7 +62,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
 
     public void setList(List<HomeBean.StoriesBean> list) {
         mList.addAll(list);
-        notifyItemRangeChanged(0,getItemCount());
+        notifyDataSetChanged();
     }
 
 

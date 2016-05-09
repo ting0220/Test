@@ -25,13 +25,15 @@ import com.example.zhaoting.myapplication.presenter.HomePresenter;
 import com.example.zhaoting.myapplication.view.EndlessScrollListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by zhaoting on 16/5/3.
  */
-public class HomeFragment extends BaseFragment implements HomeView, SwipeRefreshLayout.OnRefreshListener{
+public class HomeFragment extends BaseFragment implements HomeView, SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;
@@ -113,9 +115,16 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         mRecyclerView.setOnScrollListener(new EndlessScrollListener(mRecyclerView) {
             @Override
             public void onLoadMore(int currentPage) {
-                mHomePresenter.getHomeList("http://news.at.zhihu.com/api/4/news/before/20160508");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                String today = sdf.format(new Date());
+                String date = String.valueOf(Integer.parseInt(today) + 1 - currentPage);
+                String url="http://news.at.zhihu.com/api/4/news/before/"+date;
+                mHomePresenter.getHomeList(url);
             }
         });
+
+        mAdapter = new HomeListAdapter(getActivity());
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -213,8 +222,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     }
 
     public void setListView(List<HomeBean.StoriesBean> list) {
-        mAdapter = new HomeListAdapter(getActivity());
-        mRecyclerView.setAdapter(mAdapter);
         mAdapter.setList(list);
     }
 
@@ -227,8 +234,8 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     public void setData(HomeBean data) {
         isRefresh = false;
         mSwipeRefreshLayout.setRefreshing(isRefresh);
-
-        if (data.getTop_stories()!=null){
+        mList = new ArrayList<>();
+        if (data.getTop_stories() != null) {
             setTopView(data.getTop_stories());
         }
         for (int i = 0; i < data.getStories().size(); i++) {
@@ -257,7 +264,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             isRefresh = true;
             mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
             llPointLinear.removeAllViews();
-            mList=new ArrayList<>();
         }
     }
 
