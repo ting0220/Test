@@ -2,8 +2,14 @@ package com.example.zhaoting.myapplication.view;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
+import com.example.zhaoting.myapplication.R;
+import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by zhaoting on 16/5/9.
@@ -21,6 +27,8 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
     int firstVisibleItem, visibleItemCount, totalItemCount;
 
     private LinearLayoutManager mLinearLayoutManager;
+
+    String info = "首页";
 
     public EndlessScrollListener(RecyclerView recyclerView) {
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
@@ -50,7 +58,51 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
             onLoadMore(currentPage);
             loading = true;
         }
+        View v = mLinearLayoutManager.findViewByPosition(firstVisibleItem);
+        TextView view = (TextView) v.findViewById(R.id.id_home_list_time);
+
+        if (view.getVisibility() == View.VISIBLE) {
+            String text = view.getText().toString();
+            if (!info.equals(text)) {
+                if (v.getTop() == 0) {
+                    EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
+                    info = text;
+                }
+
+            }
+        }
+        if (firstVisibleItem>1){
+            firstVisibleItem=firstVisibleItem-1;
+        }
+        View vi = mLinearLayoutManager.findViewByPosition(firstVisibleItem-1);
+        TextView viewv = (TextView) v.findViewById(R.id.id_home_list_time);
+
+         if (viewv.getVisibility() == View.GONE) {
+            String text = viewv.getText().toString();
+            if (!info.equals(text)) {
+                if (v.getBottom() == 0) {
+                    EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
+                    info = text;
+                }
+
+            }
+        }
+
+// View v=mLinearLayoutManager.findViewByPosition(firstVisibleItem);
+// TextView view= (TextView) v.findViewById(R.id.id_home_list_time);
+// if (view.getVisibility()==View.VISIBLE){
+// String text=view.getText().toString();
+// if (!info.equals(text)){
+// EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
+// info=text;
+// Utils.getInstance().ToastShort(String.valueOf(v.getTop()));
+// }
+// }
+
+
     }
 
     public abstract void onLoadMore(int currentPage);
+
+
 }

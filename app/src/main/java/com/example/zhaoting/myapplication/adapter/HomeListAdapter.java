@@ -31,7 +31,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
     @Override
     public HomeListHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         HomeListHolder holder = new HomeListHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_list, parent, false));
-
         return holder;
     }
 
@@ -58,6 +57,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
                 holder.timeFlag.setVisibility(View.VISIBLE);
             }
         }
+//        String title = "首页";
+//        String info=holder.timeFlag.getText().toString();
+//        if (!info.equals(title)) {
+//
+//        }
     }
 
     public void setList(List<HomeBean.StoriesBean> list) {
@@ -85,4 +89,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeLi
             articleFlag = (ImageView) itemView.findViewById(R.id.id_home_card_view_flag);
         }
     }
+
+
 }

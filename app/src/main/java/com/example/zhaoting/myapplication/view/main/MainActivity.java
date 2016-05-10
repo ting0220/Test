@@ -16,9 +16,13 @@ import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.adapter.DrawerItemAdapter;
 import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.DrawerBean;
+import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.MainPresenter;
 import com.example.zhaoting.myapplication.view.home.HomeFragment;
 import com.example.zhaoting.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -36,6 +40,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this);
 
         initViews();
 
@@ -152,6 +157,11 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         }
 
     }
+    @Subscribe
+    public void onEvent(ChangeToolbarTextEvent event) {
+        mToolbar.setTitle(event.getMsg());
+    }
+
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -171,5 +181,11 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             break;
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

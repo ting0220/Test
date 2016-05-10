@@ -1,6 +1,8 @@
 package com.example.zhaoting.myapplication.view.home;
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -98,6 +100,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         return R.layout.fragment_home2;
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void initViews() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_swipe_refresh_layout);
@@ -107,22 +110,23 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         llPointLinear = (LinearLayout) mRootView.findViewById(R.id.id_point_group);
         viewOrangePoint = mRootView.findViewById(R.id.id_orange_point);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerViewHeader.attachTo(mRecyclerView);
+
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE);
-
-        mRecyclerView.setOnScrollListener(new EndlessScrollListener(mRecyclerView) {
+        mRecyclerView.addOnScrollListener(new EndlessScrollListener(mRecyclerView) {
             @Override
             public void onLoadMore(int currentPage) {
+                Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 24 *(currentPage-1));
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                String today = sdf.format(new Date());
-                String date = String.valueOf(Integer.parseInt(today) + 1 - currentPage);
-                String url="http://news.at.zhihu.com/api/4/news/before/"+date;
+                String num = sdf.format(date);
+                String url = "http://news.at.zhihu.com/api/4/news/before/" + num;
                 mHomePresenter.getHomeList(url);
             }
-        });
 
+
+        });
+        mRecyclerViewHeader.attachTo(mRecyclerView);
         mAdapter = new HomeListAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -130,6 +134,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     @Override
     protected void initDatas() {
         mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
+
     }
 
     public void setTopView(List<HomeBean.TopStoriesBean> list) {
@@ -266,5 +271,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             llPointLinear.removeAllViews();
         }
     }
+
+
 
 }

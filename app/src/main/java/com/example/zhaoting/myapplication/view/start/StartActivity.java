@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.zhaoting.myapplication.R;
-import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.myapplication.presenter.StartPresenter;
+import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -52,6 +52,7 @@ public class StartActivity extends AppCompatActivity implements StartView {
         if (!TextUtils.isEmpty(text)) {
             mText.setText(text);
         }
+
     }
 
     @Override
@@ -92,6 +93,7 @@ public class StartActivity extends AppCompatActivity implements StartView {
     @Override
     public void showFailedError() {
         Utils.getInstance().ToastShort("failed");
-
     }
+
+
 }
