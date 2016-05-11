@@ -43,3 +43,4 @@ captures/
 gradlew.bat
 gradlew
 gradle.properties
+gradle/
