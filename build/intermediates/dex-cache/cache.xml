@@ -1,2 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="941c9251d230c02f1a2f639291ce4d896ec63bfe">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/instant-run_494bda37139f8f9fdf8725ef6c5a063030f7305b.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="5b8bc7431ad3093cd29f366ba753a00e4fab35e3">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_9c7327f91da9ebd980d189eaca18d4f13c2cf2b9.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.3.0_723d31e0773643cf9b0c046e299cb8601692735e.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.3.0_fcbca4ac1ec730fa142126eaba494a623b5c3402.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.3.0_8f2323a67a4cc6a928e7efbcadf65c3f4446aa04.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.7.0/1dc44f4cec20a64cebb68b90b4218f82ac7948b1/okio-1.7.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="1dc44f4cec20a64cebb68b90b4218f82ac7948b1">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/okio-1.7.0_8b801cf554fecc114b7e1890e830118d2ca019b5.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.bartoszlipinski/recyclerviewheader2/2.0.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="f7568b1a5d689de66a10c84671a672244cb4ec32">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.bartoszlipinski-recyclerviewheader2-2.0.0_69163255f0ded913d220b049ac6bf65ab829e015.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.3.0_4ad53160650ef664395927595e7ab42579b87e21.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.3.0_5bdecbde9ae6543c8e67ff5bf16af7c65619e817.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/.gradle/caches/modules-2/files-2.1/org.greenrobot/eventbus/3.0.0/ddd99896e9569eaababbe81b35d80e1b91c4ad85/eventbus-3.0.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ddd99896e9569eaababbe81b35d80e1b91c4ad85">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/eventbus-3.0.0_ea7dd559a9b6b01f697410b2df4531e20480c32d.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/Test/utils/unspecified/jars/libs/volley.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="067698ca743a88709fb609fc20ab218fdf298b28">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/volley_c9a38d1265742f132358e3f64f03f9372379a2ea.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/Documents/androidStudio/android-sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/support-annotations-23.3.0_e73c43d6482df40ee387af232adaaf9112408be7.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.5/7a15a7db50f86c4b64aa3367424a60e3a325b8f1/okhttp-2.7.5.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="7a15a7db50f86c4b64aa3367424a60e3a325b8f1">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/okhttp-2.7.5_e36d6441e98a341b7c9477246b0dc3cb435444dc.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/design/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.3.0_1fd3f718af8db98d9704ce1b5be1064dc39804ce.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/picasso-2.5.2_4322ca1a78deee6cb6decf92284268535c4a2d9d.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/gson-2.6.2_1745d4cb7550f55f265c91e42c5be2a1347569cd.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.3.0_30715aa4b1d9064c056aec4aafdde468e7ef36a8.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/internal_impl-23.3.0_05fd1409989ed135525838101c5d1f78d5d04869.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoting/git/mine/Test/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.0.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
+        <dex dex="/Users/zhaoting/git/mine/Test/app/build/intermediates/pre-dexed/debug/de.hdodenhof-circleimageview-2.0.0_9be51e6301b0f63e6dfae81d7233a72eab627163.jar" />
+    </item>
+
+</items>

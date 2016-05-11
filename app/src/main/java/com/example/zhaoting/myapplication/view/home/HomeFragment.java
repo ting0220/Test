@@ -23,9 +23,12 @@ import com.example.zhaoting.myapplication.adapter.HomeListAdapter;
 import com.example.zhaoting.myapplication.adapter.HomeTopViewPagerAdapter;
 import com.example.zhaoting.myapplication.app.BaseFragment;
 import com.example.zhaoting.myapplication.bean.HomeBean;
+import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.HomePresenter;
 import com.example.zhaoting.myapplication.view.EndlessScrollListener;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -269,6 +272,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             isRefresh = true;
             mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
             llPointLinear.removeAllViews();
+            EventBus.getDefault().post(new ChangeToolbarTextEvent(getResources().getString(R.string.drawer_home)));
         }
     }
 

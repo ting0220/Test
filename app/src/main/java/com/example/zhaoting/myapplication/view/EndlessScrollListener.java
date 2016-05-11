@@ -11,6 +11,9 @@ import com.example.zhaoting.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by zhaoting on 16/5/9.
  */
@@ -29,6 +32,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
     private LinearLayoutManager mLinearLayoutManager;
 
     String info = "首页";
+    List<String> infos = new ArrayList<>();
 
     public EndlessScrollListener(RecyclerView recyclerView) {
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
@@ -37,6 +41,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
         } else {
             Utils.getInstance().ToastShort("Please change the layoutManager to LinearLayout");
         }
+        infos.add(info);
     }
 
     @Override
@@ -61,44 +66,35 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
         View v = mLinearLayoutManager.findViewByPosition(firstVisibleItem);
         TextView view = (TextView) v.findViewById(R.id.id_home_list_time);
 
-        if (view.getVisibility() == View.VISIBLE) {
-            String text = view.getText().toString();
-            if (!info.equals(text)) {
-                if (v.getTop() == 0) {
+        String text = view.getText().toString();
+        if (dy > 0) {
+            if (v.getTop() >= -10 && v.getTop() <= 10) {
+                if (!info.equals(text)) {
                     EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
                     info = text;
+                    infos.add(info);
                 }
+            }
+        } else if (dy < 0) {
+            if (firstVisibleItem != 0) {
+                if (v.getBottom() >= -10 && v.getBottom() <= 10) {
 
+                    if (!info.equals(text)) {
+                        EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
+                        infos.remove(info);
+                        info = text;
+                    }
+                }
+            } else {
+                if (v.getTop() >= 0) {
+                    if (infos.size() > 1) {
+                        infos.remove(infos.size() - 1);
+                    }
+                    info = infos.get(infos.size() - 1);
+                    EventBus.getDefault().post(new ChangeToolbarTextEvent(info));
+                }
             }
         }
-        if (firstVisibleItem>1){
-            firstVisibleItem=firstVisibleItem-1;
-        }
-        View vi = mLinearLayoutManager.findViewByPosition(firstVisibleItem-1);
-        TextView viewv = (TextView) v.findViewById(R.id.id_home_list_time);
-
-         if (viewv.getVisibility() == View.GONE) {
-            String text = viewv.getText().toString();
-            if (!info.equals(text)) {
-                if (v.getBottom() == 0) {
-                    EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
-                    info = text;
-                }
-
-            }
-        }
-
-// View v=mLinearLayoutManager.findViewByPosition(firstVisibleItem);
-// TextView view= (TextView) v.findViewById(R.id.id_home_list_time);
-// if (view.getVisibility()==View.VISIBLE){
-// String text=view.getText().toString();
-// if (!info.equals(text)){
-// EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
-// info=text;
-// Utils.getInstance().ToastShort(String.valueOf(v.getTop()));
-// }
-// }
-
 
     }
 
