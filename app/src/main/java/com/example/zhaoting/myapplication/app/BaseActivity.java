@@ -14,7 +14,7 @@ import com.example.zhaoting.myapplication.R;
 public abstract class BaseActivity extends AppCompatActivity {
     //还没有想到什么时候用，如果最后没用就删除两个定义的变量
     protected BaseFragment currentFragment;
-    private int flag=-1;
+    private int flag = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +49,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (res == 0) {
             res = getFragmentContainerId();
         }
-        if (fragment.equals(currentFragment)) {
-            return;
-        }
+//        if (fragment.equals(currentFragment)) {
+//            return;
+//        }
         if (tag == null) {
             tag = fragment.getClass().getName();
         }
+        if (currentFragment != null) {
+            if (tag.equals(currentFragment.getTag())) {
+                return;
+            }
+        }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out);
+                .setCustomAnimations(R.anim.fragment_fade_in, R.anim.fragment_fade_out);
 
         if (!fragment.isAdded()) {
             transaction.add(res, fragment, tag);
@@ -73,8 +78,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    public <T extends BaseFragment> T newInstanceFragment(Class<T> clazz){
-        return T.newInstance(getSupportFragmentManager(),clazz,clazz.getName());
+    public <T extends BaseFragment> T newInstanceFragment(Class<T> clazz) {
+        return T.newInstance(getSupportFragmentManager(), clazz, clazz.getName());
     }
 
     @Override

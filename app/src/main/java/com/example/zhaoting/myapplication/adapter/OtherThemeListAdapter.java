@@ -55,8 +55,10 @@ public class OtherThemeListAdapter extends RecyclerView.Adapter<ListHolder> {
     }
 
     public void setList(List<StoriesBean> list) {
-        mList.addAll(list);
-        notifyDataSetChanged();
+        if (list != null) {
+            mList.addAll(list);
+            notifyDataSetChanged();
+        }
     }
 
 }

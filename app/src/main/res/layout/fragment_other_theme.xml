@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top">
 
-            <include  layout="@layout/fragment_other_theme_top" />
+            <include  layout="@layout/item_other_theme_top" />
         </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

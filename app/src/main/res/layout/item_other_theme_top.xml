@@ -7,7 +7,7 @@
         android:id="@+id/id_other_theme_top_img"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/blue"/>
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/id_other_theme_top_title"

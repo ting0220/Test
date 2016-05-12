@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     private MainPresenter mMainPresenter = new MainPresenter(this);
 
+    private boolean isChangeMenu = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +74,19 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (isChangeMenu) {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.toolbar_menu_other_theme, menu);
+        } else {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.toolbar_menu_home, menu);
+        }
         return true;
     }
 
@@ -119,6 +133,8 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mToolbar.setTitle(R.string.drawer_home);
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 changeFragment(mHomeFragment);
+                isChangeMenu=false;
+                invalidateOptionsMenu();
             }
         });
     }
@@ -134,8 +150,9 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 mOtherThemeFragment = newInstanceFragment(OtherThemeFragment.class);
                 mOtherThemeFragment.setThemeId(mList.get(position).getId());
-                changeFragment(mOtherThemeFragment);
-
+                changeFragment(mOtherThemeFragment, mList.get(position).getName());
+                isChangeMenu=true;
+                invalidateOptionsMenu();
             }
         });
     }
@@ -187,6 +204,9 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 Utils.getInstance().ToastShort("click menu_setting");
             }
             break;
+            case R.id.id_focus: {
+                Utils.getInstance().ToastShort("click menu_focus");
+            }
         }
         return true;
     }

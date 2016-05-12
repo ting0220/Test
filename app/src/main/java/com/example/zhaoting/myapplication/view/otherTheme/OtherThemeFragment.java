@@ -83,7 +83,7 @@ public class OtherThemeFragment extends BaseFragment implements OtherThemeView, 
             mHeaderTitle.setText(bean.getDescription());
         }
         if (bean.getBackground() != null) {
-            Picasso.with(getActivity()).load(bean.getBackground()).into(mHeaderImg);
+            Picasso.with(getActivity()).load(bean.getImage()).into(mHeaderImg);
         }
         if (bean.getEditors() != null) {
             for (int i = 0; i < bean.getEditors().size(); i++) {
