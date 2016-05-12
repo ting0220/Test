@@ -19,6 +19,7 @@ import com.example.zhaoting.myapplication.bean.DrawerBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.MainPresenter;
 import com.example.zhaoting.myapplication.view.home.HomeFragment;
+import com.example.zhaoting.myapplication.view.otherTheme.OtherThemeFragment;
 import com.example.zhaoting.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -31,6 +32,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
     private HomeFragment mHomeFragment;
+    private OtherThemeFragment mOtherThemeFragment;
 
     private DrawerItemAdapter mAdapter;
 
@@ -116,6 +118,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 setItemBackgournd(position);
                 mToolbar.setTitle(R.string.drawer_home);
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
+                changeFragment(mHomeFragment);
             }
         });
     }
@@ -129,6 +132,10 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 setItemBackgournd(position + 2);
                 mToolbar.setTitle(mList.get(position).getName());
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
+                mOtherThemeFragment = newInstanceFragment(OtherThemeFragment.class);
+                mOtherThemeFragment.setThemeId(mList.get(position).getId());
+                changeFragment(mOtherThemeFragment);
+
             }
         });
     }
@@ -157,6 +164,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         }
 
     }
+
     @Subscribe
     public void onEvent(ChangeToolbarTextEvent event) {
         mToolbar.setTitle(event.getMsg());

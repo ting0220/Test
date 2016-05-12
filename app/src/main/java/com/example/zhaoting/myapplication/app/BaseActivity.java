@@ -14,6 +14,7 @@ import com.example.zhaoting.myapplication.R;
 public abstract class BaseActivity extends AppCompatActivity {
     //还没有想到什么时候用，如果最后没用就删除两个定义的变量
     protected BaseFragment currentFragment;
+    private int flag=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

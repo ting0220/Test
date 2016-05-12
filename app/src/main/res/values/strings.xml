@@ -9,4 +9,6 @@
     <string name="open_string">open</string>
     <string name="close_string">close</string>
     <string name="today_news">今日热闻</string>
+
+    <string name="editor">主编</string>
 </resources>

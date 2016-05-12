@@ -23,9 +23,11 @@ import com.example.zhaoting.myapplication.adapter.HomeListAdapter;
 import com.example.zhaoting.myapplication.adapter.HomeTopViewPagerAdapter;
 import com.example.zhaoting.myapplication.app.BaseFragment;
 import com.example.zhaoting.myapplication.bean.HomeBean;
+import com.example.zhaoting.myapplication.bean.StoriesBean;
+import com.example.zhaoting.myapplication.bean.TopStoriesBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.HomePresenter;
-import com.example.zhaoting.myapplication.view.EndlessScrollListener;
+import com.example.zhaoting.myapplication.view.HomeEndlessScrollListener;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -95,7 +97,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     private HomePresenter mHomePresenter = new HomePresenter(this);
 
     private boolean isRefresh = false;
-    private List<HomeBean.StoriesBean> mList = new ArrayList<>();
+    private List<StoriesBean> mList = new ArrayList<>();
 
 
     @Override
@@ -117,7 +119,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE);
-        mRecyclerView.addOnScrollListener(new EndlessScrollListener(mRecyclerView) {
+        mRecyclerView.addOnScrollListener(new HomeEndlessScrollListener(mRecyclerView) {
             @Override
             public void onLoadMore(int currentPage) {
                 Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 24 *(currentPage-1));
@@ -140,7 +142,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
     }
 
-    public void setTopView(List<HomeBean.TopStoriesBean> list) {
+    public void setTopView(List<TopStoriesBean> list) {
         final List<View> mList = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -229,7 +231,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
     }
 
-    public void setListView(List<HomeBean.StoriesBean> list) {
+    public void setListView(List<StoriesBean> list) {
         mAdapter.setList(list);
     }
 
@@ -247,7 +249,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             setTopView(data.getTop_stories());
         }
         for (int i = 0; i < data.getStories().size(); i++) {
-            HomeBean.StoriesBean bean = data.getStories().get(i);
+            StoriesBean bean = data.getStories().get(i);
             bean.setDate(data.getDate());
             mList.add(bean);
         }

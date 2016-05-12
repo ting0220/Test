@@ -2,16 +2,22 @@ package com.example.zhaoting.myapplication.view;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
+import com.example.zhaoting.myapplication.R;
+import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zhaoting on 16/5/12.
+ * Created by zhaoting on 16/5/9.
  */
-public abstract class EndlessScrollListener extends RecyclerView.OnScrollListener  {
+public abstract class HomeEndlessScrollListener extends RecyclerView.OnScrollListener {
     /*The minimum amount of items to have below your current scroll position before loading more*/
     private int visibleThreshold = 5;
     /* The current offset index of data you have loaded*/
@@ -28,7 +34,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
     String info = "首页";
     List<String> infos = new ArrayList<>();
 
-    public EndlessScrollListener(RecyclerView recyclerView) {
+    public HomeEndlessScrollListener(RecyclerView recyclerView) {
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         if (manager instanceof LinearLayoutManager) {
             this.mLinearLayoutManager = (LinearLayoutManager) manager;
@@ -57,40 +63,42 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
             onLoadMore(currentPage);
             loading = true;
         }
-//        View v = mLinearLayoutManager.findViewByPosition(firstVisibleItem);
-//        TextView view = (TextView) v.findViewById(R.id.id_home_list_time);
-//
-//        String text = view.getText().toString();
-//        if (dy > 0) {
-//            if (v.getTop() >= -10 && v.getTop() <= 10) {
-//                if (!info.equals(text)) {
-//                    EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
-//                    info = text;
-//                    infos.add(info);
-//                }
-//            }
-//        } else if (dy < 0) {
-//            if (firstVisibleItem != 0) {
-//                if (v.getBottom() >= -10 && v.getBottom() <= 10) {
-//
-//                    if (!info.equals(text)) {
-//                        EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
-//                        infos.remove(info);
-//                        info = text;
-//                    }
-//                }
-//            } else {
-//                if (v.getTop() >= 0) {
-//                    if (infos.size() > 1) {
-//                        infos.remove(infos.size() - 1);
-//                    }
-//                    info = infos.get(infos.size() - 1);
-//                    EventBus.getDefault().post(new ChangeToolbarTextEvent(info));
-//                }
-//            }
-//        }
+        View v = mLinearLayoutManager.findViewByPosition(firstVisibleItem);
+        TextView view = (TextView) v.findViewById(R.id.id_home_list_time);
+
+        String text = view.getText().toString();
+        if (dy > 0) {
+            if (v.getTop() >= -10 && v.getTop() <= 10) {
+                if (!info.equals(text)) {
+                    EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
+                    info = text;
+                    infos.add(info);
+                }
+            }
+        } else if (dy < 0) {
+            if (firstVisibleItem != 0) {
+                if (v.getBottom() >= -10 && v.getBottom() <= 10) {
+
+                    if (!info.equals(text)) {
+                        EventBus.getDefault().post(new ChangeToolbarTextEvent(text));
+                        infos.remove(info);
+                        info = text;
+                    }
+                }
+            } else {
+                if (v.getTop() >= 0) {
+                    if (infos.size() > 1) {
+                        infos.remove(infos.size() - 1);
+                    }
+                    info = infos.get(infos.size() - 1);
+                    EventBus.getDefault().post(new ChangeToolbarTextEvent(info));
+                }
+            }
+        }
 
     }
 
     public abstract void onLoadMore(int currentPage);
+
+
 }
