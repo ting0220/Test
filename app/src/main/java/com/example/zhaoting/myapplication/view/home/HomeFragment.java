@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -28,6 +29,9 @@ import com.example.zhaoting.myapplication.bean.TopStoriesBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.HomePresenter;
 import com.example.zhaoting.myapplication.view.HomeEndlessScrollListener;
+import com.example.zhaoting.myapplication.view.OnRecyclerItemClickListener;
+import com.example.zhaoting.myapplication.view.article.ArticleContentFragment;
+import com.example.zhaoting.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -122,7 +126,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         mRecyclerView.addOnScrollListener(new HomeEndlessScrollListener(mRecyclerView) {
             @Override
             public void onLoadMore(int currentPage) {
-                Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 24 *(currentPage-1));
+                Date date = new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * (currentPage - 1));
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                 String num = sdf.format(date);
                 String url = "http://news.at.zhihu.com/api/4/news/before/" + num;
@@ -134,6 +138,19 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         mRecyclerViewHeader.attachTo(mRecyclerView);
         mAdapter = new HomeListAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(mRecyclerView) {
+            @Override
+            public void onItemClick(View view, int position) {
+                replaceFragment(ArticleContentFragment.class);
+                Log.i("tag", String.valueOf(position));
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Utils.getInstance().ToastShort(String.valueOf(position));
+
+            }
+        });
     }
 
     @Override
@@ -277,7 +294,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             EventBus.getDefault().post(new ChangeToolbarTextEvent(getResources().getString(R.string.drawer_home)));
         }
     }
-
 
 
 }
