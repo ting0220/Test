@@ -60,12 +60,23 @@ public abstract class BaseFragment extends Fragment implements View.OnTouchListe
      * 有返回上一步
      */
     public <T extends BaseFragment> void replaceFragment(Class<T> clazz) {
+        replaceFragment(clazz, null, null);
+    }
+
+
+    public <T extends BaseFragment> void replaceFragment(Class<T> clazz, String tag, Bundle bundle) {
         int layout = ((BaseActivity) getActivity()).getFragmentContainerId();
         if (layout == 0) {
             return;
         }
         T fragment = T.newInstance(getFragmentManager(), clazz, null);
-        String tag = fragment.getClass().getName();
+        if (tag == null) {
+            tag = fragment.getClass().getName();
+        }
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+
         getFragmentManager().beginTransaction()
                 .replace(layout, fragment, tag)
                 .addToBackStack(tag)

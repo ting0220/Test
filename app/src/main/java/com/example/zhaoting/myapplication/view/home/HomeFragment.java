@@ -3,6 +3,7 @@ package com.example.zhaoting.myapplication.view.home;
 import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -141,7 +142,9 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         mRecyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(mRecyclerView) {
             @Override
             public void onItemClick(View view, int position) {
-                replaceFragment(ArticleContentFragment.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", mList.get(position).getId());
+                replaceFragment(ArticleContentFragment.class, null, bundle);
                 Log.i("tag", String.valueOf(position));
             }
 
@@ -261,7 +264,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     public void setData(HomeBean data) {
         isRefresh = false;
         mSwipeRefreshLayout.setRefreshing(isRefresh);
-        mList = new ArrayList<>();
+//        mList = new ArrayList<>();
         if (data.getTop_stories() != null) {
             setTopView(data.getTop_stories());
         }

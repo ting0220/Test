@@ -227,7 +227,7 @@ public class Utils {
     }
 
     /**
-     * shu
+     * 输出星期几
      */
     public String getDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

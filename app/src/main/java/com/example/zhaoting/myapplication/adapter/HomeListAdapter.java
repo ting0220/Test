@@ -64,7 +64,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
     }
 
     public void setList(List<StoriesBean> list) {
-        mList.addAll(list);
+        mList=list;
         notifyDataSetChanged();
     }
 

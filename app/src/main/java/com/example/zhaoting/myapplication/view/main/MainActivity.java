@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.DrawerBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.MainPresenter;
+import com.example.zhaoting.myapplication.view.article.ArticleContentFragment;
 import com.example.zhaoting.myapplication.view.home.HomeFragment;
 import com.example.zhaoting.myapplication.view.otherTheme.OtherThemeFragment;
 import com.example.zhaoting.utils.Utils;
@@ -133,7 +135,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mToolbar.setTitle(R.string.drawer_home);
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 changeFragment(mHomeFragment);
-                isChangeMenu=false;
+                isChangeMenu = false;
                 invalidateOptionsMenu();
             }
         });
@@ -151,7 +153,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mOtherThemeFragment = newInstanceFragment(OtherThemeFragment.class);
                 mOtherThemeFragment.setThemeId(mList.get(position).getId());
                 changeFragment(mOtherThemeFragment, mList.get(position).getName());
-                isChangeMenu=true;
+                isChangeMenu = true;
                 invalidateOptionsMenu();
             }
         });
@@ -215,5 +217,15 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (getCurrentFragment() instanceof ArticleContentFragment) {
+            ((ArticleContentFragment) getCurrentFragment()).onKeyDown(keyCode, event);
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
     }
 }

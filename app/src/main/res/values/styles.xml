@@ -5,14 +5,14 @@
 
     <style name="AppBaseTheme.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/orange_day</item>
+        <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@color/black_day</item>
         <item name="colorAccent">@color/white_day</item>
         <item name="background">@color/white_day</item>
     </style>
 
     <style name="AppBaseTheme.Night">
-        <item name="colorPrimary">@color/orange_night</item>
+        <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@color/black_night</item>
         <item name="colorAccent">@color/white_night</item>
         <item name="background">@color/white_night</item>
