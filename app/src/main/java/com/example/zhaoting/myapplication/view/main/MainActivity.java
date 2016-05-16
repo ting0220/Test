@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     private MainPresenter mMainPresenter = new MainPresenter(this);
 
-    private boolean isChangeMenu = false;
+    public int isChangeMenu = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +82,23 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (isChangeMenu) {
-            menu.clear();
-            getMenuInflater().inflate(R.menu.toolbar_menu_other_theme, menu);
-        } else {
-            menu.clear();
-            getMenuInflater().inflate(R.menu.toolbar_menu_home, menu);
+        switch (isChangeMenu) {
+            case 0: {
+                menu.clear();
+                getMenuInflater().inflate(R.menu.toolbar_menu_home, menu);
+            }
+            break;
+            case 1: {
+                menu.clear();
+                getMenuInflater().inflate(R.menu.toolbar_menu_other_theme, menu);
+            }
+            break;
+            case 2: {
+                menu.clear();
+                mToolbar.setVisibility(View.GONE);
+//                getMenuInflater().inflate(R.menu.toolbar_menu_article_content, menu);
+            }
+            break;
         }
         return true;
     }
@@ -135,7 +146,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mToolbar.setTitle(R.string.drawer_home);
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 changeFragment(mHomeFragment);
-                isChangeMenu = false;
+                isChangeMenu = 0;
                 invalidateOptionsMenu();
             }
         });
@@ -153,7 +164,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mOtherThemeFragment = newInstanceFragment(OtherThemeFragment.class);
                 mOtherThemeFragment.setThemeId(mList.get(position).getId());
                 changeFragment(mOtherThemeFragment, mList.get(position).getName());
-                isChangeMenu = true;
+                isChangeMenu = 1;
                 invalidateOptionsMenu();
             }
         });
@@ -224,8 +235,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (getCurrentFragment() instanceof ArticleContentFragment) {
             ((ArticleContentFragment) getCurrentFragment()).onKeyDown(keyCode, event);
-            return true;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
     }
 }

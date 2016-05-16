@@ -14,6 +14,7 @@ import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.app.BaseFragment;
 import com.example.zhaoting.myapplication.bean.ArticleContentBean;
 import com.example.zhaoting.myapplication.presenter.ArticleContentPresenter;
+import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -36,6 +37,7 @@ public class ArticleContentFragment extends BaseFragment {
     String data = null;
     String fileName = "article_content.css";
     String body = null;
+    private int oldChangeMenu;
 
     @Override
     protected int getFragmentLayout() {
@@ -63,27 +65,32 @@ public class ArticleContentFragment extends BaseFragment {
             }
         });
 
-
-
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear(); 
-        inflater.inflate(R.menu.toolbar_menu_article_content,menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        menu.clear();
+//        inflater.inflate(R.menu.toolbar_menu_article_content,menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 
     @Override
     protected void initDatas() {
         id = getArguments().getInt("id");
         mArticleContentPresenter.getArticleContent(id);
+        oldChangeMenu=((MainActivity)getActivity()).isChangeMenu;
+        ((MainActivity)getActivity()).isChangeMenu=2;
+//        getActivity().getActionBar().setIcon(R.drawable.toolbar_message);
+        getActivity().invalidateOptionsMenu();
 
     }
 
     public void onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
             mWebView.goBack();//表示返回webView的上一页面
+        }else if ((keyCode==KeyEvent.KEYCODE_BACK)&&!mWebView.canGoBack()){
+            ((MainActivity)getActivity()).isChangeMenu=oldChangeMenu;
+            getActivity().invalidateOptionsMenu();
         }
     }
 
