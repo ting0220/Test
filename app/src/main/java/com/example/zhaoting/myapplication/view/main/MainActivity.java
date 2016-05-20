@@ -1,6 +1,8 @@
 package com.example.zhaoting.myapplication.view.main;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +44,21 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     private boolean isChangeMenu = false;
 
+
+    public Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0: {
+                    Utils.getInstance().ToastShort(String.valueOf(Utils.getInstance().isBackground()));
+                    mHandler.sendEmptyMessageDelayed(0,3000);
+                }
+                break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +88,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         mHomeFragment = newInstanceFragment(HomeFragment.class);
         changeFragment(mHomeFragment);
+
     }
 
 
@@ -217,6 +235,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mHandler.sendEmptyMessageDelayed(0,3000);
     }
 
 
@@ -226,6 +245,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             ((ArticleContentFragment) getCurrentFragment()).onKeyDown(keyCode, event);
             return true;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
     }
 }

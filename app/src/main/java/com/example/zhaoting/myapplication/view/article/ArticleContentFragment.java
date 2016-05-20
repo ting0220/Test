@@ -69,7 +69,7 @@ public class ArticleContentFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear(); 
+        menu.clear();
         inflater.inflate(R.menu.toolbar_menu_article_content,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
