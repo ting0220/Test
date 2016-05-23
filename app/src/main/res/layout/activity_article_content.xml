@@ -11,7 +11,9 @@
         android:id="@+id/id_article_content_appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
@@ -27,6 +29,13 @@
                 android:layout_height="200dp"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/id_article_content_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:navigationIcon="@drawable/back"/>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 

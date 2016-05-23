@@ -3,24 +3,23 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/id_share"
-        android:icon="@drawable/toolbar_message"
+        android:icon="@drawable/share"
         android:title="share"
         app:showAsAction="always"/>
     <item
         android:id="@+id/id_collect"
-        android:icon="@drawable/toolbar_message"
+        android:icon="@drawable/collect"
         android:title="share"
         app:showAsAction="always"/>
     <item
         android:id="@+id/id_comment"
-        android:icon="@drawable/toolbar_message"
+        android:icon="@drawable/comment"
         android:title="share"
         app:showAsAction="always"/>
     <item
         android:id="@+id/id_like"
-        android:icon="@drawable/toolbar_message"
+        android:icon="@drawable/praise"
         android:title="share"
         app:showAsAction="always"/>
-
 
 </menu>

@@ -32,6 +32,7 @@ import com.example.zhaoting.myapplication.presenter.HomePresenter;
 import com.example.zhaoting.myapplication.view.HomeEndlessScrollListener;
 import com.example.zhaoting.myapplication.view.OnRecyclerItemClickListener;
 import com.example.zhaoting.myapplication.view.article.ArticleContentFragment;
+import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -144,7 +145,14 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", mList.get(position).getId());
+                String s = ((MainActivity) getActivity()).getToolBar().getTitle().toString();
+                if (s != null) {
+                    ((MainActivity) getActivity()).setToolTitle(s);
+                }
                 replaceFragment(ArticleContentFragment.class, null, bundle);
+//                Intent intent = new Intent(getActivity(), ArticleContentActivity.class);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
                 Log.i("tag", String.valueOf(position));
             }
 
@@ -264,7 +272,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     public void setData(HomeBean data) {
         isRefresh = false;
         mSwipeRefreshLayout.setRefreshing(isRefresh);
-//        mList = new ArrayList<>();
         if (data.getTop_stories() != null) {
             setTopView(data.getTop_stories());
         }
@@ -292,6 +299,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     public void onRefresh() {
         if (!isRefresh) {
             isRefresh = true;
+            mList = new ArrayList<>();
             mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
             llPointLinear.removeAllViews();
             EventBus.getDefault().post(new ChangeToolbarTextEvent(getResources().getString(R.string.drawer_home)));

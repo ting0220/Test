@@ -76,11 +76,17 @@ public abstract class BaseFragment extends Fragment implements View.OnTouchListe
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
+        if (((BaseActivity) getActivity()).currentFragment!=null){
+            if (tag.equals(((BaseActivity) getActivity()).currentFragment.getTag())) {
+                return;
+            }
+        }
 
         getFragmentManager().beginTransaction()
                 .replace(layout, fragment, tag)
                 .addToBackStack(tag)
                 .commit();
+        ((BaseActivity) getActivity()).currentFragment = fragment;
     }
 
     @Override

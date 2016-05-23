@@ -42,7 +42,9 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     private MainPresenter mMainPresenter = new MainPresenter(this);
 
-    private boolean isChangeMenu = false;
+    public int isChangeMenu = 0;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private String toolTitle="首页";
 
 
     public Handler mHandler = new Handler() {
@@ -52,7 +54,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             switch (msg.what) {
                 case 0: {
                     Utils.getInstance().ToastShort(String.valueOf(Utils.getInstance().isBackground()));
-                    mHandler.sendEmptyMessageDelayed(0,3000);
+                    mHandler.sendEmptyMessageDelayed(0, 3000);
                 }
                 break;
             }
@@ -79,11 +81,11 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         mDrawerLayout = (DrawerLayout) findViewById(R.id.id_main_layout);
         mRecyclerView = (RecyclerView) findViewById(R.id.id_main_drawer);
         mToolbar = (Toolbar) findViewById(R.id.id_main_toolbar);
-        mToolbar.setTitle(getResources().getString(R.string.drawer_home));
         setSupportActionBar(mToolbar);
+        mToolbar.setTitle(getResources().getString(R.string.drawer_home));
         mToolbar.setOnMenuItemClickListener(this);
         mToolbar.setTitleTextColor(getResources().getColor(R.color.white_day));
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open_string, R.string.close_string);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open_string, R.string.close_string);
         actionBarDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         mHomeFragment = newInstanceFragment(HomeFragment.class);
@@ -100,12 +102,28 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (isChangeMenu) {
-            menu.clear();
-            getMenuInflater().inflate(R.menu.toolbar_menu_other_theme, menu);
-        } else {
-            menu.clear();
-            getMenuInflater().inflate(R.menu.toolbar_menu_home, menu);
+        switch (isChangeMenu) {
+            case 0: {
+                menu.clear();
+                getMenuInflater().inflate(R.menu.toolbar_menu_home, menu);
+                actionBarDrawerToggle.syncState();
+                mToolbar.setTitle(getToolTitle());
+            }
+            break;
+            case 1: {
+                menu.clear();
+                getMenuInflater().inflate(R.menu.toolbar_menu_other_theme, menu);
+                actionBarDrawerToggle.syncState();
+                mToolbar.setTitle(getToolTitle());
+            }
+            break;
+            case 2: {
+                menu.clear();
+                getMenuInflater().inflate(R.menu.toolbar_menu_article_content, menu);
+                mToolbar.setNavigationIcon(R.drawable.back);
+                mToolbar.setTitle("");
+            }
+            break;
         }
         return true;
     }
@@ -153,7 +171,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mToolbar.setTitle(R.string.drawer_home);
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 changeFragment(mHomeFragment);
-                isChangeMenu = false;
+                isChangeMenu = 0;
                 invalidateOptionsMenu();
             }
         });
@@ -171,7 +189,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 mOtherThemeFragment = newInstanceFragment(OtherThemeFragment.class);
                 mOtherThemeFragment.setThemeId(mList.get(position).getId());
                 changeFragment(mOtherThemeFragment, mList.get(position).getName());
-                isChangeMenu = true;
+                isChangeMenu = 1;
                 invalidateOptionsMenu();
             }
         });
@@ -227,6 +245,26 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             case R.id.id_focus: {
                 Utils.getInstance().ToastShort("click menu_focus");
             }
+            break;
+            case R.id.id_share: {
+                Utils.getInstance().ToastShort("click menu_share");
+            }
+            break;
+            case R.id.id_collect: {
+                Utils.getInstance().ToastShort("click menu_collect");
+
+            }
+            break;
+            case R.id.id_comment: {
+                Utils.getInstance().ToastShort("click menu_comment");
+
+            }
+            break;
+            case R.id.id_like: {
+                Utils.getInstance().ToastShort("click menu_like");
+
+            }
+            break;
         }
         return true;
     }
@@ -235,7 +273,11 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        mHandler.sendEmptyMessageDelayed(0,3000);
+        mHandler.sendEmptyMessageDelayed(0, 3000);
+    }
+
+    public Toolbar getToolBar() {
+        return mToolbar;
     }
 
 
@@ -243,8 +285,15 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (getCurrentFragment() instanceof ArticleContentFragment) {
             ((ArticleContentFragment) getCurrentFragment()).onKeyDown(keyCode, event);
-            return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void setToolTitle(String s) {
+        toolTitle = s;
+    }
+
+    public String getToolTitle() {
+        return toolTitle;
     }
 }
