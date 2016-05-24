@@ -57,6 +57,10 @@ public abstract class HomeEndlessScrollListener extends RecyclerView.OnScrollLis
             if (totalItemCount == 0) {
                 this.loading = true;
             }
+
+            infos = new ArrayList<>();
+            info = "首页";
+            infos.add(info);
         }
 
         if (loading) {
@@ -99,7 +103,7 @@ public abstract class HomeEndlessScrollListener extends RecyclerView.OnScrollLis
                     if (infos.size() > 1) {
                         infos.remove(infos.size() - 1);
                     }
-                    info = infos.get(infos.size() - 1);
+                    info = infos.get(0);
                     EventBus.getDefault().post(new ChangeToolbarTextEvent(info));
                 }
             }
