@@ -5,31 +5,30 @@ import com.example.zhaoting.myapplication.model.article.ArticleContentListener;
 import com.example.zhaoting.myapplication.model.article.ArticleContentModel;
 import com.example.zhaoting.myapplication.model.article.ArticleContentModelImpl;
 import com.example.zhaoting.myapplication.model.article.ArticleCssListener;
-import com.example.zhaoting.myapplication.view.article.ArticleContentFragment;
+import com.example.zhaoting.myapplication.view.themeArticleContent.ThemeArticleContentFragment;
 
 /**
- * Created by zhaoting on 16/5/16.
+ * Created by zhaoting on 16/5/24.
  */
-public class ArticleContentPresenter {
+public class ThemeArticleContentPresenter {
     private ArticleContentModel mArticleContentModel;
-    private ArticleContentFragment mArticleContentFragment;
+    private ThemeArticleContentFragment mThemeArticleContentFragment;
 
-    public ArticleContentPresenter(ArticleContentFragment articleContentFragment) {
-        mArticleContentFragment = articleContentFragment;
-        mArticleContentModel = new ArticleContentModelImpl();
+    public ThemeArticleContentPresenter(ThemeArticleContentFragment themeArticleContentFragment) {
+        mThemeArticleContentFragment = themeArticleContentFragment;
+        mArticleContentModel=new ArticleContentModelImpl();
     }
 
-    public void getArticleContent(int id) {
+    public void getArticleContent(int id){
         mArticleContentModel.getArticleContent(id, new ArticleContentListener() {
             @Override
             public void onSuccess(ArticleContentBean bean) {
-                mArticleContentFragment.onSuccess(bean);
+                mThemeArticleContentFragment.onSuccess(bean);
             }
 
             @Override
             public void onError() {
-                mArticleContentFragment.onError();
-
+                mThemeArticleContentFragment.onError();
             }
         });
     }
@@ -38,15 +37,14 @@ public class ArticleContentPresenter {
         mArticleContentModel.getArticleCss(url, new ArticleCssListener() {
             @Override
             public void onCssSuccess(String s) {
-                mArticleContentFragment.onCssSuccess(s);
+                mThemeArticleContentFragment.onCssSuccess(s);
             }
 
             @Override
             public void onCssError() {
-                mArticleContentFragment.onCssError();
+                mThemeArticleContentFragment.onCssError();
             }
         });
 
     }
-
 }

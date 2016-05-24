@@ -12,15 +12,14 @@
         android:supportsRtl="true"
         android:name=".app.ApplicationController"
         android:theme="@style/AppBaseTheme.Light">
-        <activity android:name=".view.start.StartActivity">
+        <activity android:name=".view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.main.MainActivity"></activity>
-        <activity android:name=".view.article.ArticleContentActivity" />
+        <!--<activity android:name=".view.main.MainActivity"></activity>-->
     </application>
 
 </manifest>

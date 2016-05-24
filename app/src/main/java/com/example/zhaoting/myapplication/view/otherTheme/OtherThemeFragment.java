@@ -1,8 +1,10 @@
 package com.example.zhaoting.myapplication.view.otherTheme;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +18,9 @@ import com.example.zhaoting.myapplication.bean.OtherThemeBean;
 import com.example.zhaoting.myapplication.bean.StoriesBean;
 import com.example.zhaoting.myapplication.presenter.OtherThemePresenter;
 import com.example.zhaoting.myapplication.view.EndlessScrollListener;
+import com.example.zhaoting.myapplication.view.OnRecyclerItemClickListener;
+import com.example.zhaoting.myapplication.view.main.MainActivity;
+import com.example.zhaoting.myapplication.view.themeArticleContent.ThemeArticleContentFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -64,6 +69,7 @@ public class OtherThemeFragment extends BaseFragment implements OtherThemeView, 
         mRecyclerView.setAdapter(mAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
+
     }
 
     @Override
@@ -108,6 +114,24 @@ public class OtherThemeFragment extends BaseFragment implements OtherThemeView, 
             }
         });
 
+
+        mRecyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(mRecyclerView) {
+            @Override
+            public void onItemClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", bean.getStories().get(position).getId());
+                String s = ((MainActivity) getActivity()).getToolBar().getTitle().toString();
+                if (s != null) {
+                    ((MainActivity) getActivity()).setToolTitle(s);
+                }
+                replaceFragment(ThemeArticleContentFragment.class, null, bundle);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
     }
 
     @Override

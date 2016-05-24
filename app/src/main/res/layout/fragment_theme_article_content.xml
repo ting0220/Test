@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.zhaoting.myapplication.widget.MyScrollView
+    android:id="@+id/id_theme_article_content_scroll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/id_theme_article_content_linear"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/light_gray">
+
+            <ImageView
+                android:id="@+id/id_theme_article_content_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"/>
+
+            <TextView
+                android:id="@+id/id_theme_article_content_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@id/id_theme_article_content_img"
+                android:text="@string/drawer_home"
+                android:textColor="@color/black_day"
+                android:textSize="@dimen/sp_14"/>
+
+            <TextView
+                android:layout_width="@dimen/px_1"
+                android:layout_height="@dimen/dp_40"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/black_day"/>
+
+            <TextView
+                android:id="@+id/id_theme_article_content_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="@string/drawer_home"
+                android:textColor="@color/blue"/>
+        </RelativeLayout>
+
+        <WebView
+            android:id="@+id/id_theme_article_content_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</com.example.zhaoting.myapplication.widget.MyScrollView>

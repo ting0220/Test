@@ -10,6 +10,8 @@
     <dimen name="sp_18">18sp</dimen>
     <dimen name="sp_20">20sp</dimen>
 
+    <dimen name="px_1">1px</dimen>
+    <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_6">6dp</dimen>

@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zhaoting.myapplication.R;
@@ -21,7 +22,7 @@ import java.io.FileOutputStream;
 /**
  * Created by zhaoting on 16/5/13.
  */
-public class ArticleContentFragment extends BaseFragment {
+public class ArticleContentFragment extends BaseFragment implements ArticleContentView {
 
     private CoordinatorLayout mCoordinatorLayout;
     private AppBarLayout mAppBarLayout;
@@ -29,6 +30,7 @@ public class ArticleContentFragment extends BaseFragment {
     private ImageView mTopImage;
     private TextView mTopTitle;
     private TextView mTopText;
+    private LinearLayout mFooterLinear;
 
     private int id;
     private ArticleContentPresenter mArticleContentPresenter = new ArticleContentPresenter(this);
@@ -64,14 +66,11 @@ public class ArticleContentFragment extends BaseFragment {
 
     @Override
     protected void initDatas() {
-
         id = getArguments().getInt("id");
         mArticleContentPresenter.getArticleContent(id);
         oldChangeMenu = ((MainActivity) getActivity()).isChangeMenu;
         ((MainActivity) getActivity()).isChangeMenu = 2;
         getActivity().invalidateOptionsMenu();
-
-
     }
 
     public void onKeyDown(int keyCode, KeyEvent event) {
@@ -83,6 +82,7 @@ public class ArticleContentFragment extends BaseFragment {
         }
     }
 
+    @Override
     public void onSuccess(ArticleContentBean bean) {
         Picasso.with(getActivity()).load(bean.getImage()).into(mTopImage);
         mTopTitle.setText(bean.getTitle());
@@ -93,9 +93,11 @@ public class ArticleContentFragment extends BaseFragment {
     }
 
 
+    @Override
     public void onError() {
     }
 
+    @Override
     public void onCssSuccess(String s) {
         File file = new File(getActivity().getFilesDir(), fileName);
         try {
@@ -112,6 +114,7 @@ public class ArticleContentFragment extends BaseFragment {
 
     }
 
+    @Override
     public void onCssError() {
     }
 
