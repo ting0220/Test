@@ -168,7 +168,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             @Override
             public void onItemClick(int position, DrawerBean.OthersBean data) {
                 setItemBackgournd(position);
-                mToolbar.setTitle(R.string.drawer_home);
+                setToolTitle(getResources().getString(R.string.drawer_home));
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 changeFragment(mHomeFragment);
                 isChangeMenu = 0;
@@ -184,7 +184,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             @Override
             public void onItemClick(int position, DrawerBean.OthersBean data) {
                 setItemBackgournd(position + 2);
-                mToolbar.setTitle(mList.get(position).getName());
+                setToolTitle(mList.get(position).getName());
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 mOtherThemeFragment = newInstanceFragment(OtherThemeFragment.class);
                 mOtherThemeFragment.setThemeId(mList.get(position).getId());
