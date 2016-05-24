@@ -270,9 +270,9 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
     @Override
     public void setData(HomeBean data) {
-        isRefresh = false;
-        mSwipeRefreshLayout.setRefreshing(isRefresh);
         if (data.getTop_stories() != null) {
+            isRefresh = false;
+            mSwipeRefreshLayout.setRefreshing(isRefresh);
             setTopView(data.getTop_stories());
         }
         for (int i = 0; i < data.getStories().size(); i++) {
@@ -299,9 +299,9 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     public void onRefresh() {
         if (!isRefresh) {
             isRefresh = true;
+            llPointLinear.removeAllViews();
             mList = new ArrayList<>();
             mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
-            llPointLinear.removeAllViews();
             EventBus.getDefault().post(new ChangeToolbarTextEvent(getResources().getString(R.string.drawer_home)));
         }
     }

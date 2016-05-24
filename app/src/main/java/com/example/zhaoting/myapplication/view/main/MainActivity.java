@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0: {
-                    Utils.getInstance().ToastShort(String.valueOf(Utils.getInstance().isBackground()));
+//                    Utils.getInstance().ToastShort(String.valueOf(Utils.getInstance().isBackground()));
                     mHandler.sendEmptyMessageDelayed(0, 3000);
                 }
                 break;

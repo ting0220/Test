@@ -20,6 +20,7 @@ import java.util.List;
 public abstract class HomeEndlessScrollListener extends RecyclerView.OnScrollListener {
     /*The minimum amount of items to have below your current scroll position before loading more*/
     private int visibleThreshold = 5;
+
     /* The current offset index of data you have loaded*/
     private int currentPage = 0;
     /* The total number of items in the dataset after the last load*/
@@ -50,6 +51,13 @@ public abstract class HomeEndlessScrollListener extends RecyclerView.OnScrollLis
         visibleItemCount = recyclerView.getChildCount();
         totalItemCount = mLinearLayoutManager.getItemCount();
         firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+        if (!loading && (totalItemCount < previousTotalItemCount)) {
+            this.currentPage = 0;
+            this.previousTotalItemCount = totalItemCount;
+            if (totalItemCount == 0) {
+                this.loading = true;
+            }
+        }
 
         if (loading) {
             if (totalItemCount > previousTotalItemCount) {
@@ -63,6 +71,7 @@ public abstract class HomeEndlessScrollListener extends RecyclerView.OnScrollLis
             onLoadMore(currentPage);
             loading = true;
         }
+
         View v = mLinearLayoutManager.findViewByPosition(firstVisibleItem);
         TextView view = (TextView) v.findViewById(R.id.id_home_list_time);
 
