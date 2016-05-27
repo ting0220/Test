@@ -19,8 +19,10 @@ import com.example.zhaoting.myapplication.utils.SharedPManager;
 /**
  * Created by zhaoting on 15/11/25.
  */
-public abstract class BaseFragment extends Fragment implements View.OnTouchListener {
+public abstract class BaseFragment extends Fragment  implements View.OnTouchListener{
     public View mRootView;
+
+    private static Bundle mBundle;
 
     @Nullable
     @Override
@@ -76,7 +78,7 @@ public abstract class BaseFragment extends Fragment implements View.OnTouchListe
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
-        if (((BaseActivity) getActivity()).currentFragment!=null){
+        if (((BaseActivity) getActivity()).currentFragment != null) {
             if (tag.equals(((BaseActivity) getActivity()).currentFragment.getTag())) {
                 return;
             }
@@ -100,6 +102,14 @@ public abstract class BaseFragment extends Fragment implements View.OnTouchListe
         return true;
     }
 
+//    public Bundle getBundle() {
+//        return mBundle;
+//    }
+//
+//    public void setBundle(Bundle bundle) {
+//        mBundle = null;
+//        mBundle = bundle;
+//    }
 
     //抽象方法
 

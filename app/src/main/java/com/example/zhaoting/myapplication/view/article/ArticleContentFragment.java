@@ -73,6 +73,7 @@ public class ArticleContentFragment extends BaseFragment implements ArticleConte
         getActivity().invalidateOptionsMenu();
     }
 
+
     public void onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
             mWebView.goBack();//表示返回webView的上一页面

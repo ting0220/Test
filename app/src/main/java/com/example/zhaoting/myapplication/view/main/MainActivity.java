@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     public int isChangeMenu = 0;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private String toolTitle="首页";
+    private String toolTitle = "首页";
 
 
     public Handler mHandler = new Handler() {
@@ -122,6 +122,14 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 getMenuInflater().inflate(R.menu.toolbar_menu_article_content, menu);
                 mToolbar.setNavigationIcon(R.drawable.back);
                 mToolbar.setTitle("");
+                mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getSupportFragmentManager().popBackStack();
+                        isChangeMenu = 1;
+                        invalidateOptionsMenu();
+                    }
+                });
             }
             break;
         }
@@ -296,4 +304,5 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     public String getToolTitle() {
         return toolTitle;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.example.zhaoting.myapplication.view.themeArticleContent;
 
-import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -20,8 +21,7 @@ import java.io.FileOutputStream;
 /**
  * Created by zhaoting on 16/5/24.
  */
-public class ThemeArticleContentFragment extends BaseFragment implements ArticleContentView {
-//    private ScrollView mScrollView;
+public class ThemeArticleContentFragment extends BaseFragment implements ArticleContentView ,View.OnTouchListener{
     private WebView mWebView;
     private ImageView mFootImg;
     private TextView mFootTitle;
@@ -76,7 +76,6 @@ public class ThemeArticleContentFragment extends BaseFragment implements Article
 
     @Override
     protected void initViews() {
-//        mScrollView= (ScrollView) mRootView.findViewById(R.id.id_theme_article_content_scroll);
         mWebView = (WebView) mRootView.findViewById(R.id.id_theme_article_content_webview);
         mFootFocus = (TextView) mRootView.findViewById(R.id.id_theme_article_content_focus);
         mFootImg = (ImageView) mRootView.findViewById(R.id.id_theme_article_content_img);
@@ -90,17 +89,7 @@ public class ThemeArticleContentFragment extends BaseFragment implements Article
                 return true;
             }
         });
-//        mWebView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    mScrollView.requestDisallowInterceptTouchEvent(true);
-//                } else {
-//                    mScrollView.requestDisallowInterceptTouchEvent(false);
-//                }
-//                return false;
-//            }
-//        });
+
     }
 
     @Override
@@ -113,12 +102,18 @@ public class ThemeArticleContentFragment extends BaseFragment implements Article
 
     }
 
-    public void onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-            mWebView.goBack();//表示返回webView的上一页面
-        } else if ((keyCode == KeyEvent.KEYCODE_BACK) && !mWebView.canGoBack()) {
-            ((MainActivity) getActivity()).isChangeMenu = oldChangeMenu;
-            getActivity().invalidateOptionsMenu();
-        }
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
     }
+
+    //
+//    public void onKeyDown(int keyCode, KeyEvent event) {
+//        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
+//            mWebView.goBack();//表示返回webView的上一页面
+//        } else if ((keyCode == KeyEvent.KEYCODE_BACK) && !mWebView.canGoBack()) {
+//            ((MainActivity) getActivity()).isChangeMenu = oldChangeMenu;
+//            getActivity().invalidateOptionsMenu();
+//        }
+//    }
 }
