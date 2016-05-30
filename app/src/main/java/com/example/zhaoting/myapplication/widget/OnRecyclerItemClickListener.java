@@ -1,4 +1,4 @@
-package com.example.zhaoting.myapplication.view;
+package com.example.zhaoting.myapplication.widget;
 
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.RecyclerView;

@@ -99,6 +99,10 @@ public class ArticleContentBean {
      * css : ["http://news-at.zhihu.com/css/news_qa.auto.css?v=4b3e3"]
      */
 
+
+
+
+
     private String body;
     private String image_source;
     private String title;

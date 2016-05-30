@@ -108,6 +108,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 getMenuInflater().inflate(R.menu.toolbar_menu_home, menu);
                 actionBarDrawerToggle.syncState();
                 mToolbar.setTitle(getToolTitle());
+                mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
             }
             break;
             case 1: {
@@ -115,6 +116,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 getMenuInflater().inflate(R.menu.toolbar_menu_other_theme, menu);
                 actionBarDrawerToggle.syncState();
                 mToolbar.setTitle(getToolTitle());
+
             }
             break;
             case 2: {

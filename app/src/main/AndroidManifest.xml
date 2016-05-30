@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <!--<activity android:name=".view.main.MainActivity"></activity>-->
+        <activity android:name=".view.article.ArticleContentActivity"></activity>
     </application>
 
 </manifest>

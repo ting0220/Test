@@ -1,6 +1,7 @@
 package com.example.zhaoting.myapplication.view.home;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -29,10 +29,9 @@ import com.example.zhaoting.myapplication.bean.StoriesBean;
 import com.example.zhaoting.myapplication.bean.TopStoriesBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.HomePresenter;
-import com.example.zhaoting.myapplication.view.HomeEndlessScrollListener;
-import com.example.zhaoting.myapplication.view.OnRecyclerItemClickListener;
-import com.example.zhaoting.myapplication.view.article.ArticleContentFragment;
-import com.example.zhaoting.myapplication.view.main.MainActivity;
+import com.example.zhaoting.myapplication.widget.HomeEndlessScrollListener;
+import com.example.zhaoting.myapplication.widget.OnRecyclerItemClickListener;
+import com.example.zhaoting.myapplication.view.article.ArticleContentActivity;
 import com.example.zhaoting.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -145,15 +144,18 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", mList.get(position).getId());
-                String s = ((MainActivity) getActivity()).getToolBar().getTitle().toString();
-                if (s != null) {
-                    ((MainActivity) getActivity()).setToolTitle(s);
-                }
-                replaceFragment(ArticleContentFragment.class, null, bundle);
-//                Intent intent = new Intent(getActivity(), ArticleContentActivity.class);
-//                intent.putExtras(bundle);
-//                startActivity(intent);
-                Log.i("tag", String.valueOf(position));
+                Intent intent = new Intent(getActivity(), ArticleContentActivity.class);
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+//                String s = ((MainActivity) getActivity()).getToolBar().getTitle().toString();
+//                if (s != null) {
+//                    ((MainActivity) getActivity()).setToolTitle(s);
+//                }
+//                replaceFragment(ArticleContentFragment.class, null, bundle);
+////                Intent intent = new Intent(getActivity(), ArticleContentActivity.class);
+////                intent.putExtras(bundle);
+////                startActivity(intent);
+//                Log.i("tag", String.valueOf(position));
             }
 
             @Override

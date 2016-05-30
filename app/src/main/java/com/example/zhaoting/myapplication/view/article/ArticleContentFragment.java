@@ -50,7 +50,7 @@ public class ArticleContentFragment extends BaseFragment implements ArticleConte
         mAppBarLayout = (AppBarLayout) mRootView.findViewById(R.id.id_article_content_appbar_layout);
         mWebView = (WebView) mRootView.findViewById(R.id.id_article_content_webview);
         mTopImage = (ImageView) mRootView.findViewById(R.id.id_article_content_top_img);
-        mTopTitle = (TextView) mRootView.findViewById(R.id.id_article_content_top_title);
+//        mTopTitle = (TextView) mRootView.findViewById(R.id.id_article_content_top_title);
         mTopText = (TextView) mRootView.findViewById(R.id.id_article_content_top_text);
 
 
@@ -86,7 +86,7 @@ public class ArticleContentFragment extends BaseFragment implements ArticleConte
     @Override
     public void onSuccess(ArticleContentBean bean) {
         Picasso.with(getActivity()).load(bean.getImage()).into(mTopImage);
-        mTopTitle.setText(bean.getTitle());
+//        mTopTitle.setText(bean.getTitle());
         mTopText.setText(bean.getImage_source());
         mArticleContentPresenter.getArticleCss(bean.getCss().get(0));
         body = bean.getBody();
