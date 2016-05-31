@@ -32,71 +32,10 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
         Log.d("pre", "onNestedFling: " + target.getScrollY()+" "+target.getY()+" "+target.getTop());
         Log.d("pre", "onNestedFling: " + velocityY);
         Log.d("pre", "onNestedFling: " + consumed);
-//        if (velocityY > 0) {
-//            if (target.getTop() == 0) {
-//                child.setAlpha(0f);
-//                child.setVisibility(View.GONE);
-//            }
-//        }else{
-//            if (target.getTop() == 0) {
-//                child.setVisibility(View.VISIBLE);
-//                child.setAlpha(1f);
-//            }
-//        }
+
         return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
     }
 
-    @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View
-            dependency) {
-        return super.onDependentViewChanged(parent, child, dependency);
-    }
-
-    //    @Override
-//    public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
-//        if (velocityY > 0) {
-//            if (target.getTop() == 0) {
-//                child.setAlpha(0f);
-//                child.setVisibility(View.GONE);
-//            } else {
-//                int x = target.getTop() - 110;
-//                float y = (float) x / 490;
-//                if (y > 0 && y < 1) {
-//                    child.setVisibility(View.VISIBLE);
-//                    child.setAlpha(y);
-//                } else if (y <= 0) {
-//                    if (child.getVisibility() == View.VISIBLE) {
-//                        child.setAlpha(0f);
-//                    }
-//                    child.setVisibility(View.GONE);
-//                } else if (y >= 1) {
-//                    child.setVisibility(View.VISIBLE);
-//                    child.setAlpha(1f);
-//                }
-//            }
-//        } else {
-//            if (target.getTop() == 0) {
-//                child.setVisibility(View.VISIBLE);
-//                child.setAlpha(1f);
-//            }else{
-//                int x = target.getTop() - 110;
-//                float y = (float) x / 490;
-//                if (y > 0 && y < 1) {
-//                    child.setVisibility(View.VISIBLE);
-//                    child.setAlpha(y);
-//                } else if (y <= 0) {
-//                    if (child.getVisibility() == View.VISIBLE) {
-//                        child.setAlpha(0f);
-//                    }
-//                    child.setVisibility(View.GONE);
-//                } else if (y >= 1) {
-//                    child.setVisibility(View.VISIBLE);
-//                    child.setAlpha(1f);
-//                }
-//            }
-//        }
-//        return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
-//    }
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target,
