@@ -50,6 +50,7 @@
         android:id="@+id/id_article_content_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
+        app:layout_behavior="com.example.zhaoting.myapplication.widget.ToolBarBehavior"
         android:background="@color/blue">
 
         <RelativeLayout
