@@ -1,49 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/id_article_content_coordinator_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/id_article_content_appbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_300"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@android:color/transparent"
-            app:layout_scrollFlags="scroll">
-
-            <include
-                layout="@layout/item_article_content_top"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_300"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7"/>
-
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-
-    </android.support.design.widget.AppBarLayout>
+    android:layout_height="match_parent">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:scrollbars="vertical">
 
-        <WebView
-            android:id="@+id/id_article_content_webview"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"/>
+
+            <WebView
+                android:id="@+id/id_article_content_webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:background="@color/light_gray">
+
+                <ImageView
+                    android:id="@+id/id_theme_article_content_img"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:src="@drawable/drawer_home"/>
+
+                <TextView
+                    android:id="@+id/id_theme_article_content_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/id_theme_article_content_img"
+                    android:text="@string/drawer_home"
+                    android:textColor="@color/black_day"
+                    android:textSize="@dimen/sp_14"/>
+
+                <TextView
+                    android:id="@+id/id_theme_article_content_focus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="@string/drawer_home"
+                    android:textColor="@color/blue"/>
+
+                <TextView
+                    android:layout_width="@dimen/px_1"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_toLeftOf="@id/id_theme_article_content_focus"
+                    android:background="@color/black_day"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"/>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.v7.widget.Toolbar
@@ -109,7 +139,5 @@
                 android:src="@drawable/share"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
+
 </android.support.design.widget.CoordinatorLayout>
-
-
-

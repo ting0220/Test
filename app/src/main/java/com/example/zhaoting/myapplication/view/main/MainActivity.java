@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +20,6 @@ import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.DrawerBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.MainPresenter;
-import com.example.zhaoting.myapplication.view.article.ArticleContentFragment;
 import com.example.zhaoting.myapplication.view.home.HomeFragment;
 import com.example.zhaoting.myapplication.view.otherTheme.OtherThemeFragment;
 import com.example.zhaoting.utils.Utils;
@@ -119,21 +117,21 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
             }
             break;
-            case 2: {
-                menu.clear();
-                getMenuInflater().inflate(R.menu.toolbar_menu_article_content, menu);
-                mToolbar.setNavigationIcon(R.drawable.back);
-                mToolbar.setTitle("");
-                mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getSupportFragmentManager().popBackStack();
-                        isChangeMenu = 1;
-                        invalidateOptionsMenu();
-                    }
-                });
-            }
-            break;
+//            case 2: {
+//                menu.clear();
+//                getMenuInflater().inflate(R.menu.toolbar_menu_article_content, menu);
+//                mToolbar.setNavigationIcon(R.drawable.back);
+//                mToolbar.setTitle("");
+//                mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        getSupportFragmentManager().popBackStack();
+//                        isChangeMenu = 1;
+//                        invalidateOptionsMenu();
+//                    }
+//                });
+//            }
+//            break;
         }
         return true;
     }
@@ -284,19 +282,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         mHandler.sendEmptyMessageDelayed(0, 3000);
-    }
-
-    public Toolbar getToolBar() {
-        return mToolbar;
-    }
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (getCurrentFragment() instanceof ArticleContentFragment) {
-            ((ArticleContentFragment) getCurrentFragment()).onKeyDown(keyCode, event);
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     public void setToolTitle(String s) {

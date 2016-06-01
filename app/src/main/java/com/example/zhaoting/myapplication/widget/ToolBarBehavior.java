@@ -24,16 +24,13 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
     @Override
     public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target) {
         super.onStopNestedScroll(coordinatorLayout, child, target);
-        Log.d("pre", "onStopNestedScroll: " + target.getTop());
     }
 
     @Override
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
-        Log.d("pre", "onNestedFling: " + target.getScrollY()+" "+target.getY()+" "+target.getTop());
-        Log.d("pre", "onNestedFling: " + velocityY);
-        Log.d("pre", "onNestedFling: " + consumed);
 
         return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
+
     }
 
 
@@ -41,6 +38,12 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target,
                                   int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
+        Log.d("pre", "onNestedPreScroll: target.getY()" + target.getY());
+        Log.d("pre", "onNestedPreScroll: target.getScrollY()" + target.getScrollY());
+        Log.d("pre", "onNestedPreScroll: coordinatorLayout.getScrollY()" + coordinatorLayout.getScrollY());
+        Log.d("pre", "onNestedPreScroll: coordinatorLayout.getY()" + coordinatorLayout.getY());
+        Log.d("pre", "onNestedPreScroll: target.getPivotY()" + target.getPivotY());
+        Log.d("pre", "onNestedPreScroll: dy==" + dy);
         if (target.getTop() == 0) {
             if (dy > 0) {
                 child.setAlpha(0f);

@@ -3,7 +3,6 @@ package com.example.zhaoting.myapplication.app;
 import android.app.Application;
 
 import com.example.zhaoting.myapplication.utils.SharedPManager;
-import com.example.zhaoting.myapplication.volley.VolleyUtil;
 import com.example.zhaoting.utils.Utils;
 
 /**
@@ -15,7 +14,7 @@ public class ApplicationController extends Application{
         super.onCreate();
         //初始化
         Utils.getInstance().init(this);
-        VolleyUtil.getInstance().init(this);
+//        VolleyUtil.getInstance().init(this);
         SharedPManager.getInstance().init(this);
 
     }
