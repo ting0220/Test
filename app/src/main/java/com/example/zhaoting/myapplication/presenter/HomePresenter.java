@@ -20,15 +20,6 @@ public class HomePresenter {
 
     public void getHomeList(String url) {
         mHomeModel.getHomeList(new HomeListener() {
-//            @Override
-//            public void onTopSuccess(List<HomeBean.TopStoriesBean> mTopList) {
-//                mHomeView.setTopView(mTopList);
-//            }
-//
-//            @Override
-//            public void onSuccess(List<HomeBean.StoriesBean> mList) {
-//                mHomeView.setListView(mList);
-//            }
 
             @Override
             public void onSuccess(HomeBean data) {

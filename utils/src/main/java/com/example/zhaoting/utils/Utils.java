@@ -239,7 +239,7 @@ public class Utils {
         String week = "";
         try {
             Date newDate = sdf.parse(date);
-            month = newDate.getMonth()+1;
+            month = newDate.getMonth() + 1;
             day = newDate.getDate();
             if (newDate.getDay() == 0) {
                 week += "天";
@@ -265,9 +265,10 @@ public class Utils {
 
     /**
      * 判断应用是否处于后台
+     *
      * @return
      */
-    public  boolean isBackground() {
+    public boolean isBackground() {
         ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
         if (!tasks.isEmpty()) {
@@ -279,4 +280,10 @@ public class Utils {
         return false;
     }
 
+    public static String dateLongToString(long date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+        Date dt = new Date(date);
+        String dateString = sdf.format(dt);
+        return dateString;
+    }
 }

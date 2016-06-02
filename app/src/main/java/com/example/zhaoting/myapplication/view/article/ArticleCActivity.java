@@ -65,7 +65,7 @@ public class ArticleCActivity extends ArticleContentBaseActivity implements View
 
     @Override
     public void setContentData(ArticleContentBean bean, String data) {
-        Picasso.with(this).load(bean.getImage()).into(mTopImg);
+        Picasso.with(this).load(bean.getImages().get(0)).into(mTopImg);
         mTopTitle.setText(bean.getTitle());
         mTopText.setText(bean.getImage_source());
         mWebView.loadDataWithBaseURL("", data, "text/html", "UTF-8", null);

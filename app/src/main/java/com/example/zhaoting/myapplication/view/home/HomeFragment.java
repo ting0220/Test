@@ -147,15 +147,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
                 Intent intent = new Intent(getActivity(), ArticleCActivity.class);
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
-//                String s = ((MainActivity) getActivity()).getToolBar().getTitle().toString();
-//                if (s != null) {
-//                    ((MainActivity) getActivity()).setToolTitle(s);
-//                }
-//                replaceFragment(ArticleContentFragment.class, null, bundle);
-////                Intent intent = new Intent(getActivity(), ArticleContentActivity.class);
-////                intent.putExtras(bundle);
-////                startActivity(intent);
-//                Log.i("tag", String.valueOf(position));
             }
 
             @Override
@@ -172,7 +163,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
     }
 
-    public void setTopView(List<TopStoriesBean> list) {
+    public void setTopView(final List<TopStoriesBean> list) {
         final List<View> mList = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -184,10 +175,15 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             imgMeng.setLayoutParams(params);
             Picasso.with(getActivity()).load(list.get(i).getImage()).into(img);
             text.setText(list.get(i).getTitle());
+            final int finalI = i;
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", list.get(finalI).getId());
+                    Intent intent = new Intent(getActivity(), ArticleCActivity.class);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
                 }
             });
             mList.add(v);
