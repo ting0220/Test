@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <!--<TextView-->
+        <!--android:id="@+id/id_short_line"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dp_1"-->
+        <!--android:background="@color/light_gray"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/id_text_short_comments"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:paddingBottom="@dimen/dp_15"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_15"
+            android:text="0条短评"
+            android:textSize="@dimen/sp_16"/>
+
+        <ImageView
+            android:id="@+id/id_img_icon_fold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp_20"
+            android:src="@drawable/comment_icon_fold"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/id_long_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/light_gray"/>
+
+
+</LinearLayout>

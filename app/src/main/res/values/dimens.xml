@@ -52,4 +52,8 @@
     <dimen name="dp_280">280dp</dimen>
     <dimen name="dp_290">290dp</dimen>
     <dimen name="dp_300">300dp</dimen>
+    <dimen name="dp_470">470dp</dimen>
+    <dimen name="dp_500">500dp</dimen>
+    <dimen name="dp_510">510dp</dimen>
+    <dimen name="dp_520">520dp</dimen>
 </resources>

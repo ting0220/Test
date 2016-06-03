@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".view.article.ArticleCActivity" />
         <activity android:name=".view.article.ThemeArticleCActivity" />
+        <activity android:name=".view.comments.CommentActivity" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.zhaoting.myapplication.view.article;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.bean.ArticleContentBean;
 import com.example.zhaoting.myapplication.bean.ExtraInfoBean;
+import com.example.zhaoting.myapplication.view.comments.CommentActivity;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -24,6 +26,9 @@ public class ArticleCActivity extends ArticleContentBaseActivity implements View
     private TextView mComment;
     private ImageView mCollect;
     private ImageView mShare;
+
+    private ExtraInfoBean mExtraInfoBean;
+    private ArticleContentBean mArticleContentBean;
 
 
     @Override
@@ -58,6 +63,7 @@ public class ArticleCActivity extends ArticleContentBaseActivity implements View
 
     @Override
     public void setToolBarData(ExtraInfoBean bean) {
+        mExtraInfoBean = bean;
         mPraise.setText(bean.getPopularity() + "");
         mComment.setText(bean.getComments() + "");
 
@@ -65,6 +71,7 @@ public class ArticleCActivity extends ArticleContentBaseActivity implements View
 
     @Override
     public void setContentData(ArticleContentBean bean, String data) {
+        mArticleContentBean = bean;
         Picasso.with(this).load(bean.getImages().get(0)).into(mTopImg);
         mTopTitle.setText(bean.getTitle());
         mTopText.setText(bean.getImage_source());
@@ -85,6 +92,13 @@ public class ArticleCActivity extends ArticleContentBaseActivity implements View
             }
             break;
             case R.id.id_menu_comment: {
+                Bundle bundle = new Bundle();
+                bundle.putInt("longComments", mExtraInfoBean.getLong_comments());
+                bundle.putInt("shortComments", mExtraInfoBean.getShort_comments());
+                bundle.putInt("id", mArticleContentBean.getId());
+                Intent intent = new Intent(ArticleCActivity.this, CommentActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
             break;
