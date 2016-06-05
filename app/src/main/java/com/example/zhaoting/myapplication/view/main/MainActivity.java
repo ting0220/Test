@@ -19,14 +19,21 @@ import com.example.zhaoting.myapplication.adapter.DrawerItemAdapter;
 import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.DrawerBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
+import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
 import com.example.zhaoting.myapplication.presenter.MainPresenter;
 import com.example.zhaoting.myapplication.view.home.HomeFragment;
 import com.example.zhaoting.myapplication.view.otherTheme.OtherThemeFragment;
 import com.example.zhaoting.utils.Utils;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMenuItemClickListener {
@@ -248,10 +255,12 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             break;
             case R.id.id_setting: {
                 Utils.getInstance().ToastShort("click menu_setting");
+
             }
             break;
             case R.id.id_focus: {
                 Utils.getInstance().ToastShort("click menu_focus");
+
             }
             break;
             case R.id.id_share: {

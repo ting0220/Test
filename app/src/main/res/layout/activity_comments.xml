@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_55"
+        android:background="@color/blue">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/id_comment_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="@dimen/dp_10"
+                android:src="@drawable/back" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/id_text_short_comments"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/dp_50"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:drawableRight="@drawable/comment_icon_fold"-->
-        <!--android:paddingBottom="@dimen/dp_15"-->
-        <!--android:paddingLeft="@dimen/dp_20"-->
-        <!--android:paddingRight="@dimen/dp_20"-->
-        <!--android:paddingTop="@dimen/dp_15"-->
-        <!--android:text="0条短评"-->
-        <!--android:textSize="@dimen/sp_16"/>-->
+            <TextView
+                android:id="@+id/id_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/id_comment_back"
+                android:gravity="center_vertical"
+                android:text="text"
+                android:textColor="@color/white_day"
+                android:textSize="@dimen/sp_18" />
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"></RelativeLayout>-->
+            <ImageView
+                android:id="@+id/id_comment_write"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:src="@drawable/comment_write" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/id_comment_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
-
-    <!--<TextView-->
-    <!--android:id="@+id/id_short_line"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/dp_1"-->
-    <!--android:layout_above="@id/id_text_short_comments"-->
-    <!--android:background="@color/light_gray"/>-->
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_above="@id/id_short_line"-->
-    <!--android:layout_below="@id/id_long_line">-->
-
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>-->
-    <!--</RelativeLayout>-->
 </LinearLayout>

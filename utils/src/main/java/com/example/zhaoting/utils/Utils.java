@@ -280,10 +280,12 @@ public class Utils {
         return false;
     }
 
-    public static String dateLongToString(long date) {
+    public  String dateLongToString(long date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
         Date dt = new Date(date);
         String dateString = sdf.format(dt);
         return dateString;
     }
+
+
 }

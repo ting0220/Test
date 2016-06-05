@@ -1,9 +1,22 @@
 package com.example.zhaoting.myapplication.okhttp;
 
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.example.zhaoting.myapplication.utils.SharedPManager;
+import com.example.zhaoting.utils.Utils;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by zhaoting on 16/4/28.
@@ -28,9 +41,44 @@ public class OkHttpUtil {
         return SingletonHolder.instance;
     }
 
+    public void get(String url, Map<String, String> map, Callback responseCallback) {
+        StringBuilder builder = new StringBuilder(url);
+        builder.append("?");
+        Set<String> keys = map.keySet();
+        Iterator<String> iterator = keys.iterator();
+        for (int i = 0; i < map.size(); i++) {
+            String key = iterator.next();
+            String value = map.get(key);
+            if (!TextUtils.isEmpty(value)) {
+                builder.append(key);
+                builder.append("=");
+                builder.append(map.get(key));
+            }
+            if (!TextUtils.isEmpty(value) && i < map.size() - 1) {
+                builder.append("&");
+            }
+        }
+        Log.i("tag", builder.toString());
+        get(builder.toString(), responseCallback);
+    }
 
-    public void get(String url, Callback responseCaliiback) {
+
+    public void get(String url, Callback responseCallback) {
         Request request = new Request.Builder().url(url).build();
-        mOkHttpClient.newCall(request).enqueue(responseCaliiback);
+        mOkHttpClient.newCall(request).enqueue(responseCallback);
+    }
+
+    /**
+     * 需要根据与后台的约定添加
+     * @param url
+     * @param body 用于提交的键值对的添加
+     * @param responseCallback
+     * 如果头部还需要什么需要通过addHeader()的方式添加
+     */
+    public void post(String url, RequestBody body, Callback responseCallback) {
+        Request request = new Request.Builder().url(url)
+                .addHeader("Accept", "application/json")
+                .post(body).build();
+        mOkHttpClient.newCall(request).enqueue(responseCallback);
     }
 }
