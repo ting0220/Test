@@ -39,6 +39,11 @@ public class ArticleCActivity extends ArticleContentBaseActivity implements View
         initDatas();
     }
 
+    @Override
+    public int getFragmentContainerId() {
+        return 0;
+    }
+
     private void initViews() {
 
         mBack = (ImageView) findViewById(R.id.id_menu_back);

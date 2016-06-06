@@ -39,6 +39,11 @@ public class ThemeArticleCActivity extends ArticleContentBaseActivity implements
         initDatas();
     }
 
+    @Override
+    public int getFragmentContainerId() {
+        return 0;
+    }
+
     private void initViews() {
         mWebView = (WebView) findViewById(R.id.id_article_content_webview);
         mFootImg = (ImageView) findViewById(R.id.id_theme_article_content_img);

@@ -1,6 +1,5 @@
 package com.example.zhaoting.myapplication.view.comments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.adapter.CommentListAdapter;
+import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.CommentBean;
 import com.example.zhaoting.myapplication.presenter.CommentPresenter;
 import com.example.zhaoting.myapplication.widget.OnRecyclerItemClickListener;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by zhaoting on 16/6/2.
  */
-public class CommentActivity extends Activity implements CommentView, View.OnClickListener {
+public class CommentActivity extends BaseActivity implements CommentView, View.OnClickListener {
     private RecyclerView mRecyclerView;
 
     private int longComments;
@@ -45,6 +45,11 @@ public class CommentActivity extends Activity implements CommentView, View.OnCli
         initViews();
         initDatas();
         initListeners();
+    }
+
+    @Override
+    public int getFragmentContainerId() {
+        return 0;
     }
 
     private void initListeners() {

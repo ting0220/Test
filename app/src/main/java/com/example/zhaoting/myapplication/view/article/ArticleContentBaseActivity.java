@@ -1,7 +1,6 @@
 package com.example.zhaoting.myapplication.view.article;
 
-import android.app.Activity;
-
+import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.ArticleContentBean;
 import com.example.zhaoting.myapplication.bean.ExtraInfoBean;
 import com.example.zhaoting.myapplication.presenter.ArticleContentBasePresenter;
@@ -12,7 +11,7 @@ import java.io.FileOutputStream;
 /**
  * Created by zhaoting on 16/6/1.
  */
-public abstract class ArticleContentBaseActivity extends Activity implements ArticleContentView {
+public abstract class ArticleContentBaseActivity extends BaseActivity implements ArticleContentView {
     private int id;
     private String fileName = "article_content.css";
     private ArticleContentBean bean;

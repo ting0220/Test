@@ -1,6 +1,7 @@
 package com.example.zhaoting.myapplication.app;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -48,11 +49,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             fragment.setArguments(bundle);
         }
         if (res == 0) {
-            res = getFragmentContainerId();
+            if (getFragmentContainerId() == 0) {
+                throw new Resources.NotFoundException("FragmentContainer is null");
+            } else {
+                res = getFragmentContainerId();
+            }
         }
-//        if (fragment.equals(currentFragment)) {
-//            return;
-//        }
         if (tag == null) {
             tag = fragment.getClass().getName();
         }
