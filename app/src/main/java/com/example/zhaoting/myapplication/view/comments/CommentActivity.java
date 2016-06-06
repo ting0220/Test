@@ -2,10 +2,10 @@ package com.example.zhaoting.myapplication.view.comments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +18,6 @@ import com.example.zhaoting.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 /**
  * Created by zhaoting on 16/6/2.
@@ -35,6 +34,8 @@ public class CommentActivity extends Activity implements CommentView, View.OnCli
     private ImageView mCommentBack;
     private TextView mCommentCount;
     private ImageView mCommentWrite;
+
+    private int height = 0;
 
 
     @Override
@@ -114,7 +115,7 @@ public class CommentActivity extends Activity implements CommentView, View.OnCli
         if (longComments != 0) {
             mCommentPresenter.getLongComments(id);
         }
-        mCommentCount.setText(String.valueOf(longComments+shortComments)+"条点评");
+        mCommentCount.setText(String.valueOf(longComments + shortComments) + "条点评");
     }
 
     private void initViews() {
@@ -141,9 +142,41 @@ public class CommentActivity extends Activity implements CommentView, View.OnCli
         mList.addAll(list);
         mAdapter.setList(mList);
         if (longComments == 0) {
-            mRecyclerView.smoothScrollToPosition(longComments + 2);
+            for (int i = 0; i < longComments + 2; i++) {
+                if (i == 0) {
+                    height = 0;
+                }
+                ViewTreeObserver vto = mRecyclerView.getChildAt(i).getViewTreeObserver();
+                final int finalI = i;
+                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        mRecyclerView.getChildAt(finalI).getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        height += mRecyclerView.getChildAt(finalI).getHeight();
+                        if (finalI == longComments + 1) {
+                            mRecyclerView.smoothScrollBy(0, height);
+                        }
+                    }
+                });
+            }
         } else {
-            mRecyclerView.smoothScrollToPosition(longComments + 1);
+            for (int i = 0; i < longComments + 1; i++) {
+                if (i == 0) {
+                    height = 0;
+                }
+                ViewTreeObserver vto = mRecyclerView.getChildAt(i).getViewTreeObserver();
+                final int finalI = i;
+                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        mRecyclerView.getChildAt(finalI).getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        height += mRecyclerView.getChildAt(finalI).getHeight();
+                        if (finalI == longComments) {
+                            mRecyclerView.smoothScrollBy(0, height);
+                        }
+                    }
+                });
+            }
         }
 
 
