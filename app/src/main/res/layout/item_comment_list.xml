@@ -54,7 +54,22 @@
         android:layout_marginTop="@dimen/dp_10"
         android:lineSpacingExtra="@dimen/dp_5"
         android:text="text"
+        android:textColor="@color/black_day"
         android:textSize="@dimen/sp_16"/>
+
+    <TextView
+        android:id="@+id/id_comment_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_65"
+        android:layout_marginRight="@dimen/dp_20"
+        android:lineSpacingExtra="@dimen/dp_5"
+        android:text="@string/drawer_home"
+        android:textColor="@color/gray_day"
+        android:textSize="@dimen/sp_16"
+        android:visibility="gone"/>
+
 
     <TextView
         android:id="@+id/id_comment_time"

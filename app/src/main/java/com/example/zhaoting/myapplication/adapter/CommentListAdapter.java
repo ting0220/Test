@@ -1,7 +1,13 @@
 package com.example.zhaoting.myapplication.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +68,23 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     String date = Utils.getInstance().dateLongToString(mList.get(position - 1).getTime());
                     ((CommentListHolder) holder).mCommentDate.setText(date);
                     ((CommentListHolder) holder).mCommentLike.setText(String.valueOf(mList.get(position - 1).getLikes()));
+                    if (mList.get(position - 1).getReply_to() != null) {
+                        String name = mList.get(position - 1).getReply_to().getAuthor();
+                        String content = mList.get(position - 1).getReply_to().getContent();
+                        SpannableStringBuilder spannableString = new SpannableStringBuilder("//");
+                        spannableString.append(name);
+                        spannableString.append(":");
+                        spannableString.append(content);
+                        StyleSpan span = new StyleSpan(Typeface.BOLD);
+                        int length = name.length()+3;
+                        spannableString.setSpan(span, 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.BLACK),0,length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                        ((CommentListHolder) holder).mCommentReply.setVisibility(View.VISIBLE);
+                        ((CommentListHolder) holder).mCommentReply.setText(spannableString);
+                    } else {
+                        ((CommentListHolder) holder).mCommentReply.setVisibility(View.GONE);
+                    }
                 } else {
                     if (longSize == 0) {
                         Picasso.with(mContext).load(mList.get(position - 3).getAvatar()).into(((CommentListHolder) holder).mCircleImageView);
@@ -70,13 +93,49 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         String date = Utils.getInstance().dateLongToString(mList.get(position - 3).getTime());
                         ((CommentListHolder) holder).mCommentDate.setText(date);
                         ((CommentListHolder) holder).mCommentLike.setText(String.valueOf(mList.get(position - 3).getLikes()));
-                    }else{
+
+                        if (mList.get(position - 3).getReply_to() != null) {
+                            String name = mList.get(position - 3).getReply_to().getAuthor();
+                            String content = mList.get(position - 3).getReply_to().getContent();
+                            SpannableStringBuilder spannableString = new SpannableStringBuilder("//");
+                            spannableString.append(name);
+                            spannableString.append(":");
+                            spannableString.append(content);
+                            StyleSpan span = new StyleSpan(Typeface.BOLD);
+                            int length = name.length() + 3;
+                            spannableString.setSpan(span, 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.BLACK),0,length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                            ((CommentListHolder) holder).mCommentReply.setVisibility(View.VISIBLE);
+                            ((CommentListHolder) holder).mCommentReply.setText(spannableString);
+                        } else {
+                            ((CommentListHolder) holder).mCommentReply.setVisibility(View.GONE);
+                        }
+                    } else {
                         Picasso.with(mContext).load(mList.get(position - 2).getAvatar()).into(((CommentListHolder) holder).mCircleImageView);
                         ((CommentListHolder) holder).mCommentOwner.setText(mList.get(position - 2).getAuthor());
                         ((CommentListHolder) holder).mCommentContent.setText(mList.get(position - 2).getContent());
                         String date = Utils.getInstance().dateLongToString(mList.get(position - 2).getTime());
                         ((CommentListHolder) holder).mCommentDate.setText(date);
                         ((CommentListHolder) holder).mCommentLike.setText(String.valueOf(mList.get(position - 2).getLikes()));
+
+                        if (mList.get(position - 2).getReply_to() != null) {
+                            String name = mList.get(position - 2).getReply_to().getAuthor();
+                            String content = mList.get(position - 2).getReply_to().getContent();
+                            ((CommentListHolder) holder).mCommentReply.setVisibility(View.VISIBLE);
+                            SpannableStringBuilder spannableString = new SpannableStringBuilder("//");
+                            spannableString.append(name);
+                            spannableString.append(":");
+                            spannableString.append(content);
+                            StyleSpan span = new StyleSpan(Typeface.BOLD);
+                            int length = name.length() + 3;
+                            spannableString.setSpan(span, 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.BLACK),0,length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                            ((CommentListHolder) holder).mCommentReply.setText(spannableString);
+                        } else {
+                            ((CommentListHolder) holder).mCommentReply.setVisibility(View.GONE);
+                        }
 
                     }
                 }

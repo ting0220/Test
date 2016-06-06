@@ -6,11 +6,12 @@ package com.example.zhaoting.myapplication.bean;
 public class CommentBean {
 
     /**
-     * author : 一边按快门一边等待逆袭
-     * content : 居然看到图片里面有骨头，我想问问吃的哪家飞机餐。。。
-     * avatar : http://pic1.zhimg.com/290172b4c_im.jpg
-     * time : 1413665436
-     * id : 547265
+     * author : TuoTuo的亲爹
+     * content : 第一次也是吃了牛肉…吃完以后，人家很客气的问我还需要么…我也很客气地再来了一盒鸡肉的。。。。可惜后来专门坐那个航班，居然换成茄子饭了?
+     * avatar : http://pic1.zhimg.com/8949bb2f30ed5789857accd489644234_im.jpg
+     * time : 1413859600
+     * reply_to : {"content":"我每次都不假思索选了牛肉，然后就深深的后悔没有试过一次鸡肉，到下一次又情不自禁选了牛肉，周而复始循环往复-_-#","status":0,"id":551969,"author":"怒放的腋毛"}
+     * id : 552762
      * likes : 0
      */
 
@@ -18,6 +19,14 @@ public class CommentBean {
     private String content;
     private String avatar;
     private int time;
+    /**
+     * content : 我每次都不假思索选了牛肉，然后就深深的后悔没有试过一次鸡肉，到下一次又情不自禁选了牛肉，周而复始循环往复-_-#
+     * status : 0
+     * id : 551969
+     * author : 怒放的腋毛
+     */
+
+    private ReplyToBean reply_to;
     private int id;
     private int likes;
 
@@ -53,6 +62,14 @@ public class CommentBean {
         this.time = time;
     }
 
+    public ReplyToBean getReply_to() {
+        return reply_to;
+    }
+
+    public void setReply_to(ReplyToBean reply_to) {
+        this.reply_to = reply_to;
+    }
+
     public int getId() {
         return id;
     }
@@ -67,5 +84,44 @@ public class CommentBean {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public static class ReplyToBean {
+        private String content;
+        private int status;
+        private int id;
+        private String author;
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public void setAuthor(String author) {
+            this.author = author;
+        }
     }
 }
