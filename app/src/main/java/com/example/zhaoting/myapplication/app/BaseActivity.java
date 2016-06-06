@@ -1,5 +1,6 @@
 package com.example.zhaoting.myapplication.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -87,6 +88,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    public void jumpActivity(Class clazz) {
+        jumpActivity(clazz, null);
+    }
+
+    public void jumpActivity(Class clazz, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+
+    }
 
     //获取fragment所在布局
     public abstract int getFragmentContainerId();
