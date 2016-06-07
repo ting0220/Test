@@ -30,6 +30,7 @@ import com.example.zhaoting.myapplication.bean.TopStoriesBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.HomePresenter;
 import com.example.zhaoting.myapplication.view.article.ArticleCActivity;
+import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.myapplication.widget.HomeEndlessScrollListener;
 import com.example.zhaoting.myapplication.widget.OnRecyclerItemClickListener;
 import com.example.zhaoting.utils.Utils;
@@ -144,9 +145,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", mList.get(position).getId());
-                Intent intent = new Intent(getActivity(), ArticleCActivity.class);
-                intent.putExtras(bundle);
-                getActivity().startActivity(intent);
+                ((MainActivity) getActivity()).jumpActivity(ArticleCActivity.class, bundle,false);
             }
 
             @Override

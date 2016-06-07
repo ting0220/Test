@@ -90,16 +90,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void jumpActivity(Class clazz) {
-        jumpActivity(clazz, null);
+    public void jumpActivity(Class clazz, boolean isFinish) {
+        jumpActivity(clazz, null, isFinish);
     }
 
-    public void jumpActivity(Class clazz, Bundle bundle) {
-        Intent intent = new Intent(this, clazz);
+    public void jumpActivity(Class to, Bundle bundle, boolean isFinish) {
+        Intent intent = new Intent(this, to);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
         startActivity(intent);
+        if (isFinish) {
+            this.finish();
+        }
 
     }
 

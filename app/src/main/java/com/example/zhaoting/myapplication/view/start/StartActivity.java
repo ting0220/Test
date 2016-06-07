@@ -3,15 +3,14 @@ package com.example.zhaoting.myapplication.view.start;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.zhaoting.myapplication.R;
+import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.presenter.StartPresenter;
 import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.utils.Utils;
@@ -20,7 +19,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by zhaoting on 16/4/25.
  */
-public class StartActivity extends AppCompatActivity implements StartView {
+public class StartActivity extends BaseActivity implements StartView {
     private ImageView mImg;
     private TextView mText;
 
@@ -32,6 +31,11 @@ public class StartActivity extends AppCompatActivity implements StartView {
         setContentView(R.layout.activity_splash);
 
         initViews();
+    }
+
+    @Override
+    public int getFragmentContainerId() {
+        return 0;
     }
 
     private void initViews() {
@@ -71,9 +75,7 @@ public class StartActivity extends AppCompatActivity implements StartView {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                startActivity(intent);
-                StartActivity.this.finish();
+                jumpActivity(MainActivity.class,true);
             }
 
             @Override

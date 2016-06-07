@@ -46,8 +46,6 @@ public abstract class OnRecyclerItemClickListener implements RecyclerView.OnItem
         public boolean onSingleTapUp(MotionEvent e) {
             View child = mRecyclerView.findChildViewUnder(e.getX(), e.getY());
             if (child != null) {
-//                RecyclerView.ViewHolder vh = mRecyclerView.getChildViewHolder(child);
-//                onItemClick(vh);
                 onItemClick(child, mRecyclerView.getChildAdapterPosition(child));
             }
             return true;
@@ -57,8 +55,12 @@ public abstract class OnRecyclerItemClickListener implements RecyclerView.OnItem
         public void onLongPress(MotionEvent e) {
             View child = mRecyclerView.findChildViewUnder(e.getX(), e.getY());
             if (child != null) {
-                onItemLongClick(child, mRecyclerView.getChildAdapterPosition(child));
-
+                if (e.getAction() == MotionEvent.ACTION_DOWN) {
+                    long i = e.getEventTime();
+//                    onItemLongClick(child, mRecyclerView.getChildAdapterPosition(child));
+                } else if (e.getAction() == MotionEvent.ACTION_UP) {
+                    long j = e.getEventTime();
+                }
 
             }
         }

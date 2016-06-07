@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +13,7 @@ import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.CommentBean;
 import com.example.zhaoting.myapplication.presenter.CommentPresenter;
 import com.example.zhaoting.myapplication.widget.OnRecyclerItemClickListener;
+import com.example.zhaoting.myapplication.widget.onViewClickListener;
 import com.example.zhaoting.utils.Utils;
 
 import java.util.ArrayList;
@@ -34,8 +34,6 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
     private ImageView mCommentBack;
     private TextView mCommentCount;
     private ImageView mCommentWrite;
-
-    private int height = 0;
 
 
     @Override
@@ -96,7 +94,6 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
                         }
                     }
                 }
-
             }
 
             @Override
@@ -134,6 +131,19 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
         mAdapter = new CommentListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
+        mAdapter.setOnClickListener(new onViewClickListener() {
+            @Override
+            public void onViewClickListener(View view) {
+                if (((TextView) view).getText().toString().equals(getResources().getString(R.string.open))) {
+                    ((TextView) view).setText(getResources().getString(R.string.fold));
+                    ((TextView) view).setMaxLines(100);
+                } else {
+                    ((TextView) view).setText(getResources().getString(R.string.open));
+                    ((TextView) view).setMaxLines(2);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -146,45 +156,10 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
     public void onSuccessShortComments(List<CommentBean> list) {
         mList.addAll(list);
         mAdapter.setList(mList);
-        if (longComments == 0) {
-            for (int i = 0; i < longComments + 2; i++) {
-                if (i == 0) {
-                    height = 0;
-                }
-                ViewTreeObserver vto = mRecyclerView.getChildAt(i).getViewTreeObserver();
-                final int finalI = i;
-                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        mRecyclerView.getChildAt(finalI).getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        height += mRecyclerView.getChildAt(finalI).getHeight();
-                        if (finalI == longComments + 1) {
-                            mRecyclerView.smoothScrollBy(0, height);
-                        }
-                    }
-                });
-            }
-        } else {
-            for (int i = 0; i < longComments + 1; i++) {
-                if (i == 0) {
-                    height = 0;
-                }
-                ViewTreeObserver vto = mRecyclerView.getChildAt(i).getViewTreeObserver();
-                final int finalI = i;
-                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        mRecyclerView.getChildAt(finalI).getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        height += mRecyclerView.getChildAt(finalI).getHeight();
-                        if (finalI == longComments) {
-                            mRecyclerView.smoothScrollBy(0, height);
-                        }
-                    }
-                });
-            }
-        }
 
-
+        int i = mRecyclerView.getChildCount();
+        int height = mRecyclerView.getChildAt(i - 1).getTop();
+        mRecyclerView.smoothScrollBy(0, height);
     }
 
     @Override
@@ -208,6 +183,9 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
                 Utils.getInstance().ToastShort("click_write");
             }
             break;
+
         }
     }
+
+
 }

@@ -1,6 +1,5 @@
 package com.example.zhaoting.myapplication.view.article;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -101,9 +100,7 @@ public class ArticleCActivity extends ArticleContentBaseActivity implements View
                 bundle.putInt("longComments", mExtraInfoBean.getLong_comments());
                 bundle.putInt("shortComments", mExtraInfoBean.getShort_comments());
                 bundle.putInt("id", mArticleContentBean.getId());
-                Intent intent = new Intent(ArticleCActivity.this, CommentActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                jumpActivity(CommentActivity.class,bundle,false);
 
             }
             break;

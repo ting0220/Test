@@ -14,4 +14,7 @@
     <string name="focus">关注</string>
     <string name="article_from">本文来自：</string>
     <string name="no_long_comments">深度长评虚位以待</string>
+    <string name="open">展开</string>
+    <string name="fold">收起</string>
+    <string name="comment_delete">抱歉，原点评已经被删除</string>
 </resources>

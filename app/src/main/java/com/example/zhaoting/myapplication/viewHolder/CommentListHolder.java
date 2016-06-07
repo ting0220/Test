@@ -18,6 +18,7 @@ public class CommentListHolder extends RecyclerView.ViewHolder {
     public TextView mCommentContent;
     public TextView mCommentDate;
     public TextView mCommentReply;
+    public TextView mCommentReplyFold;
 
     public CommentListHolder(View itemView) {
         super(itemView);
@@ -27,5 +28,6 @@ public class CommentListHolder extends RecyclerView.ViewHolder {
         mCommentContent = (TextView) itemView.findViewById(R.id.id_comment_content);
         mCommentDate = (TextView) itemView.findViewById(R.id.id_comment_time);
         mCommentReply = (TextView) itemView.findViewById(R.id.id_comment_reply);
+        mCommentReplyFold = (TextView) itemView.findViewById(R.id.id_comment_reply_visible);
     }
 }

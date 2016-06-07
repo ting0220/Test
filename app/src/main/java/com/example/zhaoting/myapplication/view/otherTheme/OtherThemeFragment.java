@@ -1,6 +1,5 @@
 package com.example.zhaoting.myapplication.view.otherTheme;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +18,7 @@ import com.example.zhaoting.myapplication.bean.OtherThemeBean;
 import com.example.zhaoting.myapplication.bean.StoriesBean;
 import com.example.zhaoting.myapplication.presenter.OtherThemePresenter;
 import com.example.zhaoting.myapplication.view.article.ThemeArticleCActivity;
+import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.myapplication.widget.EndlessScrollListener;
 import com.example.zhaoting.myapplication.widget.OnRecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
@@ -120,14 +120,7 @@ public class OtherThemeFragment extends BaseFragment implements OtherThemeView, 
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", bean.getStories().get(position).getId());
-                Intent intent = new Intent(getActivity(), ThemeArticleCActivity.class);
-                intent.putExtras(bundle);
-                getActivity().startActivity(intent);
-//                String s = ((MainActivity) getActivity()).getToolBar().getTitle().toString();
-//                if (s != null) {
-//                    ((MainActivity) getActivity()).setToolTitle(s);
-//                }
-//                replaceFragment(ThemeArticleContentFragment.class, null, bundle);
+                ((MainActivity) getActivity()).jumpActivity(ThemeArticleCActivity.class, bundle,false);
             }
 
             @Override

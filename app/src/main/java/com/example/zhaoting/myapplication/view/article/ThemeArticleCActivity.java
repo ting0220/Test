@@ -1,6 +1,5 @@
 package com.example.zhaoting.myapplication.view.article;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -66,14 +65,14 @@ public class ThemeArticleCActivity extends ArticleContentBaseActivity implements
 
     @Override
     public void setToolBarData(ExtraInfoBean bean) {
-        this.mExtraInfoBean=bean;
-        mPraise.setText(bean.getPopularity()+"");
-        mComment.setText(bean.getComments()+"");
+        this.mExtraInfoBean = bean;
+        mPraise.setText(bean.getPopularity() + "");
+        mComment.setText(bean.getComments() + "");
     }
 
     @Override
     public void setContentData(ArticleContentBean bean, String data) {
-        this.mArticleContentBean=bean;
+        this.mArticleContentBean = bean;
         Picasso.with(this).load(bean.getTheme().getThumbnail()).into(mFootImg);
         mFootTitle.setText(getResources().getString(R.string.article_from) + bean.getTheme().getName());
         mWebView.loadDataWithBaseURL("", data, "text/html", "UTF-8", null);
@@ -90,13 +89,11 @@ public class ThemeArticleCActivity extends ArticleContentBaseActivity implements
             }
             break;
             case R.id.id_menu_comment: {
-                Bundle bundle=new Bundle();
-                bundle.putInt("longComments",mExtraInfoBean.getLong_comments());
-                bundle.putInt("shortComments",mExtraInfoBean.getShort_comments());
-                bundle.putInt("id",mArticleContentBean.getId());
-                Intent intent=new Intent(ThemeArticleCActivity.this, CommentActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putInt("longComments", mExtraInfoBean.getLong_comments());
+                bundle.putInt("shortComments", mExtraInfoBean.getShort_comments());
+                bundle.putInt("id", mArticleContentBean.getId());
+                jumpActivity(CommentActivity.class, bundle,false);
             }
             break;
             case R.id.id_menu_collect: {
