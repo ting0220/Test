@@ -76,7 +76,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
                             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                                v.getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                                v.getParent().getParent().getParent().requestDisallowInterceptTouchEvent(true);
                                 Utils.getInstance().ToastShort("touch like");
                             }
                             return true;
