@@ -17,4 +17,20 @@
     <string name="open">展开</string>
     <string name="fold">收起</string>
     <string name="comment_delete">抱歉，原点评已经被删除</string>
+
+    <string name="setting">设置</string>
+    <string name="normal">常规</string>
+    <string name="down_auto">自动离线下载</string>
+    <string name="down_auto_sig">仅Wi-Fi下可用，自动下载最新内容</string>
+    <string name="no_picture">无图模式</string>
+    <string name="no_picture_sig">2G/3G 网络下不下载图片</string>
+    <string name="big_size">大字号</string>
+    <string name="other">其他</string>
+    <string name="push_info">推送消息</string>
+    <string name="comment_share">点评分享到微博</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="update">检查更新</string>
+    <string name="version">版本</string>
+    <string name="feedback">反馈</string>
+    <string name="suggestion">意见反馈</string>
 </resources>

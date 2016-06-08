@@ -10,7 +10,6 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -72,18 +71,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     String date = Utils.getInstance().dateLongToString(mList.get(position - 1).getTime());
                     ((CommentListHolder) holder).mCommentDate.setText(date);
                     ((CommentListHolder) holder).mCommentLike.setText(String.valueOf(mList.get(position - 1).getLikes()));
-                    ((CommentListHolder) holder).mCommentLike.setOnTouchListener(new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                                v.getParent().getParent().getParent().requestDisallowInterceptTouchEvent(true);
-                                Utils.getInstance().ToastShort("touch like");
-                            }
-                            return true;
-                        }
-                    });
-
-
                     if (mList.get(position - 1).getReply_to() != null) {
                         String name = mList.get(position - 1).getReply_to().getAuthor();
                         String content = mList.get(position - 1).getReply_to().getContent();

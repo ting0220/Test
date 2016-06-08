@@ -5,4 +5,11 @@
         <attr name="circleBorderWidth" format="dimension"/>
         <attr name="circleBorderColor" format="color"/>
     </declare-styleable>
+    <declare-styleable name="SettingView">
+        <attr name="titleS" format="string"/>
+        <attr name="sigS" format="string"/>
+        <attr name="checkB" format="boolean"/>
+        <attr name="hasCheckB" format="string"/>
+        <attr name="hasLine" format="boolean"/>
+    </declare-styleable>
 </resources>

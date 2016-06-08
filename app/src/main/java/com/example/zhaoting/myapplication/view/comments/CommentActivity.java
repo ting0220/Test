@@ -1,6 +1,9 @@
 package com.example.zhaoting.myapplication.view.comments;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -72,11 +75,27 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
                             }
 //                            mCommentPresenter.getShortComment(id);
                         } else {
+                            final String[] arrayItems = new String[]{"赞同", "举报", "复制", "回复"};
+                            Dialog alertDialog = new AlertDialog.Builder(CommentActivity.this).setItems(arrayItems, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Utils.getInstance().ToastShort(arrayItems[which]);
+                                }
+                            }).create();
+                            alertDialog.show();
                             Utils.getInstance().ToastShort("短" + mList.get(position - 3).getContent());
                         }
                     } else {
                         if (position < longComments + 1) {
                             Utils.getInstance().ToastShort("长" + mList.get(position - 1).getContent());
+                            final String[] arrayItems = new String[]{"赞同", "举报", "复制", "回复"};
+                            Dialog alertDialog = new AlertDialog.Builder(CommentActivity.this).setItems(arrayItems, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Utils.getInstance().ToastShort(arrayItems[which]);
+                                }
+                            }).create();
+                            alertDialog.show();
                         } else if (position == longComments + 1) {
                             if (shortComments != 0 && mAdapter.getItemCount() == longComments + 2) {
                                 mCommentPresenter.getShortComment(id);
@@ -90,6 +109,16 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
                             }
 
                         } else {
+                            final String[] arrayItems = new String[]{"赞同", "举报", "复制", "回复"};
+                            Dialog alertDialog = new AlertDialog.Builder(CommentActivity.this)
+                                    .setItems(arrayItems, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Utils.getInstance().ToastShort(arrayItems[which]);
+                                        }
+                                    })
+                                    .create();
+                            alertDialog.show();
                             Utils.getInstance().ToastShort("短" + mList.get(position - 2).getContent());
                         }
                     }
