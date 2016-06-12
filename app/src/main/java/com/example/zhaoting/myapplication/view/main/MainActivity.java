@@ -1,15 +1,21 @@
 package com.example.zhaoting.myapplication.view.main;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -253,43 +259,69 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             }
             break;
             case R.id.id_mode: {
+                View targetView = MainActivity.this.getWindow().getDecorView().getRootView();
+                targetView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                targetView.setDrawingCacheEnabled(true);
+                Rect frame = new Rect();
+                MainActivity.this.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+                int statusBarHeight = frame.top;
+                DisplayMetrics dm = MainActivity.this.getResources().getDisplayMetrics();
+                int height = dm.heightPixels;
+                int width = dm.widthPixels;
+                Bitmap bmp = Bitmap.createBitmap(targetView.getDrawingCache(), 0, statusBarHeight, width, height - statusBarHeight);
+                targetView.destroyDrawingCache();
+                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+                final View screenShot = inflater.inflate(R.layout.window_img, null);
+                final WindowManager windowManager = (WindowManager) MainActivity.this.getSystemService(MainActivity.this.WINDOW_SERVICE);
+                WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+                ImageView img = (ImageView) screenShot.findViewById(R.id.id_wm_img);
+                img.setImageBitmap(bmp);
 
-                Handler mHandler = new Handler();
-                mHandler.postDelayed(new Runnable() {
+                params.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE;
+                params.format = PixelFormat.RGBA_8888;
+                params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+                params.alpha = 1f;
+                windowManager.addView(screenShot, params);
+
+                boolean isDay = Utils.getInstance().getTheme();
+                if (isDay) {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    recreate();
+                } else {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    recreate();
+                }
+                ObjectAnimator animator = ObjectAnimator.ofFloat(img, "alpha", 1f, 0f);
+                animator.setDuration(5000);
+                animator.start();
+                animator.addListener(new Animator.AnimatorListener() {
                     @Override
-                    public void run() {
-                        WindowManager wm = (WindowManager) MainActivity.this.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-                        LayoutInflater inflater = LayoutInflater.from(MainActivity.this.getApplicationContext());
-                        LinearLayout wmLinear = (LinearLayout) inflater.inflate(R.layout.window_img, null, false);
-                        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-                        ImageView shotImg = (ImageView) wmLinear.findViewById(R.id.id_wm_img);
-                        shotImg.setImageBitmap(Utils.getInstance().getScreenShot(MainActivity.this).getDrawingCache());
-
-                        params.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE;
-                        params.format = PixelFormat.TRANSLUCENT;
-                        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
-                        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                        params.gravity = Gravity.CENTER;
-                        params.alpha=0.8f;
-                        wm.addView(wmLinear, params);
-                        Log.i("tag", "");
+                    public void onAnimationStart(Animator animation) {
+                        boolean isDay = Utils.getInstance().getTheme();
+                        if (isDay) {
+                            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            recreate();
+                        } else {
+                            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            recreate();
+                        }
                     }
-                }, 1000);
 
-//                boolean isDay = Utils.getInstance().getTheme();
-//                Bitmap bitmap = Utils.getInstance().takeScreenShot(this);
-////                wmImg.setImageBitmap(bitmap);
-//                wmImg.setImageResource(R.drawable.unlogin);
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        windowManager.removeView(screenShot);
+                    }
 
-//                if (isDay) {
-//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    recreate();
-//                } else {
-//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    recreate();
-//                }
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
 
 
             }
