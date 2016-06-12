@@ -2,21 +2,21 @@
 <resources>
 
     <!--白天模式-->
-    <color name="black_day">#333333</color>
-    <color name="orange_day">#EE6E50</color>
-    <color name="white_day">#FFFFFF</color>
-    <color name="gray_day">#808080</color>
+    <color name="black">#333333</color>
+    <color name="orange">#EE6E50</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#808080</color>
     <color name="light_gray">#dfdfdf</color>
     <color name="background_gray">#efefef</color>
-    <color name="night_mask_day">#69000000</color> <!--透明黑色-->
+    <color name="night_mask">#69000000</color> <!--透明黑色-->
 
 
-    <!--夜间模式-->
-    <color name="black_night">#8F8F8F</color>
-    <color name="orange_night">#944432</color>
-    <color name="white_night">#222222</color>
-    <color name="gray_night">#2B2B2B</color>
-    <color name="night_mask_night">#D9000000</color>
+    <!--&lt;!&ndash;夜间模式&ndash;&gt;-->
+    <!--<color name="black_night">#8F8F8F</color>-->
+    <!--<color name="orange_night">#944432</color>-->
+    <!--<color name="white_night">#222222</color>-->
+    <!--<color name="gray_night">#2B2B2B</color>-->
+    <!--<color name="night_mask_night">#D9000000</color>-->
 
     <color name="blue">#5C99ED</color>
 

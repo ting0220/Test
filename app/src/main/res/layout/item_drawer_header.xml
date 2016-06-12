@@ -31,7 +31,7 @@
             android:maxLength="5"
             android:singleLine="true"
             android:text="texttttttt"
-            android:textColor="@color/white_day"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18"/>
     </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:drawablePadding="@dimen/dp_20"
             android:gravity="center_vertical"
             android:text="@string/my_collect"
-            android:textColor="@color/white_day"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_14"/>
 
         <TextView
@@ -63,7 +63,7 @@
             android:gravity="center_vertical"
             android:text="@string/download"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/white_day"/>
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 

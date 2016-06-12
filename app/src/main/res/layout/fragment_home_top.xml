@@ -25,6 +25,6 @@
             android:id="@+id/id_orange_point"
             android:layout_width="@dimen/dp_5"
             android:layout_height="@dimen/dp_5"
-            android:background="@color/orange_day"/>
+            android:background="@color/orange"/>
     </RelativeLayout>
 </RelativeLayout>

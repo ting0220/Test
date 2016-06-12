@@ -1,5 +1,7 @@
 package com.example.zhaoting.myapplication.view.main;
 
+import android.content.Context;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,11 +10,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.adapter.DrawerItemAdapter;
@@ -69,6 +76,8 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         initViews();
 
         setUpDrawer();
+
+
     }
 
     @Override
@@ -83,10 +92,10 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         setSupportActionBar(mToolbar);
         mToolbar.setTitle(getResources().getString(R.string.drawer_home));
         mToolbar.setOnMenuItemClickListener(this);
-        mToolbar.setTitleTextColor(getResources().getColor(R.color.white_day));
+        mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open_string, R.string.close_string);
-        actionBarDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
         mHomeFragment = newInstanceFragment(HomeFragment.class);
         changeFragment(mHomeFragment);
 
@@ -211,7 +220,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         for (int i = 1; i < lastItemPosition; i++) {
             View v = mRecyclerView.getChildAt(i);
             DrawerItemAdapter.DrawerItemHolder holder = (DrawerItemAdapter.DrawerItemHolder) mRecyclerView.getChildViewHolder(v);
-            holder.itemView.setBackgroundResource(R.color.white_day);
+            holder.itemView.setBackgroundResource(R.color.white);
         }
         if (firstItemPosition == 0) {
             View v = mRecyclerView.getChildAt(position);
@@ -244,18 +253,53 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             }
             break;
             case R.id.id_mode: {
-                Utils.getInstance().ToastShort("click menu_mode");
+
+                Handler mHandler = new Handler();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        WindowManager wm = (WindowManager) MainActivity.this.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+                        LayoutInflater inflater = LayoutInflater.from(MainActivity.this.getApplicationContext());
+                        LinearLayout wmLinear = (LinearLayout) inflater.inflate(R.layout.window_img, null, false);
+                        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+                        ImageView shotImg = (ImageView) wmLinear.findViewById(R.id.id_wm_img);
+                        shotImg.setImageBitmap(Utils.getInstance().getScreenShot(MainActivity.this).getDrawingCache());
+
+                        params.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE;
+                        params.format = PixelFormat.TRANSLUCENT;
+                        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+                        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                        params.gravity = Gravity.CENTER;
+                        params.alpha=0.8f;
+                        wm.addView(wmLinear, params);
+                        Log.i("tag", "");
+                    }
+                }, 1000);
+
+//                boolean isDay = Utils.getInstance().getTheme();
+//                Bitmap bitmap = Utils.getInstance().takeScreenShot(this);
+////                wmImg.setImageBitmap(bitmap);
+//                wmImg.setImageResource(R.drawable.unlogin);
+
+//                if (isDay) {
+//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    recreate();
+//                } else {
+//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    recreate();
+//                }
+
+
             }
             break;
             case R.id.id_setting: {
-                jumpActivity(SettingActivity.class,false);
-                Utils.getInstance().ToastShort("click menu_setting");
-
+                jumpActivity(SettingActivity.class, false);
             }
             break;
             case R.id.id_focus: {
                 Utils.getInstance().ToastShort("click menu_focus");
-
             }
             break;
             case R.id.id_share: {

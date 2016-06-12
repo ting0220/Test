@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_day"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -54,7 +54,7 @@
         android:layout_marginTop="@dimen/dp_10"
         android:lineSpacingExtra="@dimen/dp_5"
         android:text="text"
-        android:textColor="@color/black_day"
+        android:textColor="@color/black"
         android:textSize="@dimen/sp_16"/>
 
     <TextView
@@ -68,7 +68,7 @@
         android:maxLines="2"
         android:text="@string/drawer_home"
         android:ellipsize="end"
-        android:textColor="@color/gray_day"
+        android:textColor="@color/gray"
         android:textSize="@dimen/sp_16"
         android:visibility="gone"/>
 
@@ -95,7 +95,7 @@
             android:background="@color/blue"
             android:padding="@dimen/dp_5"
             android:text="@string/open"
-            android:textColor="@color/white_day"
+            android:textColor="@color/white"
             android:visibility="gone"/>
     </RelativeLayout>
 

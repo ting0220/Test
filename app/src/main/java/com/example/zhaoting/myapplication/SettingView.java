@@ -112,5 +112,22 @@ public class SettingView extends RelativeLayout {
         line = (TextView) findViewById(R.id.id_line);
     }
 
+    public void setTitle(String s) {
+        titleS = s;
+        title.setText(titleS);
+        invalidate();
+    }
+
+    public void setSig(String s) {
+        sigS = s;
+        sig.setText(sigS);
+        invalidate();
+    }
+
+    public void setCheck(boolean s) {
+        check.setChecked(s);
+        invalidate();
+    }
+
 
 }

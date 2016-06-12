@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
-        android:background="@color/white_day"/>
+        android:background="@color/white"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_245"
-            android:background="@color/night_mask_day"
+            android:background="@color/night_mask"
             android:scaleType="fitXY"/>
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_marginBottom="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_20"
             android:text="@string/drawer_home"
-            android:textColor="@color/white_day"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_14"/>
 
 
@@ -54,7 +54,7 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:text="@string/drawer_home"
-            android:textColor="@color/white_day"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18"/>
     </RelativeLayout>
 </LinearLayout>

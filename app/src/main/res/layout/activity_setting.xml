@@ -10,12 +10,13 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/id_setting_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_55"
             android:background="@color/blue"
             app:navigationIcon="@drawable/back"
             app:title="@string/setting"
-            app:titleTextColor="@color/white_day"/>
+            app:titleTextColor="@color/white"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:paddingRight="@dimen/dp_15"
             android:paddingTop="@dimen/dp_5"
             android:text="@string/normal"
-            android:textColor="@color/gray_day"/>
+            android:textColor="@color/gray"/>
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_down_auto"
@@ -70,7 +71,7 @@
             android:paddingRight="@dimen/dp_15"
             android:paddingTop="@dimen/dp_5"
             android:text="@string/other"
-            android:textColor="@color/gray_day"/>
+            android:textColor="@color/gray"/>
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_push_info"
@@ -120,7 +121,7 @@
             android:paddingRight="@dimen/dp_15"
             android:paddingTop="@dimen/dp_5"
             android:text="@string/feedback"
-            android:textColor="@color/gray_day"/>
+            android:textColor="@color/gray"/>
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_feedback"

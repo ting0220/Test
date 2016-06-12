@@ -6,8 +6,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
@@ -280,12 +282,59 @@ public class Utils {
         return false;
     }
 
-    public  String dateLongToString(long date) {
+    public String dateLongToString(long date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
         Date dt = new Date(date);
         String dateString = sdf.format(dt);
         return dateString;
     }
 
+    public boolean getTheme() {
+        int currentNightMode = mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO: {
+                return true;
+            }
+            case Configuration.UI_MODE_NIGHT_YES: {
+                return false;
+            }
+            case Configuration.UI_MODE_NIGHT_UNDEFINED: {
+                return true;
+            }
+            default:
+                return true;
+        }
+    }
 
+    public Bitmap takeScreenShot(Activity pActivity) {
+        Bitmap bitmap = null;
+        View view = pActivity.getWindow().getDecorView();
+        // 设置是否可以进行绘图缓存
+        view.setDrawingCacheEnabled(true);
+        // 如果绘图缓存无法，强制构建绘图缓存
+        view.buildDrawingCache();
+        // 返回这个缓存视图
+        bitmap = view.getDrawingCache();
+
+        // 获取状态栏高度
+        Rect frame = new Rect();
+        // 测量屏幕宽和高
+        view.getWindowVisibleDisplayFrame(frame);
+        int stautsHeight = frame.top;
+        Log.d("jiangqq", "状态栏的高度为:" + stautsHeight);
+
+        int width = pActivity.getWindowManager().getDefaultDisplay().getWidth();
+        int height = pActivity.getWindowManager().getDefaultDisplay().getHeight();
+        // 根据坐标点和需要的宽和高创建bitmap
+        bitmap = Bitmap.createBitmap(bitmap, 0, stautsHeight, width, height - stautsHeight);
+        return bitmap;
+    }
+
+    public View getScreenShot(Activity activity) {
+        View targetView = activity.getWindow().getDecorView();
+        targetView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        targetView.setDrawingCacheEnabled(true);
+        return targetView;
+
+    }
 }

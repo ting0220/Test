@@ -93,7 +93,7 @@ public class SharedPManager {
     }
 
     public int getTheme(){
-        return getSharedPreferences().getInt("theme", R.style.AppBaseTheme_Light);
+        return getSharedPreferences().getInt("theme", R.style.AppBaseTheme);
     }
 
 }

@@ -47,7 +47,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/id_theme_article_content_img"
                     android:text="@string/drawer_home"
-                    android:textColor="@color/black_day"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"/>
 
                 <TextView
@@ -67,7 +67,7 @@
                     android:layout_marginBottom="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_5"
                     android:layout_toLeftOf="@id/id_theme_article_content_focus"
-                    android:background="@color/black_day"/>
+                    android:background="@color/black"/>
             </RelativeLayout>
 
             <View
@@ -103,7 +103,7 @@
                 android:drawableLeft="@drawable/praise"
                 android:gravity="center_vertical"
                 android:text="..."
-                android:textColor="@color/white_day"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_14"/>
 
             <TextView
@@ -115,7 +115,7 @@
                 android:drawableLeft="@drawable/comment"
                 android:gravity="center_vertical"
                 android:text="..."
-                android:textColor="@color/white_day"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_14"/>
 
             <ImageView

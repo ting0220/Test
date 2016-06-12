@@ -1,6 +1,7 @@
 package com.example.zhaoting.myapplication.view.setting;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.zhaoting.myapplication.R;
@@ -19,6 +20,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private SettingView mClearCache;
     private SettingView mUpdate;
     private SettingView mFeedback;
+    private Toolbar mToolBar;
 
     @Override
     public int getFragmentContainerId() {
@@ -30,7 +32,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         initViews();
+        initDatas();
         initListeners();
+    }
+
+    private void initDatas() {
+
     }
 
     private void initListeners() {
@@ -42,6 +49,13 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         mClearCache.setOnClickListener(this);
         mUpdate.setOnClickListener(this);
         mFeedback.setOnClickListener(this);
+
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingActivity.this.finish();
+            }
+        });
     }
 
     private void initViews() {
@@ -53,6 +67,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         mClearCache = (SettingView) findViewById(R.id.id_setting_clear_cache);
         mUpdate = (SettingView) findViewById(R.id.id_setting_update);
         mFeedback = (SettingView) findViewById(R.id.id_setting_feedback);
+        mToolBar = (Toolbar) findViewById(R.id.id_setting_toolbar);
     }
 
     @Override

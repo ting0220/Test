@@ -16,7 +16,7 @@
         android:layout_alignBottom="@id/id_other_theme_top_img"
         android:padding="@dimen/dp_20"
         android:text="@string/today_news"
-        android:textColor="@color/white_day"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_18"/>
 
     <LinearLayout

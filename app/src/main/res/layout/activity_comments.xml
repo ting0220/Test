@@ -27,7 +27,7 @@
                 android:layout_toRightOf="@id/id_comment_back"
                 android:gravity="center_vertical"
                 android:text="text"
-                android:textColor="@color/white_day"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_18" />
 
             <ImageView

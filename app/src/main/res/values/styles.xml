@@ -1,25 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <!--<style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar"/>-->
 
-    <style name="AppBaseTheme.Light">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@android:color/transparent</item>
-        <item name="colorPrimaryDark">@color/black_day</item>
-        <item name="colorAccent">@color/white_day</item>
-        <item name="background">@color/white_day</item>
+    <!--<style name="AppBaseTheme.Light">-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@android:color/transparent</item>-->
+    <!--<item name="colorPrimaryDark">@color/black_day</item>-->
+    <!--<item name="colorAccent">@color/orange_day</item>-->
+    <!--<item name="background">@color/white_day</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppBaseTheme.Night">-->
+    <!--<item name="colorPrimary">@android:color/transparent</item>-->
+    <!--<item name="colorPrimaryDark">@color/black_night</item>-->
+    <!--<item name="colorAccent">@color/white_night</item>-->
+    <!--<item name="background">@color/white_night</item>-->
+    <!--</style>-->
+
+
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorAccent" >@color/orange</item>
     </style>
-
-    <style name="AppBaseTheme.Night">
-        <item name="colorPrimary">@android:color/transparent</item>
-        <item name="colorPrimaryDark">@color/black_night</item>
-        <item name="colorAccent">@color/white_night</item>
-        <item name="background">@color/white_night</item>
-    </style>
-
-
     <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorControlNormal">@color/white_day</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
+
 </resources>

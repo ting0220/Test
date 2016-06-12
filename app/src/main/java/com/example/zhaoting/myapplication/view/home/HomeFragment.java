@@ -190,7 +190,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
         for (int i = 0; i < list.size(); i++) {
             View point = new View(getActivity());
-            point.setBackgroundResource(R.color.gray_day);
+            point.setBackgroundResource(R.color.gray);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
             if (i > 0) {
