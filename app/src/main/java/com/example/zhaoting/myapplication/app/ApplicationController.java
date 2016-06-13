@@ -9,7 +9,7 @@ import com.example.zhaoting.utils.Utils;
 /**
  * Created by zhaoting on 16/4/25.
  */
-public class ApplicationController extends Application{
+public class ApplicationController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -17,7 +17,12 @@ public class ApplicationController extends Application{
         Utils.getInstance().init(this);
 //        VolleyUtil.getInstance().init(this);
         SharedPManager.getInstance().init(this);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        int isDay = SharedPManager.getInstance().getTheme();
+        if (isDay == 0) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
 
     }
 }

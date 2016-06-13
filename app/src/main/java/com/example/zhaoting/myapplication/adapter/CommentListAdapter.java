@@ -82,12 +82,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                             StyleSpan span = new StyleSpan(Typeface.BOLD);
                             int length = name.length() + 3;
                             spannableString.setSpan(span, 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                            spannableString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            spannableString.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.black)), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             ((CommentListHolder) holder).mCommentReply.setVisibility(View.VISIBLE);
                             ((CommentListHolder) holder).mCommentReply.setText(spannableString);
                         } else {
                             ((CommentListHolder) holder).mCommentReply.setText(mContext.getResources().getString(R.string.comment_delete));
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (Build.VERSION.SDK_INT >= 23) {
                                 ((CommentListHolder) holder).mCommentReply.setBackgroundColor(mContext.getResources().getColor(R.color.light_gray, mContext.getTheme()));
                             } else {
                                 ((CommentListHolder) holder).mCommentReply.setBackgroundColor(mContext.getResources().getColor(R.color.light_gray));
@@ -129,13 +129,14 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                 StyleSpan span = new StyleSpan(Typeface.BOLD);
                                 int length = name.length() + 3;
                                 spannableString.setSpan(span, 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                spannableString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                                spannableString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                spannableString.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.black)), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                                 ((CommentListHolder) holder).mCommentReply.setVisibility(View.VISIBLE);
                                 ((CommentListHolder) holder).mCommentReply.setText(spannableString);
                             } else {
                                 ((CommentListHolder) holder).mCommentReply.setText(mContext.getResources().getString(R.string.comment_delete));
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                if (Build.VERSION.SDK_INT >= 23) {
                                     ((CommentListHolder) holder).mCommentReply.setBackgroundColor(mContext.getResources().getColor(R.color.light_gray, mContext.getTheme()));
                                 } else {
                                     ((CommentListHolder) holder).mCommentReply.setBackgroundColor(mContext.getResources().getColor(R.color.light_gray));
@@ -176,12 +177,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                 StyleSpan span = new StyleSpan(Typeface.BOLD);
                                 int length = name.length() + 3;
                                 spannableString.setSpan(span, 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                spannableString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                                spannableString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                spannableString.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.black)), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                                 ((CommentListHolder) holder).mCommentReply.setText(spannableString);
                             } else {
                                 ((CommentListHolder) holder).mCommentReply.setText(mContext.getResources().getString(R.string.comment_delete));
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                if (Build.VERSION.SDK_INT >=23) {
                                     ((CommentListHolder) holder).mCommentReply.setBackgroundColor(mContext.getResources().getColor(R.color.light_gray, mContext.getTheme()));
                                 } else {
                                     ((CommentListHolder) holder).mCommentReply.setBackgroundColor(mContext.getResources().getColor(R.color.light_gray));

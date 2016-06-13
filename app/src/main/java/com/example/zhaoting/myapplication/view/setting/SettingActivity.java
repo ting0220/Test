@@ -1,6 +1,8 @@
 package com.example.zhaoting.myapplication.view.setting;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -37,6 +39,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initDatas() {
+
 
     }
 

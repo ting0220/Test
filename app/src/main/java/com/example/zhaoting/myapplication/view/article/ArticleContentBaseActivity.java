@@ -1,5 +1,7 @@
 package com.example.zhaoting.myapplication.view.article;
 
+
+
 import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.ArticleContentBean;
 import com.example.zhaoting.myapplication.bean.ExtraInfoBean;

@@ -87,13 +87,14 @@ public class SharedPManager {
 
     /**
      * theme
+     * 0表示白天模式
      */
-    public void setTheme(int theme){
-        getSharedPreferences().edit().putInt("theme",theme).commit();
+    public void setTheme(int theme) {
+        getSharedPreferences().edit().putInt("theme", theme).commit();
     }
 
-    public int getTheme(){
-        return getSharedPreferences().getInt("theme", R.style.AppBaseTheme);
+    public int getTheme() {
+        return getSharedPreferences().getInt("theme", 0);
     }
 
 }

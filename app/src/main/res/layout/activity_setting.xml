@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:background="@color/blue"
             app:navigationIcon="@drawable/back"
             app:title="@string/setting"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:paddingRight="@dimen/dp_15"
             android:paddingTop="@dimen/dp_5"
             android:text="@string/normal"
-            android:textColor="@color/gray"/>
+            android:textColor="@color/gray" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_down_auto"
@@ -39,7 +40,7 @@
             app:hasCheckB="y"
             app:hasLine="true"
             app:sigS="@string/down_auto_sig"
-            app:titleS="@string/down_auto"/>
+            app:titleS="@string/down_auto" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_no_picture"
@@ -49,7 +50,7 @@
             app:hasCheckB="y"
             app:hasLine="true"
             app:sigS="@string/no_picture_sig"
-            app:titleS="@string/no_picture"/>
+            app:titleS="@string/no_picture" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_big_size"
@@ -58,7 +59,7 @@
             app:checkB="false"
             app:hasCheckB="y"
             app:hasLine="false"
-            app:titleS="@string/big_size"/>
+            app:titleS="@string/big_size" />
 
         <TextView
             android:layout_width="match_parent"
@@ -71,7 +72,7 @@
             android:paddingRight="@dimen/dp_15"
             android:paddingTop="@dimen/dp_5"
             android:text="@string/other"
-            android:textColor="@color/gray"/>
+            android:textColor="@color/gray" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_push_info"
@@ -80,7 +81,7 @@
             app:checkB="false"
             app:hasCheckB="y"
             app:hasLine="true"
-            app:titleS="@string/push_info"/>
+            app:titleS="@string/push_info" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_comment_share"
@@ -89,7 +90,7 @@
             app:checkB="false"
             app:hasCheckB="y"
             app:hasLine="true"
-            app:titleS="@string/comment_share"/>
+            app:titleS="@string/comment_share" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_clear_cache"
@@ -98,7 +99,7 @@
             app:checkB="false"
             app:hasCheckB="n"
             app:hasLine="true"
-            app:titleS="@string/clear_cache"/>
+            app:titleS="@string/clear_cache" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_update"
@@ -108,7 +109,7 @@
             app:hasCheckB="n"
             app:hasLine="false"
             app:sigS="@string/version"
-            app:titleS="@string/update"/>
+            app:titleS="@string/update" />
 
         <TextView
             android:layout_width="match_parent"
@@ -121,7 +122,7 @@
             android:paddingRight="@dimen/dp_15"
             android:paddingTop="@dimen/dp_5"
             android:text="@string/feedback"
-            android:textColor="@color/gray"/>
+            android:textColor="@color/gray" />
 
         <com.example.zhaoting.myapplication.SettingView
             android:id="@+id/id_setting_feedback"
@@ -130,7 +131,7 @@
             app:checkB="false"
             app:hasCheckB="n"
             app:hasLine="false"
-            app:titleS="@string/suggestion"/>
+            app:titleS="@string/suggestion" />
 
     </LinearLayout>
 </ScrollView>

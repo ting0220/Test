@@ -30,6 +30,7 @@ import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.DrawerBean;
 import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.MainPresenter;
+import com.example.zhaoting.myapplication.utils.SharedPManager;
 import com.example.zhaoting.myapplication.view.home.HomeFragment;
 import com.example.zhaoting.myapplication.view.otherTheme.OtherThemeFragment;
 import com.example.zhaoting.myapplication.view.setting.SettingActivity;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     public int isChangeMenu = 0;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private String toolTitle = "首页";
+
 
 
     public Handler mHandler = new Handler() {
@@ -239,7 +241,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             }
             break;
             case R.id.id_mode: {
-
                 View targetView = MainActivity.this.getWindow().getDecorView().getRootView();
                 targetView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
                 targetView.setDrawingCacheEnabled(true);
@@ -272,9 +273,12 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                 animator.addListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
-                        boolean isDay = Utils.getInstance().getTheme();
-                        if (isDay) {
+                        int isDay = SharedPManager.getInstance().getTheme();
+                        if (isDay==0) {
                             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            SharedPManager.getInstance().setTheme(1);
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
                             new Handler().postDelayed(new Runnable() {
                                 public void run() {
                                     recreate();
@@ -282,6 +286,9 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                             }, 100);
                         } else {
                             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            SharedPManager.getInstance().setTheme(0);
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
                             new Handler().postDelayed(new Runnable() {
                                 public void run() {
                                     recreate();

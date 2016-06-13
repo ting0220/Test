@@ -21,8 +21,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        int themeId = SharedPManager.getInstance().getTheme();
-//        setTheme(themeId);
+
+
     }
 
     public BaseFragment getCurrentFragment() {

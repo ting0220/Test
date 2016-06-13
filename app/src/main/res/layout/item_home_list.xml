@@ -53,6 +53,7 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_toLeftOf="@id/id_home_card_view_img"
                 android:lineSpacingExtra="@dimen/dp_5"
+                android:textColor="@color/black"
                 android:text="什么，这些云看着都一样？不不不，我来告诉你答案"
                 android:textSize="@dimen/sp_17"
                 android:textStyle="bold"/>
