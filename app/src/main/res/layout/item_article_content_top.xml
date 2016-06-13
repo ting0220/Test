@@ -23,7 +23,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_245"
-            android:background="@color/night_mask"
+            android:background="@color/night_mask_home"
             android:scaleType="fitXY"/>
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:text="@string/drawer_home"
-            android:textColor="@color/white"
+            android:textColor="@color/white_home"
             android:textSize="@dimen/sp_18"/>
     </RelativeLayout>
 </LinearLayout>

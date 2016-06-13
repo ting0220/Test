@@ -14,11 +14,12 @@
     <!--夜间模式-->
     <color name="black">#8F8F8F</color>
     <color name="orange">#944432</color>
+    <color name="white_home">#eeeeee</color>
     <color name="white">#222222</color>
     <color name="gray">#2B2B2B</color>
     <color name="light_gray">#dfdfdf</color>
-    <color name="background_gray">#efefef</color>
-    <color name="night_mask">#D9000000</color>
+    <color name="background_gray">#101010</color>
+    <color name="night_mask_home">#69000000</color>
     <color name="blue">#5C99ED</color>
 
 

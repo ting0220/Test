@@ -62,7 +62,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0: {
-//                    Utils.getInstance().ToastShort(String.valueOf(Utils.getInstance().isBackground()));
                     mHandler.sendEmptyMessageDelayed(0, 3000);
                 }
                 break;
@@ -129,21 +128,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
             }
             break;
-//            case 2: {
-//                menu.clear();
-//                getMenuInflater().inflate(R.menu.toolbar_menu_article_content, menu);
-//                mToolbar.setNavigationIcon(R.drawable.back);
-//                mToolbar.setTitle("");
-//                mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        getSupportFragmentManager().popBackStack();
-//                        isChangeMenu = 1;
-//                        invalidateOptionsMenu();
-//                    }
-//                });
-//            }
-//            break;
         }
         return true;
     }
