@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -164,7 +165,7 @@ public class Utils {
         NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return networkInfo.isConnected();
     }
-  
+
 
     /**
      * 判断网络是否连接
@@ -172,6 +173,65 @@ public class Utils {
     public boolean isNetConnected() {
         boolean isConnected = isMobile() || isWifi();
         return isConnected;
+    }
+
+    /**
+     * 判断网络是否是2G、3G
+     * 如果是返回true
+     * 否则返回false
+     */
+    public boolean getNetType() {
+        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
+            int sub = info.getSubtype();
+            switch (sub) {
+                case TelephonyManager.NETWORK_TYPE_GPRS:
+                    return true;
+                case TelephonyManager.NETWORK_TYPE_EDGE:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_CDMA:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_1xRTT:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_IDEN:
+                    return true;//2G
+                case TelephonyManager.NETWORK_TYPE_UMTS:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_EVDO_A:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_HSDPA:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_HSUPA:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_HSPA:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_EVDO_B:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_EHRPD:
+                    return true;
+
+                case TelephonyManager.NETWORK_TYPE_HSPAP:
+                    return true;//3G
+                case TelephonyManager.NETWORK_TYPE_LTE:
+                    return false;//4G
+                case TelephonyManager.NETWORK_TYPE_UNKNOWN:
+                    return false;
+                default:
+                    return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -279,7 +339,6 @@ public class Utils {
 //        }
 //        return false;
 //    }
-
     public String dateLongToString(long date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
         Date dt = new Date(date);

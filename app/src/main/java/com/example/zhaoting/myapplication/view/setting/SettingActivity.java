@@ -9,6 +9,8 @@ import android.view.View;
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.SettingView;
 import com.example.zhaoting.myapplication.app.BaseActivity;
+import com.example.zhaoting.myapplication.utils.SharedPManager;
+import com.example.zhaoting.utils.Utils;
 
 /**
  * Created by zhaoting on 16/6/8.
@@ -39,7 +41,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initDatas() {
-
+        if (SharedPManager.getInstance().get2gOr3gChecked()) {
+            mNoPicture.setCheck(true);
+        } else {
+            mNoPicture.setCheck(false);
+        }
+        mUpdate.setSig(getResources().getString(R.string.version)+" "+Utils.getInstance().getAppVersionName());
 
     }
 
@@ -80,6 +87,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             }
             break;
             case R.id.id_setting_no_picture: {
+                boolean checked = mNoPicture.getChecked();
+                if (checked) {
+                    mNoPicture.setCheck(false);
+                    SharedPManager.getInstance().set2gOr3gChecked(false);
+                } else {
+                    mNoPicture.setCheck(true);
+                    SharedPManager.getInstance().set2gOr3gChecked(true);
+                }
             }
             break;
             case R.id.id_setting_big_size: {

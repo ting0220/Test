@@ -125,7 +125,14 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE);
+        if (Build.VERSION.SDK_INT >= 23) {
+            mSwipeRefreshLayout.setColorSchemeColors(getActivity().getResources().getColor(R.color.blue, getActivity().getTheme()));
+            mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getActivity().getResources().getColor(R.color.white, getActivity().getTheme()));
+        }else{
+            mSwipeRefreshLayout.setColorSchemeColors(getActivity().getResources().getColor(R.color.blue));
+            mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getActivity().getResources().getColor(R.color.white));
+
+        }
         mRecyclerView.addOnScrollListener(new HomeEndlessScrollListener(mRecyclerView) {
             @Override
             public void onLoadMore(int currentPage) {

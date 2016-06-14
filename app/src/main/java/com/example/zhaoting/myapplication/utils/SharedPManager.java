@@ -97,4 +97,16 @@ public class SharedPManager {
         return getSharedPreferences().getInt("theme", 0);
     }
 
+
+    /**
+     * 判断2g或者3g设置是否选中
+     * @param checked
+     */
+    public void set2gOr3gChecked(boolean checked) {
+        getSharedPreferences().edit().putBoolean("noPicture", checked).commit();
+    }
+
+    public boolean get2gOr3gChecked() {
+        return getSharedPreferences().getBoolean("noPicture", false);
+    }
 }

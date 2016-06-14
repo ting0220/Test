@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.bean.StoriesBean;
+import com.example.zhaoting.myapplication.utils.SharedPManager;
 import com.example.zhaoting.myapplication.viewHolder.ListHolder;
 import com.example.zhaoting.utils.Utils;
+import com.squareup.okhttp.internal.Util;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -36,7 +38,15 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
     @Override
     public void onBindViewHolder(ListHolder holder, int position) {
         holder.articleTitle.setText(mList.get(position).getTitle());
-        Picasso.with(mContext).load(mList.get(position).getImages().get(0)).into(holder.articleImg);
+        if (SharedPManager.getInstance().get2gOr3gChecked()) {
+            if (Utils.getInstance().getNetType()) {
+                Picasso.with(mContext).load(R.mipmap.ic_launcher).into(holder.articleImg);
+            } else {
+                Picasso.with(mContext).load(mList.get(position).getImages().get(0)).into(holder.articleImg);
+            }
+        } else {
+            Picasso.with(mContext).load(mList.get(position).getImages().get(0)).into(holder.articleImg);
+        }
         if (Utils.getInstance().isToday(mList.get(position).getDate())) {
             holder.timeFlag.setText(R.string.today_news);
         } else {
@@ -64,7 +74,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
     }
 
     public void setList(List<StoriesBean> list) {
-        mList=list;
+        mList = list;
         notifyDataSetChanged();
     }
 
@@ -73,7 +83,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
     public int getItemCount() {
         return mList.size();
     }
-
 
 
 }

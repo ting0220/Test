@@ -128,6 +128,9 @@ public class SettingView extends RelativeLayout {
         check.setChecked(s);
         invalidate();
     }
+    public boolean getChecked(){
+        return check.isChecked();
+    }
 
 
 }

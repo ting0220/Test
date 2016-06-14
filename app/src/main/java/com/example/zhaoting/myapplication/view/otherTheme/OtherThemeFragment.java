@@ -1,5 +1,6 @@
 package com.example.zhaoting.myapplication.view.otherTheme;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -68,6 +69,13 @@ public class OtherThemeFragment extends BaseFragment implements OtherThemeView, 
         mAdapter = new OtherThemeListAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        if (Build.VERSION.SDK_INT > 23) {
+            mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getActivity().getResources().getColor(R.color.white, getActivity().getTheme()));
+            mSwipeRefreshLayout.setColorSchemeColors(getActivity().getResources().getColor(R.color.blue, getActivity().getTheme()));
+        } else {
+            mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getActivity().getResources().getColor(R.color.white));
+            mSwipeRefreshLayout.setColorSchemeColors(getActivity().getResources().getColor(R.color.blue));
+        }
 
 
     }
@@ -120,7 +128,7 @@ public class OtherThemeFragment extends BaseFragment implements OtherThemeView, 
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", bean.getStories().get(position).getId());
-                ((MainActivity) getActivity()).jumpActivity(ThemeArticleCActivity.class, bundle,false);
+                ((MainActivity) getActivity()).jumpActivity(ThemeArticleCActivity.class, bundle, false);
             }
 
             @Override

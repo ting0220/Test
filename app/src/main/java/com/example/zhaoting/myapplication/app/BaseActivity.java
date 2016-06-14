@@ -18,12 +18,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected BaseFragment currentFragment;
     private int flag = -1;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-
-    }
 
     public BaseFragment getCurrentFragment() {
         return currentFragment;
