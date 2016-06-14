@@ -104,6 +104,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
     private boolean isRefresh = false;
     private List<StoriesBean> mList = new ArrayList<>();
+    private List<Integer> mListForId = new ArrayList<>();
 
 
     @Override
@@ -145,7 +146,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", mList.get(position).getId());
-                ((MainActivity) getActivity()).jumpActivity(ArticleCActivity.class, bundle,false);
+                ((MainActivity) getActivity()).jumpActivity(ArticleCActivity.class, bundle, false);
             }
 
             @Override
@@ -271,13 +272,18 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             isRefresh = false;
             mSwipeRefreshLayout.setRefreshing(isRefresh);
             setTopView(data.getTop_stories());
+            for (int i = 0; i < data.getTop_stories().size(); i++) {
+                mListForId.add(data.getTop_stories().get(i).getId());
+            }
         }
         for (int i = 0; i < data.getStories().size(); i++) {
             StoriesBean bean = data.getStories().get(i);
             bean.setDate(data.getDate());
             mList.add(bean);
+            mListForId.add(data.getStories().get(i).getId());
         }
         setListView(mList);
+
     }
 
     @Override
@@ -298,10 +304,13 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             isRefresh = true;
             llPointLinear.removeAllViews();
             mList = new ArrayList<>();
+            mListForId = new ArrayList<>();
             mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
             EventBus.getDefault().post(new ChangeToolbarTextEvent(getResources().getString(R.string.drawer_home)));
         }
     }
 
-
+    public List<Integer> getListForId() {
+        return mListForId;
+    }
 }

@@ -57,7 +57,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     private String toolTitle = "首页";
 
 
-
     public Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -95,7 +94,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         setSupportActionBar(mToolbar);
         mToolbar.setTitle(getResources().getString(R.string.drawer_home));
         mToolbar.setOnMenuItemClickListener(this);
-        mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open_string, R.string.close_string);
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -134,6 +132,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         return true;
     }
 
+
     private void setUpDrawer() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new DrawerItemAdapter();
@@ -157,14 +156,58 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             @Override
             public void onItemClick(int position, DrawerBean.OthersBean data) {
                 Utils.getInstance().ToastShort("click_collect");
+
             }
         });
         mAdapter.setHeaderDownListener(new DrawerItemAdapter.onItemClickListener() {
-            @Override
-            public void onItemClick(int position, DrawerBean.OthersBean data) {
-                Utils.getInstance().ToastShort("click_down");
-            }
-        });
+                                           @Override
+                                           public void onItemClick(int position, DrawerBean.OthersBean data) {
+                                               Utils.getInstance().ToastShort("click_down");
+//                                               List<Integer> mList = new ArrayList<Integer>();
+//                                               final List<ArticleContentBean> list = new ArrayList<ArticleContentBean>();
+//                                               if (getCurrentFragment() instanceof HomeFragment) {
+//                                                   mList = ((HomeFragment) getCurrentFragment()).getListForId();
+//                                               }
+//                                               final int[] j = {0};
+//                                               for (int i = 0; i < mList.size(); i++) {
+//                                                   String url = "http://news-at.zhihu.com/api/4/news/" + String.valueOf(mList.get(i));
+//                                                   final List<Integer> finalMList = mList;
+//                                                   OkHttpUtil.getInstance().get(url, new Callback() {
+//                                                       @Override
+//                                                       public void onFailure(Request request, IOException e) {
+//                                                       }
+//
+//                                                       @Override
+//                                                       public void onResponse(Response response) throws IOException {
+//                                                           String result = response.body().string();
+//                                                           Gson gson = new Gson();
+//                                                           ArticleContentBean articleContentBean = gson.fromJson(result, ArticleContentBean.class);
+//                                                           ArticleContentBean bean;
+//                                                           bean=articleContentBean;
+//                                                           bean.saveThrows();
+//                                                           if (articleContentBean.save()) {
+//                                                               j[0]++;
+//                                                           }
+////
+////                                                           if (articleContentBean.save()) {
+////                                                               j++;
+////                                                           }
+////                                                           final int finalJ = j;
+////                                                           new Handler(Looper.getMainLooper()).post(new Runnable() {
+////                                                               @Override
+////                                                               public void run() {
+////                                                                   Utils.getInstance().ToastShort(String.valueOf(finalJ) + "%" + String.valueOf(finalMList.size()));
+////                                                               }
+////                                                           });
+////
+//                                                       }
+//                                                   });
+//                                               }
+
+                                           }
+                                       }
+
+        );
     }
 
     public void setFirstView(RecyclerView view) {
@@ -274,7 +317,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                     @Override
                     public void onAnimationStart(Animator animation) {
                         int isDay = SharedPManager.getInstance().getTheme();
-                        if (isDay==0) {
+                        if (isDay == 0) {
                             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                             SharedPManager.getInstance().setTheme(1);
                             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

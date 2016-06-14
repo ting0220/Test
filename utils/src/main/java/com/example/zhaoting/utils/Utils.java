@@ -1,8 +1,6 @@
 package com.example.zhaoting.utils;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -25,7 +23,6 @@ import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by zhaoting on 16/4/20.
@@ -167,6 +164,7 @@ public class Utils {
         NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return networkInfo.isConnected();
     }
+  
 
     /**
      * 判断网络是否连接
@@ -270,17 +268,17 @@ public class Utils {
      *
      * @return
      */
-    public boolean isBackground() {
-        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
-        if (!tasks.isEmpty()) {
-            ComponentName topActivity = tasks.get(0).topActivity;
-            if (!topActivity.getPackageName().equals(mContext.getPackageName())) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean isBackground() {
+//        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+//        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+//        if (!tasks.isEmpty()) {
+//            ComponentName topActivity = tasks.get(0).topActivity;
+//            if (!topActivity.getPackageName().equals(mContext.getPackageName())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public String dateLongToString(long date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");

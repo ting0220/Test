@@ -50,7 +50,7 @@
         android:id="@+id/id_article_content_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
-        android:background="@color/blue"
+        android:background="@color/blue_tool"
         app:layout_behavior="com.example.zhaoting.myapplication.widget.ToolBarBehavior">
 
         <RelativeLayout
@@ -73,7 +73,7 @@
                 android:drawableLeft="@drawable/praise"
                 android:gravity="center_vertical"
                 android:text="..."
-                android:textColor="@color/white"
+                android:textColor="@color/white_home"
                 android:textSize="@dimen/sp_14"/>
 
             <TextView
@@ -85,7 +85,7 @@
                 android:drawableLeft="@drawable/comment"
                 android:gravity="center_vertical"
                 android:text="..."
-                android:textColor="@color/white"
+                android:textColor="@color/white_home"
                 android:textSize="@dimen/sp_14"/>
 
             <ImageView

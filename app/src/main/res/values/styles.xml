@@ -22,9 +22,12 @@
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorAccent" >@color/orange</item>
+        <item name="android:itemBackground">@color/white</item>
+        <!--<item name="android:itemTextAppearance">@color/</item>-->
     </style>
     <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlNormal">@color/white_home</item>
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
 </resources>

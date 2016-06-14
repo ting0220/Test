@@ -1,15 +1,16 @@
 package com.example.zhaoting.myapplication.app;
 
-import android.app.Application;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.example.zhaoting.myapplication.utils.SharedPManager;
 import com.example.zhaoting.utils.Utils;
 
+import org.litepal.LitePalApplication;
+
 /**
  * Created by zhaoting on 16/4/25.
  */
-public class ApplicationController extends Application {
+public class ApplicationController extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();

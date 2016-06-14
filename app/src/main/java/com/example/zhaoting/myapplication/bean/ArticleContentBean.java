@@ -1,11 +1,13 @@
 package com.example.zhaoting.myapplication.bean;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.List;
 
 /**
  * Created by zhaoting on 16/5/16.
  */
-public class ArticleContentBean {
+public class ArticleContentBean extends DataSupport {
 
     /**
      * body : <div class="main-wrap content-wrap">
@@ -98,9 +100,6 @@ public class ArticleContentBean {
      * id : 3892357
      * css : ["http://news-at.zhihu.com/css/news_qa.auto.css?v=4b3e3"]
      */
-
-
-
 
 
     private String body;

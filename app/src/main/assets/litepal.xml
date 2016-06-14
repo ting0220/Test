@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+dbname:设定数据库的名字
+version:数据库的版本号
+list：设定所有的映射模型
+-->
+<litepal>
+    <dbname value="dailyZh"/>
+    <version value="1"/>
+    <list>
+        <mapping class="com.example.zhaoting.myapplication.bean.ArticleContentBean" />
+    </list>
+    <storage value="external"></storage>
+</litepal>

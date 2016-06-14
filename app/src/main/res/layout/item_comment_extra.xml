@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/id_long_line"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
+        android:layout_height="@dimen/px_1"
         android:background="@color/light_gray"/>
 
 
