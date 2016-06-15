@@ -11,6 +11,7 @@ import android.view.View;
  * Created by zhaoting on 16/5/30.
  */
 public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
+    private int ScrollHeight;
 
     public ToolBarBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -22,28 +23,18 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
     }
 
     @Override
-    public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target) {
-        super.onStopNestedScroll(coordinatorLayout, child, target);
-    }
-
-    @Override
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
-
-        return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
-
+        if (target.getTop() < 600) {
+            return false;
+        } else {
+            return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
+        }
     }
-
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target,
                                   int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
-        Log.d("pre", "onNestedPreScroll: target.getY()" + target.getY());
-        Log.d("pre", "onNestedPreScroll: target.getScrollY()" + target.getScrollY());
-        Log.d("pre", "onNestedPreScroll: coordinatorLayout.getScrollY()" + coordinatorLayout.getScrollY());
-        Log.d("pre", "onNestedPreScroll: coordinatorLayout.getY()" + coordinatorLayout.getY());
-        Log.d("pre", "onNestedPreScroll: target.getPivotY()" + target.getPivotY());
-        Log.d("pre", "onNestedPreScroll: dy==" + dy);
         if (target.getTop() == 0) {
             if (dy > 0) {
                 child.setAlpha(0f);
@@ -53,6 +44,13 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
                 child.setAlpha(1f);
             }
         } else {
+            ScrollHeight += dy;
+            if (ScrollHeight > 600) {
+                ScrollHeight = 600;
+            } else if (ScrollHeight < 0) {
+                ScrollHeight = 0;
+            }
+            Log.d("pre", "onNestedPreScroll: "+String.valueOf(dy));
             int x = target.getTop() - 110;
             float y = (float) x / 490;
             if (y > 0 && y < 1) {
@@ -71,4 +69,5 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
 
 
     }
+
 }
