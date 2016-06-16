@@ -21,7 +21,11 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal|top">
 
-            <include  layout="@layout/fragment_home_top" />
+            <com.example.zhaoting.myapplication.widget.AutoScrollViewPagerLayout
+                android:id="@+id/id_auto_scroll_viewpager_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <!--<include  layout="@layout/fragment_home_top" />-->
         </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

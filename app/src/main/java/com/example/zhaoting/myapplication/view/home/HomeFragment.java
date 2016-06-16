@@ -2,27 +2,20 @@ package com.example.zhaoting.myapplication.view.home;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.adapter.HomeListAdapter;
-import com.example.zhaoting.myapplication.adapter.HomeTopViewPagerAdapter;
 import com.example.zhaoting.myapplication.app.BaseFragment;
 import com.example.zhaoting.myapplication.bean.HomeBean;
 import com.example.zhaoting.myapplication.bean.StoriesBean;
@@ -31,6 +24,7 @@ import com.example.zhaoting.myapplication.events.ChangeToolbarTextEvent;
 import com.example.zhaoting.myapplication.presenter.HomePresenter;
 import com.example.zhaoting.myapplication.view.article.ArticleCActivity;
 import com.example.zhaoting.myapplication.view.main.MainActivity;
+import com.example.zhaoting.myapplication.widget.AutoScrollViewPagerLayout;
 import com.example.zhaoting.myapplication.widget.HomeEndlessScrollListener;
 import com.example.zhaoting.myapplication.widget.OnRecyclerItemClickListener;
 import com.example.zhaoting.utils.Utils;
@@ -48,55 +42,9 @@ import java.util.List;
  */
 public class HomeFragment extends BaseFragment implements HomeView, SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private ViewPager mViewPager;
+    private AutoScrollViewPagerLayout mViewPager;
     private RecyclerView mRecyclerView;
     private RecyclerViewHeader mRecyclerViewHeader;
-    private LinearLayout llPointLinear;
-    private View viewOrangePoint;
-    private int mPointWidth;
-
-    private boolean isStop = false;
-    private int currentItem = 0;
-    private static final int MSG_UPDATE_IMAGE = 0;// 更新图片
-    private static final int MSG_STOP_UPDATE_IMAGE = 1;//停止更新图片
-    private static final int MSG_RECOVER_UPDATE_IMAGE = 2;//恢复更新图片
-    private static final int MSG_PAGE_CHANGED = 3;//记录手动滑动时的页数变化
-    private static final int MSG_DELAY = 5000;//记录换页的时间间隔
-    private static int SIZE = 0;
-    public Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (mHandler.hasMessages(MSG_UPDATE_IMAGE)) {
-                mHandler.removeMessages(MSG_UPDATE_IMAGE);
-            }
-            switch (msg.what) {
-                case MSG_UPDATE_IMAGE: {
-                    int n = (currentItem + 1) % SIZE;
-                    mViewPager.setCurrentItem(n);
-                    if (!isStop) {
-                        mHandler.sendEmptyMessageDelayed(MSG_UPDATE_IMAGE, MSG_DELAY);
-                    }
-                }
-                break;
-                case MSG_STOP_UPDATE_IMAGE: {
-
-                }
-                break;
-                case MSG_RECOVER_UPDATE_IMAGE: {
-                    if (!isStop) {
-                        mHandler.sendEmptyMessageDelayed(MSG_UPDATE_IMAGE, MSG_DELAY);
-                    }
-                }
-                break;
-                case MSG_PAGE_CHANGED: {
-                    currentItem = msg.arg1;
-                }
-                break;
-            }
-        }
-    };
-
 
     private HomeListAdapter mAdapter;
 
@@ -117,10 +65,8 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     protected void initViews() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_swipe_refresh_layout);
         mRecyclerViewHeader = (RecyclerViewHeader) mRootView.findViewById(R.id.id_view_pager_layout);
-        mViewPager = (ViewPager) mRootView.findViewById(R.id.id_view_pager);
+        mViewPager = (AutoScrollViewPagerLayout) mRootView.findViewById(R.id.id_auto_scroll_viewpager_layout);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.id_recycler_view);
-        llPointLinear = (LinearLayout) mRootView.findViewById(R.id.id_point_group);
-        viewOrangePoint = mRootView.findViewById(R.id.id_orange_point);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
@@ -128,7 +74,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         if (Build.VERSION.SDK_INT >= 23) {
             mSwipeRefreshLayout.setColorSchemeColors(getActivity().getResources().getColor(R.color.blue, getActivity().getTheme()));
             mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getActivity().getResources().getColor(R.color.white, getActivity().getTheme()));
-        }else{
+        } else {
             mSwipeRefreshLayout.setColorSchemeColors(getActivity().getResources().getColor(R.color.blue));
             mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getActivity().getResources().getColor(R.color.white));
 
@@ -167,12 +113,10 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     @Override
     protected void initDatas() {
         mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
-
     }
 
     public void setTopView(final List<TopStoriesBean> list) {
         final List<View> mList = new ArrayList<>();
-
         for (int i = 0; i < list.size(); i++) {
             View v = LayoutInflater.from(getActivity()).inflate(R.layout.item_home_top, null);
             ImageView img = (ImageView) v.findViewById(R.id.id_home_top_img);
@@ -195,71 +139,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             });
             mList.add(v);
         }
-
-        for (int i = 0; i < list.size(); i++) {
-            View point = new View(getActivity());
-            point.setBackgroundResource(R.color.gray);
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
-            if (i > 0) {
-                params.leftMargin = 20;
-            }
-            point.setLayoutParams(params);
-            llPointLinear.addView(point);
-        }
-
-        //获取圆点间的间距
-        llPointLinear.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                llPointLinear.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                mPointWidth = llPointLinear.getChildAt(1).getLeft() - llPointLinear.getChildAt(0).getLeft();
-
-            }
-        });
-
-
-        HomeTopViewPagerAdapter adapter = new HomeTopViewPagerAdapter(mList);
-        mViewPager.setAdapter(adapter);
-        mViewPager.setCurrentItem(currentItem);
-        mHandler.sendEmptyMessage(MSG_RECOVER_UPDATE_IMAGE);
-
-
-        SIZE = mList.size();
-        mHandler.sendEmptyMessageDelayed(MSG_UPDATE_IMAGE, MSG_DELAY);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                int len = (int) ((mPointWidth * positionOffset) + position * mPointWidth);
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewOrangePoint.getLayoutParams();
-                params.leftMargin = len;
-                viewOrangePoint.setLayoutParams(params);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Message msg = new Message();
-                msg.what = MSG_PAGE_CHANGED;
-                msg.arg1 = position;
-                msg.arg2 = 0;
-                mHandler.sendMessage(msg);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                switch (state) {
-                    case ViewPager.SCROLL_STATE_IDLE: {
-                        mHandler.sendEmptyMessageDelayed(MSG_UPDATE_IMAGE, MSG_DELAY);
-                    }
-                    break;
-                    case ViewPager.SCROLL_STATE_DRAGGING: {
-                        mHandler.sendEmptyMessage(MSG_STOP_UPDATE_IMAGE);
-                    }
-                    break;
-                }
-
-            }
-        });
+        mViewPager.setListViews(mList);
 
 
     }
@@ -290,7 +170,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             mListForId.add(data.getStories().get(i).getId());
         }
         setListView(mList);
-
     }
 
     @Override
@@ -298,18 +177,17 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        isStop = true;
+        mViewPager.setStop(true);
     }
 
     @Override
     public void onRefresh() {
         if (!isRefresh) {
             isRefresh = true;
-            llPointLinear.removeAllViews();
+            mViewPager.clearLinearLayout();
             mList = new ArrayList<>();
             mListForId = new ArrayList<>();
             mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
