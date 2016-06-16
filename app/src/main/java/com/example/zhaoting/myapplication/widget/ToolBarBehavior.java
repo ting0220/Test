@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -22,13 +21,8 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
         return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
-    @Override
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
-        if (target.getTop() < 600) {
-            return false;
-        } else {
-            return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
-        }
+        return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
     }
 
     @Override
@@ -37,20 +31,12 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
         if (target.getTop() == 0) {
             if (dy > 0) {
-                child.setAlpha(0f);
-                child.setVisibility(View.GONE);
+                child.setAlpha(0.00001f);
             } else {
                 child.setVisibility(View.VISIBLE);
                 child.setAlpha(1f);
             }
         } else {
-            ScrollHeight += dy;
-            if (ScrollHeight > 600) {
-                ScrollHeight = 600;
-            } else if (ScrollHeight < 0) {
-                ScrollHeight = 0;
-            }
-            Log.d("pre", "onNestedPreScroll: "+String.valueOf(dy));
             int x = target.getTop() - 110;
             float y = (float) x / 490;
             if (y > 0 && y < 1) {
@@ -58,9 +44,8 @@ public class ToolBarBehavior extends CoordinatorLayout.Behavior<View> {
                 child.setAlpha(y);
             } else if (y <= 0) {
                 if (child.getVisibility() == View.VISIBLE) {
-                    child.setAlpha(0f);
+                    child.setAlpha(0.00001f);
                 }
-                child.setVisibility(View.GONE);
             } else if (y >= 1) {
                 child.setVisibility(View.VISIBLE);
                 child.setAlpha(1f);
