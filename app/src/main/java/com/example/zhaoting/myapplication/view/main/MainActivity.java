@@ -1,28 +1,18 @@
 package com.example.zhaoting.myapplication.view.main;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.adapter.DrawerItemAdapter;
@@ -163,46 +153,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                                            @Override
                                            public void onItemClick(int position, DrawerBean.OthersBean data) {
                                                Utils.getInstance().ToastShort("click_down");
-//                                               List<Integer> mList = new ArrayList<Integer>();
-//                                               final List<ArticleContentBean> list = new ArrayList<ArticleContentBean>();
-//                                               if (getCurrentFragment() instanceof HomeFragment) {
-//                                                   mList = ((HomeFragment) getCurrentFragment()).getListForId();
-//                                               }
-//                                               final int[] j = {0};
-//                                               for (int i = 0; i < mList.size(); i++) {
-//                                                   String url = "http://news-at.zhihu.com/api/4/news/" + String.valueOf(mList.get(i));
-//                                                   final List<Integer> finalMList = mList;
-//                                                   OkHttpUtil.getInstance().get(url, new Callback() {
-//                                                       @Override
-//                                                       public void onFailure(Request request, IOException e) {
-//                                                       }
-//
-//                                                       @Override
-//                                                       public void onResponse(Response response) throws IOException {
-//                                                           String result = response.body().string();
-//                                                           Gson gson = new Gson();
-//                                                           ArticleContentBean articleContentBean = gson.fromJson(result, ArticleContentBean.class);
-//                                                           ArticleContentBean bean;
-//                                                           bean=articleContentBean;
-//                                                           bean.saveThrows();
-//                                                           if (articleContentBean.save()) {
-//                                                               j[0]++;
-//                                                           }
-////
-////                                                           if (articleContentBean.save()) {
-////                                                               j++;
-////                                                           }
-////                                                           final int finalJ = j;
-////                                                           new Handler(Looper.getMainLooper()).post(new Runnable() {
-////                                                               @Override
-////                                                               public void run() {
-////                                                                   Utils.getInstance().ToastShort(String.valueOf(finalJ) + "%" + String.valueOf(finalMList.size()));
-////                                                               }
-////                                                           });
-////
-//                                                       }
-//                                                   });
-//                                               }
 
                                            }
                                        }
@@ -284,80 +234,7 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
             }
             break;
             case R.id.id_mode: {
-                View targetView = MainActivity.this.getWindow().getDecorView().getRootView();
-                targetView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-                targetView.setDrawingCacheEnabled(true);
-                Rect frame = new Rect();
-                MainActivity.this.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-                int statusBarHeight = frame.top;
-                DisplayMetrics dm = MainActivity.this.getResources().getDisplayMetrics();
-                int height = dm.heightPixels;
-                int width = dm.widthPixels;
-                Bitmap bmp = Bitmap.createBitmap(targetView.getDrawingCache(), 0, statusBarHeight, width, height - statusBarHeight);
-
-                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                final View screenShot = inflater.inflate(R.layout.window_img, null);
-                ImageView img = (ImageView) screenShot.findViewById(R.id.id_wm_img);
-                img.setImageBitmap(bmp);
-
-                final WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-
-                WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-                params.type = WindowManager.LayoutParams.TYPE_TOAST;
-                params.format = PixelFormat.RGBA_8888;
-                params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
-                params.alpha = 1f;
-                windowManager.addView(screenShot, params);
-
-                ObjectAnimator animator = ObjectAnimator.ofFloat(img, "alpha", 1f, 0f);
-                animator.setDuration(1000);
-
-
-                animator.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        int isDay = SharedPManager.getInstance().getTheme();
-                        if (isDay == 0) {
-                            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                            SharedPManager.getInstance().setTheme(1);
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-                            new Handler().postDelayed(new Runnable() {
-                                public void run() {
-                                    recreate();
-                                }
-                            }, 100);
-                        } else {
-                            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                            SharedPManager.getInstance().setTheme(0);
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-                            new Handler().postDelayed(new Runnable() {
-                                public void run() {
-                                    recreate();
-                                }
-                            }, 100);
-                        }
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        windowManager.removeView(screenShot);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-                animator.start();
-
-
+                SharedPManager.getInstance().setMode(this, R.layout.window_img, R.id.id_wm_img);
             }
             break;
             case R.id.id_setting: {

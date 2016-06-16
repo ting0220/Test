@@ -1,10 +1,18 @@
 package com.example.zhaoting.myapplication.utils;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.PixelFormat;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.view.View;
+import android.view.WindowManager;
 
-import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.bean.LoginMessage;
+import com.example.zhaoting.utils.Utils;
 
 /**
  * Created by zhaoting on 16/4/21.
@@ -100,6 +108,7 @@ public class SharedPManager {
 
     /**
      * 判断2g或者3g设置是否选中
+     *
      * @param checked
      */
     public void set2gOr3gChecked(boolean checked) {
@@ -108,5 +117,68 @@ public class SharedPManager {
 
     public boolean get2gOr3gChecked() {
         return getSharedPreferences().getBoolean("noPicture", false);
+    }
+
+
+    public void setMode(AppCompatActivity activity, int resId, int imgId) {
+        final AppCompatActivity localActivity = activity;
+        final View view = Utils.getInstance().setMode(activity, resId, imgId);
+
+        final WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.type = WindowManager.LayoutParams.TYPE_TOAST;
+        params.format = PixelFormat.RGBA_8888;
+        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+        params.alpha = 1f;
+        windowManager.addView(view, params);
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
+        animator.setDuration(1000);
+
+
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                int isDay = getTheme();
+                if (isDay == 0) {
+                    localActivity.getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    setTheme(1);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            localActivity.recreate();
+                        }
+                    }, 100);
+                } else {
+                    localActivity.getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    setTheme(0);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            localActivity.recreate();
+                        }
+                    }, 100);
+                }
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                windowManager.removeView(view);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator.start();
     }
 }
