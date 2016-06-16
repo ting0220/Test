@@ -10,11 +10,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -387,11 +390,28 @@ public class Utils {
         return bitmap;
     }
 
-    public View getScreenShot(Activity activity) {
-        View targetView = activity.getWindow().getDecorView();
-        targetView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+    public Bitmap getScreenShot(AppCompatActivity activity) {
+        View targetView = activity.getWindow().getDecorView().getRootView();
+        targetView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
         targetView.setDrawingCacheEnabled(true);
-        return targetView;
-
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+        DisplayMetrics dm = activity.getResources().getDisplayMetrics();
+        int height = dm.heightPixels;
+        int width = dm.widthPixels;
+        Bitmap bmp = Bitmap.createBitmap(targetView.getDrawingCache(), 0, statusBarHeight, width, height - statusBarHeight);
+        return bmp;
     }
+
+    public View setMode(AppCompatActivity activity, int resId, int imgId) {
+        Bitmap bmp = getScreenShot(activity);
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        final View screenShot = inflater.inflate(resId, null);
+        ImageView img = (ImageView) screenShot.findViewById(imgId);
+        img.setImageBitmap(bmp);
+        return screenShot;
+    }
+
+
 }
