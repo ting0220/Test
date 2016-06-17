@@ -134,7 +134,7 @@ public class SharedPManager {
         windowManager.addView(view, params);
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
-        animator.setDuration(1000);
+        animator.setDuration(500);
 
 
         animator.addListener(new Animator.AnimatorListener() {
