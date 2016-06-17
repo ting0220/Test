@@ -14,15 +14,10 @@ public class ViewPagerHandler extends Handler {
     public static final int MSG_PAGE_CHANGED = 3;//记录手动滑动时的页数变化
     public static final int MSG_DELAY = 5000;//记录换页的时间间隔
 
-
     private int mCurrentItem;
     private boolean mIsStop;
     private ViewPager mViewPager;
     private int mSize;
-
-
-
-
 
     public ViewPagerHandler(int currentItem, boolean isStop, ViewPager viewPager, int size) {
         mCurrentItem = currentItem;
