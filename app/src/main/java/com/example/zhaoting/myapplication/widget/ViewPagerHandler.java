@@ -20,6 +20,10 @@ public class ViewPagerHandler extends Handler {
     private ViewPager mViewPager;
     private int mSize;
 
+
+
+
+
     public ViewPagerHandler(int currentItem, boolean isStop, ViewPager viewPager, int size) {
         mCurrentItem = currentItem;
         mIsStop = isStop;

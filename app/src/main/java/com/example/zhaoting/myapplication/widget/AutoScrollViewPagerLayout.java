@@ -44,10 +44,16 @@ public class AutoScrollViewPagerLayout extends RelativeLayout {
         mLinearLayout = (LinearLayout) findViewById(R.id.id_point_group);
         mTextView = (TextView) findViewById(R.id.id_orange_point);
         mContext = context;
+
+
     }
 
     public void setListViews(List<View> list) {
         mList = list;
+        adapter = new HomeTopViewPagerAdapter(mList);
+        mViewPagetHandler = new ViewPagerHandler(0, false, mViewPager, list.size());
+
+
         addPoints(list.size());
 
         //获取圆点间的间距
@@ -61,14 +67,11 @@ public class AutoScrollViewPagerLayout extends RelativeLayout {
         });
 
         initAdapter(mViewPager, adapter);
-        initHandler(mViewPager,mTextView, mViewPagetHandler, list.size());
+        initHandler(mViewPager, mTextView, mViewPagetHandler, list.size());
 
     }
 
     private void initHandler(ViewPager viewPager, final TextView textView, ViewPagerHandler viewPagetHandler, int size) {
-        viewPagetHandler = new ViewPagerHandler(0, false, viewPager, size);
-
-
         viewPagetHandler.sendEmptyMessage(viewPagetHandler.MSG_RECOVER_UPDATE_IMAGE);
         viewPagetHandler.sendEmptyMessageDelayed(viewPagetHandler.MSG_UPDATE_IMAGE, viewPagetHandler.MSG_DELAY);
         final ViewPagerHandler finalViewPagetHandler = viewPagetHandler;
@@ -113,7 +116,6 @@ public class AutoScrollViewPagerLayout extends RelativeLayout {
 
 
     private void initAdapter(ViewPager viewpager, PagerAdapter adapter) {
-        adapter = new HomeTopViewPagerAdapter(mList);
         viewpager.setAdapter(adapter);
         viewpager.setCurrentItem(0);
     }
