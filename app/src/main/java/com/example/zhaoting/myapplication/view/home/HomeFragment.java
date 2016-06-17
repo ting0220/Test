@@ -60,7 +60,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
         return R.layout.fragment_home2;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void initViews() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_swipe_refresh_layout);
