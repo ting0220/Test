@@ -35,7 +35,8 @@ public class Utils {
     public static String TAG;
     public static boolean DEBUG = false;
     private static Context mContext;
-
+    private int mScreenWidth = 0;
+    private int mScreenHeight = 0;
 
     /**
      * 使用内部类的方式实现单例模式
@@ -94,19 +95,8 @@ public class Utils {
      *
      * @return
      */
-    public int getScreenWidth() {
-        DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
-        return dm.widthPixels;
-    }
+    private void getWidthAndHeight() {
 
-    /**
-     * 获取屏幕高度
-     *
-     * @return
-     */
-    public int getScreenHeight() {
-        DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
-        return dm.heightPixels;
     }
 
 
@@ -326,11 +316,11 @@ public class Utils {
         return String.valueOf(month) + "月" + String.valueOf(day) + "日 " + "星期" + week;
     }
 
-    /**
-     * 判断应用是否处于后台
-     *
-     * @return
-     */
+    //    /**
+//     * 判断应用是否处于后台
+//     *
+//     * @return
+//     */
 //    public boolean isBackground() {
 //        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
 //        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
@@ -413,5 +403,21 @@ public class Utils {
         return screenShot;
     }
 
+
+    public int getScreenWidth() {
+        if (mScreenWidth == 0) {
+            DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
+            mScreenWidth = dm.widthPixels;
+        }
+        return mScreenWidth;
+    }
+
+    public int getScreenHeight() {
+        if (mScreenHeight == 0) {
+            DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
+            mScreenHeight = dm.heightPixels;
+        }
+        return mScreenHeight;
+    }
 
 }
