@@ -11,7 +11,6 @@ import com.example.zhaoting.myapplication.bean.StoriesBean;
 import com.example.zhaoting.myapplication.utils.SharedPManager;
 import com.example.zhaoting.myapplication.viewHolder.ListHolder;
 import com.example.zhaoting.utils.Utils;
-import com.squareup.okhttp.internal.Util;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,7 +39,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
         holder.articleTitle.setText(mList.get(position).getTitle());
         if (SharedPManager.getInstance().get2gOr3gChecked()) {
             if (Utils.getInstance().getNetType()) {
-                Picasso.with(mContext).load(R.mipmap.ic_launcher).into(holder.articleImg);
             } else {
                 Picasso.with(mContext).load(mList.get(position).getImages().get(0)).into(holder.articleImg);
             }

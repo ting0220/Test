@@ -174,57 +174,75 @@ public class Utils {
      * 否则返回false
      */
     public boolean getNetType() {
+        boolean flag;
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo info = cm.getActiveNetworkInfo();
         if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
             int sub = info.getSubtype();
             switch (sub) {
                 case TelephonyManager.NETWORK_TYPE_GPRS:
-                    return true;
+                    flag = true;
+                    break;
                 case TelephonyManager.NETWORK_TYPE_EDGE:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_CDMA:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_1xRTT:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_IDEN:
-                    return true;//2G
+                    flag = true;
+                    break;//2G
                 case TelephonyManager.NETWORK_TYPE_UMTS:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_EVDO_A:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_HSDPA:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_HSUPA:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_HSPA:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_EVDO_B:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_EHRPD:
-                    return true;
+                    flag = true;
+                    break;
 
                 case TelephonyManager.NETWORK_TYPE_HSPAP:
-                    return true;//3G
+                    flag = true;
+                    break;//3G
                 case TelephonyManager.NETWORK_TYPE_LTE:
-                    return false;//4G
+                    flag = false;
+                    break;//4G
                 case TelephonyManager.NETWORK_TYPE_UNKNOWN:
-                    return false;
+                    flag = false;
+                    break;
                 default:
-                    return false;
+                    flag = false;
+                    break;
             }
         } else {
-            return false;
+            flag = false;
         }
+        return flag;
     }
 
     /**
