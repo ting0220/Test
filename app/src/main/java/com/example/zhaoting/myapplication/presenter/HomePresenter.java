@@ -1,7 +1,7 @@
 package com.example.zhaoting.myapplication.presenter;
 
 import com.example.zhaoting.myapplication.bean.HomeBean;
-import com.example.zhaoting.myapplication.model.home.HomeListener;
+import com.example.zhaoting.myapplication.model.OnListener;
 import com.example.zhaoting.myapplication.model.home.HomeModel;
 import com.example.zhaoting.myapplication.model.home.HomeModelImpl;
 import com.example.zhaoting.myapplication.view.home.HomeView;
@@ -19,17 +19,23 @@ public class HomePresenter {
     }
 
     public void getHomeList(String url) {
-        mHomeModel.getHomeList(new HomeListener() {
+        mHomeModel.getHomeList(new OnListener() {
 
             @Override
-            public void onSuccess(HomeBean data) {
-                mHomeView.setData(data);
+            public void onSuccess(Object s) {
+                HomeBean bean = (HomeBean) s;
+                mHomeView.setData(bean);
             }
 
             @Override
             public void onError() {
                 mHomeView.onError();
             }
-        },url);
+
+            @Override
+            public void onNoConnected() {
+
+            }
+        }, url);
     }
 }

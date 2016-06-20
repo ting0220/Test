@@ -144,6 +144,11 @@ public class OtherThemeFragment extends BaseFragment implements OtherThemeView, 
     }
 
     @Override
+    public void onNoConnected() {
+
+    }
+
+    @Override
     public void onRefresh() {
         if (!isRefresh) {
             isRefresh = true;

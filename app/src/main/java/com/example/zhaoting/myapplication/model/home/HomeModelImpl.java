@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.zhaoting.myapplication.bean.HomeBean;
+import com.example.zhaoting.myapplication.model.OnListener;
+import com.example.zhaoting.myapplication.okhttp.NoConnected;
 import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -17,7 +19,7 @@ import java.io.IOException;
  */
 public class HomeModelImpl implements HomeModel {
     @Override
-    public void getHomeList(final HomeListener mHomeListener,String url) {
+    public void getHomeList(final OnListener mHomeListener, String url) {
         OkHttpUtil.getInstance().get(url, new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -36,6 +38,11 @@ public class HomeModelImpl implements HomeModel {
 //                        mHomeListener.onTopSuccess(mTopList);
                     }
                 });
+            }
+        }, new NoConnected() {
+            @Override
+            public void noConnected() {
+                mHomeListener.onNoConnected();
             }
         });
     }

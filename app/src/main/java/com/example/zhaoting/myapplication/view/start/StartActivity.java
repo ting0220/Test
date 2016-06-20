@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.app.BaseActivity;
+import com.example.zhaoting.myapplication.bean.StartBean;
 import com.example.zhaoting.myapplication.presenter.StartPresenter;
 import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.utils.Utils;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 /**
  * Created by zhaoting on 16/4/25.
@@ -44,22 +47,6 @@ public class StartActivity extends BaseActivity implements StartView {
         mStartPresenter.login();
     }
 
-    @Override
-    public void setImg(String url) {
-        if (!TextUtils.isEmpty(url)) {
-            Picasso.with(this).load(url).into(mImg);
-        }
-    }
-
-    @Override
-    public void setText(String text) {
-        if (!TextUtils.isEmpty(text)) {
-            mText.setText(text);
-        }
-
-    }
-
-    @Override
     public void toMainActivity() {
         ObjectAnimator animator1 = ObjectAnimator.ofFloat(mImg, "scaleY", 1f, 1.1f);
         ObjectAnimator animator2 = ObjectAnimator.ofFloat(mImg, "scaleX", 1f, 1.1f);
@@ -75,7 +62,7 @@ public class StartActivity extends BaseActivity implements StartView {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                jumpActivity(MainActivity.class,true);
+                jumpActivity(MainActivity.class, true);
             }
 
             @Override
@@ -92,9 +79,39 @@ public class StartActivity extends BaseActivity implements StartView {
 
     }
 
+
     @Override
-    public void showFailedError() {
-        Utils.getInstance().ToastShort("failed");
+    public void onSuccess(StartBean s) {
+        if (!TextUtils.isEmpty(s.getImg())) {
+            Picasso.with(this).load(s.getImg()).into(mImg);
+        }
+        if (!TextUtils.isEmpty(s.getText())) {
+            mText.setText(s.getText());
+        }
+        Utils.getInstance().downImage(s.getImg());
+        toMainActivity();
+    }
+
+    @Override
+    public void onError() {
+        File file = new File(Utils.getInstance().getSplashPath());
+        if (file.exists()) {
+            Picasso.with(this).load(Utils.getInstance().getSplashPath()).into(mImg);
+        } else {
+            mImg.setImageResource(R.mipmap.ic_launcher);
+        }
+        toMainActivity();
+    }
+
+    @Override
+    public void onNoConnected() {
+        File file = new File(Utils.getInstance().getSplashPath());
+        if (file.exists()) {
+            Picasso.with(this).load(Utils.getInstance().getSplashPath()).into(mImg);
+        } else {
+            mImg.setImageResource(R.mipmap.ic_launcher);
+        }
+        toMainActivity();
     }
 
 

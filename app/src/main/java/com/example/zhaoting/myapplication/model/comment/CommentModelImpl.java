@@ -5,6 +5,8 @@ import android.os.Looper;
 
 import com.example.zhaoting.myapplication.bean.CommentBean;
 import com.example.zhaoting.myapplication.bean.CommentsBean;
+import com.example.zhaoting.myapplication.model.OnListener;
+import com.example.zhaoting.myapplication.okhttp.NoConnected;
 import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -20,12 +22,12 @@ import java.util.List;
 public class CommentModelImpl implements CommentModel {
 
     @Override
-    public void getShortComments(int id, final CommentsShortListener listener) {
+    public void getShortComments(int id, final OnListener listener) {
         String url = "http://news-at.zhihu.com/api/4/story/" + String.valueOf(id) + "/short-comments";
         OkHttpUtil.getInstance().get(url, new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                listener.onShortCommentsError();
+                listener.onError();
             }
 
             @Override
@@ -37,21 +39,26 @@ public class CommentModelImpl implements CommentModel {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        listener.onShortCommentsSuccess(list);
+                        listener.onSuccess(list);
 
                     }
                 });
+            }
+        }, new NoConnected() {
+            @Override
+            public void noConnected() {
+                listener.onNoConnected();
             }
         });
     }
 
     @Override
-    public void getLongComments(int id, final CommentsLongListener listener) {
+    public void getLongComments(int id, final OnListener listener) {
         String url = "http://news-at.zhihu.com/api/4/story/" + String.valueOf(id) + "/long-comments";
         OkHttpUtil.getInstance().get(url, new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                listener.onLongCommentsError();
+                listener.onError();
             }
 
             @Override
@@ -63,10 +70,15 @@ public class CommentModelImpl implements CommentModel {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        listener.onLongCommentsSuccess(list);
+                        listener.onSuccess(list);
 
                     }
                 });
+            }
+        }, new NoConnected() {
+            @Override
+            public void noConnected() {
+                listener.onNoConnected();
             }
         });
     }

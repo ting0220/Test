@@ -3,7 +3,7 @@ package com.example.zhaoting.myapplication.presenter;
 import android.os.Handler;
 
 import com.example.zhaoting.myapplication.bean.StartBean;
-import com.example.zhaoting.myapplication.model.start.StartListener;
+import com.example.zhaoting.myapplication.model.OnListener;
 import com.example.zhaoting.myapplication.model.start.StartModel;
 import com.example.zhaoting.myapplication.model.start.StartModelImpl;
 import com.example.zhaoting.myapplication.view.start.StartView;
@@ -27,18 +27,21 @@ public class StartPresenter {
     public void login() {
         String width = String.valueOf(Utils.getInstance().getScreenWidth());
         String height = String.valueOf(Utils.getInstance().getScreenHeight());
-        mStartModel.start(width, height, new StartListener() {
+        mStartModel.start(width, height, new OnListener() {
             @Override
-            public void onSuccess(StartBean s) {
-                mStartView.setImg(s.getImg());
-                mStartView.setText(s.getText());
-                mStartView.toMainActivity();
-
+            public void onSuccess(Object s) {
+                StartBean bean = (StartBean) s;
+                mStartView.onSuccess(bean);
             }
 
             @Override
             public void onError() {
-                mStartView.showFailedError();
+                mStartView.onError();
+            }
+
+            @Override
+            public void onNoConnected() {
+                mStartView.onNoConnected();
             }
         });
     }

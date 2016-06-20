@@ -15,4 +15,8 @@ public interface CommentView {
     void onErrorLongComments();
 
     void onErrorShortComments();
+
+    void onLongNoConnected();
+
+    void onShortNoConnected();
 }

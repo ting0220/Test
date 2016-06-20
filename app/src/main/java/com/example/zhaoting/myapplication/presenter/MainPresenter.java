@@ -1,7 +1,7 @@
 package com.example.zhaoting.myapplication.presenter;
 
 import com.example.zhaoting.myapplication.bean.DrawerBean;
-import com.example.zhaoting.myapplication.model.drawer.DrawerListener;
+import com.example.zhaoting.myapplication.model.OnListener;
 import com.example.zhaoting.myapplication.model.drawer.DrawerModel;
 import com.example.zhaoting.myapplication.model.drawer.DrawerModelImpl;
 import com.example.zhaoting.myapplication.view.main.MainView;
@@ -21,14 +21,23 @@ public class MainPresenter {
     }
 
     public void getDrawerList() {
-        mDrawerModel.getDrawer(new DrawerListener() {
+        mDrawerModel.getDrawer(new OnListener() {
+
             @Override
-            public void onSuccess(List<DrawerBean.OthersBean> s) {
-                mMainView.setDrawer(s);
+            public void onSuccess(Object s) {
+                List<DrawerBean.OthersBean> bean= (List<DrawerBean.OthersBean>) s;
+                mMainView.setDrawer(bean);
             }
 
             @Override
             public void onError() {
+                mMainView.onError();
+
+            }
+
+            @Override
+            public void onNoConnected() {
+                mMainView.onNoConnected();
 
             }
         });

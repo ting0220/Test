@@ -10,4 +10,7 @@ import java.util.List;
 public interface MainView {
     void setDrawer(List<DrawerBean.OthersBean> mList);
 
+    void onError();
+
+    void onNoConnected();
 }

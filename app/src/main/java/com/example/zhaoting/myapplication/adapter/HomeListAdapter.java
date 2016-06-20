@@ -1,6 +1,7 @@
 package com.example.zhaoting.myapplication.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.example.zhaoting.myapplication.bean.StoriesBean;
 import com.example.zhaoting.myapplication.utils.SharedPManager;
 import com.example.zhaoting.myapplication.viewHolder.ListHolder;
 import com.example.zhaoting.utils.Utils;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -39,12 +41,22 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
         holder.articleTitle.setText(mList.get(position).getTitle());
         if (SharedPManager.getInstance().get2gOr3gChecked()) {
             if (Utils.getInstance().getNetType()) {
-            } else {
-                Picasso.with(mContext).load(mList.get(position).getImages().get(0)).into(holder.articleImg);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Picasso.with(mContext).load(mList.get(position).getImages().get(0)).networkPolicy(NetworkPolicy.OFFLINE).placeholder(mContext.getResources().getDrawable(R.mipmap.ic_launcher, mContext.getTheme())).
+                            into(holder.articleImg);
+                } else {
+                    Picasso.with(mContext).load(mList.get(position).getImages().get(0)).networkPolicy(NetworkPolicy.OFFLINE).placeholder(mContext.getResources().getDrawable(R.mipmap.ic_launcher)).
+                            into(holder.articleImg);
+                }
+            }else{
+                Picasso.with(mContext).load(mList.get(position).getImages().get(0)).
+                        into(holder.articleImg);
             }
         } else {
-            Picasso.with(mContext).load(mList.get(position).getImages().get(0)).into(holder.articleImg);
+            Picasso.with(mContext).load(mList.get(position).getImages().get(0)).
+                    into(holder.articleImg);
         }
+
         if (Utils.getInstance().isToday(mList.get(position).getDate())) {
             holder.timeFlag.setText(R.string.today_news);
         } else {

@@ -21,6 +21,7 @@ public class OkHttpUtil {
     private static final OkHttpClient mOkHttpClient = new OkHttpClient();
     private Request mRequest;
     private Call mCall;
+    private NoConnected mNoConnected;
 
 
     /**
@@ -37,35 +38,37 @@ public class OkHttpUtil {
         return SingletonHolder.instance;
     }
 
-    public void get(String url, Map<String, String> map, Callback responseCallback) {
-        if (Utils.getInstance().isNetConnected()) {
-            StringBuilder builder = new StringBuilder(url);
-            builder.append("?");
-            Set<String> keys = map.keySet();
-            Iterator<String> iterator = keys.iterator();
-            for (int i = 0; i < map.size(); i++) {
-                String key = iterator.next();
-                String value = map.get(key);
-                if (!TextUtils.isEmpty(value)) {
-                    builder.append(key);
-                    builder.append("=");
-                    builder.append(map.get(key));
-                }
-                if (!TextUtils.isEmpty(value) && i < map.size() - 1) {
-                    builder.append("&");
-                }
+    public void get(String url, Map<String, String> map, Callback responseCallback,NoConnected mNoConnected) {
+        StringBuilder builder = new StringBuilder(url);
+        builder.append("?");
+        Set<String> keys = map.keySet();
+        Iterator<String> iterator = keys.iterator();
+        for (int i = 0; i < map.size(); i++) {
+            String key = iterator.next();
+            String value = map.get(key);
+            if (!TextUtils.isEmpty(value)) {
+                builder.append(key);
+                builder.append("=");
+                builder.append(map.get(key));
             }
-            Log.i("tag", builder.toString());
-            get(builder.toString(), responseCallback);
-        } else {
-            Utils.getInstance().ToastShort("网络连接错误");
+            if (!TextUtils.isEmpty(value) && i < map.size() - 1) {
+                builder.append("&");
+            }
         }
+        Log.i("tag", builder.toString());
+        get(builder.toString(), responseCallback,mNoConnected);
+
     }
 
 
-    public void get(String url, Callback responseCallback) {
-        Request request = new Request.Builder().url(url).build();
-        mOkHttpClient.newCall(request).enqueue(responseCallback);
+    public void get(String url, Callback responseCallback,NoConnected mNoConnected) {
+        if (Utils.getInstance().isNetConnected()) {
+            Request request = new Request.Builder().url(url).build();
+            mOkHttpClient.newCall(request).enqueue(responseCallback);
+        } else {
+            Utils.getInstance().ToastShort("网络连接错误");
+            mNoConnected.noConnected();
+        }
     }
 
     /**
@@ -81,4 +84,5 @@ public class OkHttpUtil {
                 .post(body).build();
         mOkHttpClient.newCall(request).enqueue(responseCallback);
     }
+
 }

@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.zhaoting.myapplication.bean.ExtraInfoBean;
+import com.example.zhaoting.myapplication.model.OnListener;
+import com.example.zhaoting.myapplication.okhttp.NoConnected;
 import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -17,7 +19,7 @@ import java.io.IOException;
  */
 public class ExtraInfoModelImpl implements ExtraInfoModel {
     @Override
-    public void getExtraInfo(int id, final ExtraInfoListener listener) {
+    public void getExtraInfo(int id, final OnListener listener) {
         String url = "http://news-at.zhihu.com/api/4/story-extra/" + id;
         OkHttpUtil.getInstance().get(url, new Callback() {
             @Override
@@ -36,6 +38,11 @@ public class ExtraInfoModelImpl implements ExtraInfoModel {
                         listener.onSuccess(bean);
                     }
                 });
+            }
+        }, new NoConnected() {
+            @Override
+            public void noConnected() {
+                listener.onNoConnected();
             }
         });
     }

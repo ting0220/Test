@@ -194,6 +194,16 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
         });
     }
 
+    @Override
+    public void onError() {
+        
+    }
+
+    @Override
+    public void onNoConnected() {
+
+    }
+
     public void setItemBackgournd(int position) {
         LinearLayoutManager mManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
         int firstItemPosition = mManager.findFirstVisibleItemPosition();

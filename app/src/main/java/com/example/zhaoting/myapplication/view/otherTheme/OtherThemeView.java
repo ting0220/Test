@@ -8,4 +8,5 @@ import com.example.zhaoting.myapplication.bean.OtherThemeBean;
 public interface OtherThemeView {
     void setData(OtherThemeBean bean);
     void onError();
+    void onNoConnected();
 }

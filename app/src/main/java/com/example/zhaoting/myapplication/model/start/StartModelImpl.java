@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.zhaoting.myapplication.bean.StartBean;
+import com.example.zhaoting.myapplication.model.OnListener;
+import com.example.zhaoting.myapplication.okhttp.NoConnected;
 import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -17,7 +19,7 @@ import java.io.IOException;
  */
 public class StartModelImpl implements StartModel {
     @Override
-    public void start(String width, String height, final StartListener listener) {
+    public void start(String width, String height, final OnListener listener) {
         String url = "http://news-at.zhihu.com/api/4/start-image/" + width + "*" + height;
 //        Map<String,String> map=new HashMap<>();
 //        VolleyUtil.getInstance().get(url, map,new Response.Listener<String>() {
@@ -50,6 +52,12 @@ public class StartModelImpl implements StartModel {
                 });
 
             }
+        }, new NoConnected() {
+            @Override
+            public void noConnected() {
+                listener.onNoConnected();
+            }
         });
     }
+
 }

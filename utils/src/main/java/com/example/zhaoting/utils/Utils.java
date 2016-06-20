@@ -21,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -35,8 +39,12 @@ public class Utils {
     public static String TAG;
     public static boolean DEBUG = false;
     private static Context mContext;
+
+
     private int mScreenWidth = 0;
     private int mScreenHeight = 0;
+    private String splashPath;
+
 
     /**
      * 使用内部类的方式实现单例模式
@@ -91,16 +99,6 @@ public class Utils {
     }
 
     /**
-     * 获取屏幕宽度
-     *
-     * @return
-     */
-    private void getWidthAndHeight() {
-
-    }
-
-
-    /**
      * 关闭键盘
      */
     public void closeInputMethod(Activity act) {
@@ -116,6 +114,7 @@ public class Utils {
      * 获取app版本号
      */
     public int getAppVersionCode() {
+
         try {
             PackageManager mPackageManager = mContext.getPackageManager();
             PackageInfo mPackageInfo = mPackageManager.getPackageInfo(mContext.getPackageName(), 0);
@@ -175,69 +174,66 @@ public class Utils {
      */
     public boolean getNetType() {
         boolean flag;
-        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        final NetworkInfo info = cm.getActiveNetworkInfo();
-        if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
-            int sub = info.getSubtype();
-            switch (sub) {
-                case TelephonyManager.NETWORK_TYPE_GPRS:
-                    flag = true;
-                    break;
-                case TelephonyManager.NETWORK_TYPE_EDGE:
-                    flag = true;
-                    break;
+        if (isNetConnected()) {
 
-                case TelephonyManager.NETWORK_TYPE_CDMA:
-                    flag = true;
-                    break;
+            ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            final NetworkInfo info = cm.getActiveNetworkInfo();
+            Log.e("net", "getNetType: " + info.getType());
+            if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
+                int sub = info.getSubtype();
+                switch (sub) {
+                    case TelephonyManager.NETWORK_TYPE_GPRS:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_EDGE:
+                        flag = true;
+                        break;
 
-                case TelephonyManager.NETWORK_TYPE_1xRTT:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_IDEN:
-                    flag = true;
-                    break;//2G
-                case TelephonyManager.NETWORK_TYPE_UMTS:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_EVDO_A:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_HSDPA:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_HSUPA:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_HSPA:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_EVDO_B:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_EHRPD:
-                    flag = true;
-                    break;
-
-                case TelephonyManager.NETWORK_TYPE_HSPAP:
-                    flag = true;
-                    break;//3G
-                case TelephonyManager.NETWORK_TYPE_LTE:
-                    flag = false;
-                    break;//4G
-                case TelephonyManager.NETWORK_TYPE_UNKNOWN:
-                    flag = false;
-                    break;
-                default:
-                    flag = false;
-                    break;
+                    case TelephonyManager.NETWORK_TYPE_CDMA:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_1xRTT:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_IDEN:
+                        flag = true;
+                        break;//2G
+                    case TelephonyManager.NETWORK_TYPE_UMTS:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_A:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_HSDPA:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_HSUPA:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_HSPA:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_B:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_EHRPD:
+                        flag = true;
+                        break;
+                    case TelephonyManager.NETWORK_TYPE_HSPAP:
+                        flag = true;
+                        break;//3G
+                    case TelephonyManager.NETWORK_TYPE_LTE:
+                        flag = false;
+                        break;//4G
+                    case TelephonyManager.NETWORK_TYPE_UNKNOWN:
+                        flag = false;
+                        break;
+                    default:
+                        flag = false;
+                        break;
+                }
+            } else {
+                flag = false;
             }
         } else {
             flag = false;
@@ -334,22 +330,6 @@ public class Utils {
         return String.valueOf(month) + "月" + String.valueOf(day) + "日 " + "星期" + week;
     }
 
-    //    /**
-//     * 判断应用是否处于后台
-//     *
-//     * @return
-//     */
-//    public boolean isBackground() {
-//        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-//        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
-//        if (!tasks.isEmpty()) {
-//            ComponentName topActivity = tasks.get(0).topActivity;
-//            if (!topActivity.getPackageName().equals(mContext.getPackageName())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
     public String dateLongToString(long date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
         Date dt = new Date(date);
@@ -389,7 +369,6 @@ public class Utils {
         // 测量屏幕宽和高
         view.getWindowVisibleDisplayFrame(frame);
         int stautsHeight = frame.top;
-        Log.d("jiangqq", "状态栏的高度为:" + stautsHeight);
 
         int width = pActivity.getWindowManager().getDefaultDisplay().getWidth();
         int height = pActivity.getWindowManager().getDefaultDisplay().getHeight();
@@ -421,7 +400,11 @@ public class Utils {
         return screenShot;
     }
 
-
+    /**
+     * 获取屏幕宽度
+     *
+     * @return
+     */
     public int getScreenWidth() {
         if (mScreenWidth == 0) {
             DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
@@ -430,6 +413,11 @@ public class Utils {
         return mScreenWidth;
     }
 
+    /**
+     * 获取屏幕高度
+     *
+     * @return
+     */
     public int getScreenHeight() {
         if (mScreenHeight == 0) {
             DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
@@ -438,4 +426,34 @@ public class Utils {
         return mScreenHeight;
     }
 
+    /**
+     * 下载图片
+     */
+    public void downImage(String url) {
+        Bitmap bmp ;
+        File appDir = new File(mContext.getApplicationContext().getCacheDir(), "splash");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = "splash.jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getSplashPath() {
+        if (splashPath == null) {
+            splashPath = mContext.getApplicationContext().getCacheDir() + "splash/splash.png";
+        }
+        return splashPath;
+    }
 }

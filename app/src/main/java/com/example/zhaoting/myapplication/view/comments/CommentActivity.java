@@ -202,6 +202,16 @@ public class CommentActivity extends BaseActivity implements CommentView, View.O
     }
 
     @Override
+    public void onLongNoConnected() {
+
+    }
+
+    @Override
+    public void onShortNoConnected() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_comment_back: {

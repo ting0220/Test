@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.zhaoting.myapplication.bean.OtherThemeBean;
+import com.example.zhaoting.myapplication.model.OnListener;
+import com.example.zhaoting.myapplication.okhttp.NoConnected;
 import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -17,7 +19,7 @@ import java.io.IOException;
  */
 public class OtherThemeModelImpl implements OtherThemeModel {
     @Override
-    public void getOtherTheme(String s, final OtherThemeListener listener) {
+    public void getOtherTheme(String s, final OnListener listener) {
         String url = "http://news-at.zhihu.com/api/4/theme/" + s;
         OkHttpUtil.getInstance().get(url, new Callback() {
             @Override
@@ -38,6 +40,11 @@ public class OtherThemeModelImpl implements OtherThemeModel {
 //                        mHomeListener.onTopSuccess(mTopList);
                     }
                 });
+            }
+        }, new NoConnected() {
+            @Override
+            public void noConnected() {
+                listener.onNoConnected();
             }
         });
     }

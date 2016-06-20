@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.zhaoting.myapplication.bean.DrawerBean;
+import com.example.zhaoting.myapplication.model.OnListener;
+import com.example.zhaoting.myapplication.okhttp.NoConnected;
 import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 public class DrawerModelImpl implements DrawerModel {
     @Override
-    public void getDrawer(final DrawerListener listener) {
+    public void getDrawer(final OnListener listener) {
         String url = "http://news-at.zhihu.com/api/4/themes";
 //        Map<String, String> map = new HashMap<>();
 //        VolleyUtil.getInstance().get(url,map,new Response.Listener<String>() {
@@ -50,6 +52,11 @@ public class DrawerModelImpl implements DrawerModel {
                         listener.onSuccess(list);
                     }
                 });
+            }
+        }, new NoConnected() {
+            @Override
+            public void noConnected() {
+                listener.onNoConnected();
             }
         });
     }

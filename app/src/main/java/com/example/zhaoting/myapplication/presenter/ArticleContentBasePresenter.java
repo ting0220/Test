@@ -2,11 +2,9 @@ package com.example.zhaoting.myapplication.presenter;
 
 import com.example.zhaoting.myapplication.bean.ArticleContentBean;
 import com.example.zhaoting.myapplication.bean.ExtraInfoBean;
-import com.example.zhaoting.myapplication.model.article.ArticleContentListener;
+import com.example.zhaoting.myapplication.model.OnListener;
 import com.example.zhaoting.myapplication.model.article.ArticleContentModel;
 import com.example.zhaoting.myapplication.model.article.ArticleContentModelImpl;
-import com.example.zhaoting.myapplication.model.article.ArticleCssListener;
-import com.example.zhaoting.myapplication.model.extraInfo.ExtraInfoListener;
 import com.example.zhaoting.myapplication.model.extraInfo.ExtraInfoModel;
 import com.example.zhaoting.myapplication.model.extraInfo.ExtraInfoModelImpl;
 import com.example.zhaoting.myapplication.view.article.ArticleContentView;
@@ -22,13 +20,14 @@ public class ArticleContentBasePresenter {
     public ArticleContentBasePresenter(ArticleContentView articleContentView) {
         mArticleContentView = articleContentView;
         mArticleContentModel = new ArticleContentModelImpl();
-        mExtraInfoModel=new ExtraInfoModelImpl();
+        mExtraInfoModel = new ExtraInfoModelImpl();
     }
 
     public void getArticleContent(int id) {
-        mArticleContentModel.getArticleContent(id, new ArticleContentListener() {
+        mArticleContentModel.getArticleContent(id, new OnListener() {
             @Override
-            public void onSuccess(ArticleContentBean bean) {
+            public void onSuccess(Object s) {
+                ArticleContentBean bean = (ArticleContentBean) s;
                 mArticleContentView.onSuccess(bean);
             }
 
@@ -36,33 +35,50 @@ public class ArticleContentBasePresenter {
             public void onError() {
                 mArticleContentView.onError();
             }
+
+            @Override
+            public void onNoConnected() {
+
+            }
         });
     }
 
     public void getArticleCss(String url) {
-        mArticleContentModel.getArticleCss(url, new ArticleCssListener() {
+        mArticleContentModel.getArticleCss(url, new OnListener() {
             @Override
-            public void onCssSuccess(String s) {
-                mArticleContentView.onCssSuccess(s);
+            public void onSuccess(Object s) {
+                String str = (String) s;
+                mArticleContentView.onCssSuccess(str);
             }
 
             @Override
-            public void onCssError() {
+            public void onError() {
                 mArticleContentView.onCssError();
+            }
+
+            @Override
+            public void onNoConnected() {
+
             }
         });
 
     }
 
     public void getExtraInfo(int id) {
-        mExtraInfoModel.getExtraInfo(id, new ExtraInfoListener() {
+        mExtraInfoModel.getExtraInfo(id, new OnListener() {
             @Override
-            public void onSuccess(ExtraInfoBean bean) {
+            public void onSuccess(Object s) {
+                ExtraInfoBean bean = (ExtraInfoBean) s;
                 mArticleContentView.setToolBar(bean);
             }
 
             @Override
             public void onError() {
+
+            }
+
+            @Override
+            public void onNoConnected() {
 
             }
         });
