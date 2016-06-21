@@ -45,13 +45,13 @@ public class AutoScrollViewPagerLayout extends RelativeLayout {
         mTextView = (TextView) findViewById(R.id.id_orange_point);
         mContext = context;
 
-
+        mViewPagetHandler = new ViewPagerHandler(0, false, mViewPager);
     }
 
     public void setListViews(List<View> list) {
         mList = list;
         adapter = new HomeTopViewPagerAdapter(mList);
-        mViewPagetHandler = new ViewPagerHandler(0, false, mViewPager, list.size());
+        mViewPagetHandler.setSize(list.size());
 
 
         addPoints(list.size());

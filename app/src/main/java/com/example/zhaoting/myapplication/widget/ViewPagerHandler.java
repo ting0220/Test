@@ -19,11 +19,10 @@ public class ViewPagerHandler extends Handler {
     private ViewPager mViewPager;
     private int mSize;
 
-    public ViewPagerHandler(int currentItem, boolean isStop, ViewPager viewPager, int size) {
+    public ViewPagerHandler(int currentItem, boolean isStop, ViewPager viewPager) {
         mCurrentItem = currentItem;
         mIsStop = isStop;
         mViewPager = viewPager;
-        mSize = size;
     }
 
     @Override
@@ -61,5 +60,9 @@ public class ViewPagerHandler extends Handler {
 
     public void setStop(boolean isStop) {
         mIsStop = isStop;
+    }
+
+    public void setSize(int size) {
+        mSize = size;
     }
 }
