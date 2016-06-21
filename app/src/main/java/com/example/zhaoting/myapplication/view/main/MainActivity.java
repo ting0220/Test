@@ -2,6 +2,7 @@ package com.example.zhaoting.myapplication.view.main;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,7 +25,9 @@ import com.example.zhaoting.myapplication.utils.SharedPManager;
 import com.example.zhaoting.myapplication.view.home.HomeFragment;
 import com.example.zhaoting.myapplication.view.otherTheme.OtherThemeFragment;
 import com.example.zhaoting.myapplication.view.setting.SettingActivity;
+import com.example.zhaoting.utils.IOUtils;
 import com.example.zhaoting.utils.Utils;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,6 +48,8 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     public int isChangeMenu = 0;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private String toolTitle = "首页";
+    private boolean isFirst = true;//用于没网时不加载更多
+
 
 
     public Handler mHandler = new Handler() {
@@ -196,11 +201,31 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     @Override
     public void onError() {
-        
+
     }
 
     @Override
     public void onNoConnected() {
+        if (IOUtils.getInstance().isFileIsExist("drawer")) {
+            if (isFirst) {
+                isFirst = false;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String s = IOUtils.getInstance().readSDFile("drawer");
+                        Gson gson = new Gson();
+                        DrawerBean drawerBean = gson.fromJson(s, DrawerBean.class);
+                        final List<DrawerBean.OthersBean> list = drawerBean.getOthers();
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                setDrawer(list);
+                            }
+                        });
+                    }
+                }).start();
+            }
+        }
 
     }
 

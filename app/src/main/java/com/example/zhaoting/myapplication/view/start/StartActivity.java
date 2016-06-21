@@ -3,6 +3,7 @@ package com.example.zhaoting.myapplication.view.start;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import com.example.zhaoting.myapplication.app.BaseActivity;
 import com.example.zhaoting.myapplication.bean.StartBean;
 import com.example.zhaoting.myapplication.presenter.StartPresenter;
 import com.example.zhaoting.myapplication.view.main.MainActivity;
+import com.example.zhaoting.utils.IOUtils;
 import com.example.zhaoting.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -88,15 +90,22 @@ public class StartActivity extends BaseActivity implements StartView {
         if (!TextUtils.isEmpty(s.getText())) {
             mText.setText(s.getText());
         }
-        Utils.getInstance().downImage(s.getImg());
+        final String url = s.getImg();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bmp = Utils.getInstance().urlToBitmap(url);
+                IOUtils.getInstance().downImage(bmp);
+            }
+        }).start();
         toMainActivity();
     }
 
     @Override
     public void onError() {
-        File file = new File(Utils.getInstance().getSplashPath());
+        File file = new File(IOUtils.getInstance().getSplashPath());
         if (file.exists()) {
-            Picasso.with(this).load(Utils.getInstance().getSplashPath()).into(mImg);
+            Picasso.with(this).load(file).into(mImg);
         } else {
             mImg.setImageResource(R.mipmap.ic_launcher);
         }
@@ -105,11 +114,11 @@ public class StartActivity extends BaseActivity implements StartView {
 
     @Override
     public void onNoConnected() {
-        File file = new File(Utils.getInstance().getSplashPath());
+        File file = new File(IOUtils.getInstance().getSplashPath());
         if (file.exists()) {
-            Picasso.with(this).load(Utils.getInstance().getSplashPath()).into(mImg);
+            Picasso.with(this).load(file).into(mImg);
         } else {
-            mImg.setImageResource(R.mipmap.ic_launcher);
+               mImg.setImageResource(R.mipmap.ic_launcher);
         }
         toMainActivity();
     }
