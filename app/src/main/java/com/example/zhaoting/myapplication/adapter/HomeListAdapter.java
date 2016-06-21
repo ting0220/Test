@@ -11,7 +11,8 @@ import com.example.zhaoting.myapplication.R;
 import com.example.zhaoting.myapplication.bean.StoriesBean;
 import com.example.zhaoting.myapplication.utils.SharedPManager;
 import com.example.zhaoting.myapplication.viewHolder.ListHolder;
-import com.example.zhaoting.utils.Utils;
+import com.example.zhaoting.utils.DateUtils;
+import com.example.zhaoting.utils.NetUtils;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +41,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
     public void onBindViewHolder(ListHolder holder, int position) {
         holder.articleTitle.setText(mList.get(position).getTitle());
         if (SharedPManager.getInstance().get2gOr3gChecked()) {
-            if (Utils.getInstance().getNetType()) {
+            if (NetUtils.getInstance().getNetType()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Picasso.with(mContext).load(mList.get(position).getImages().get(0)).networkPolicy(NetworkPolicy.OFFLINE).placeholder(mContext.getResources().getDrawable(R.mipmap.ic_launcher, mContext.getTheme())).
                             into(holder.articleImg);
@@ -48,7 +49,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
                     Picasso.with(mContext).load(mList.get(position).getImages().get(0)).networkPolicy(NetworkPolicy.OFFLINE).placeholder(mContext.getResources().getDrawable(R.mipmap.ic_launcher)).
                             into(holder.articleImg);
                 }
-            }else{
+            } else {
                 Picasso.with(mContext).load(mList.get(position).getImages().get(0)).
                         into(holder.articleImg);
             }
@@ -57,10 +58,10 @@ public class HomeListAdapter extends RecyclerView.Adapter<ListHolder> {
                     into(holder.articleImg);
         }
 
-        if (Utils.getInstance().isToday(mList.get(position).getDate())) {
+        if (DateUtils.getInstance().isToday(mList.get(position).getDate())) {
             holder.timeFlag.setText(R.string.today_news);
         } else {
-            holder.timeFlag.setText(Utils.getInstance().getDate(mList.get(position).getDate()));
+            holder.timeFlag.setText(DateUtils.getInstance().getDate(mList.get(position).getDate()));
         }
         if (mList.get(position).isMultipic()) {
             holder.articleFlag.setVisibility(View.VISIBLE);

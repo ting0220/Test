@@ -34,7 +34,7 @@ public class HomePresenter {
 
             @Override
             public void onNoConnected() {
-
+                mHomeView.onNoConnected();
             }
         }, url);
     }

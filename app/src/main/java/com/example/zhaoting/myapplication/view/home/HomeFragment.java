@@ -1,9 +1,10 @@
 package com.example.zhaoting.myapplication.view.home;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,9 @@ import com.example.zhaoting.myapplication.view.main.MainActivity;
 import com.example.zhaoting.myapplication.widget.AutoScrollViewPagerLayout;
 import com.example.zhaoting.myapplication.widget.HomeEndlessScrollListener;
 import com.example.zhaoting.myapplication.widget.OnRecyclerItemClickListener;
+import com.example.zhaoting.utils.IOUtils;
 import com.example.zhaoting.utils.Utils;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,6 +56,8 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     private boolean isRefresh = false;
     private List<StoriesBean> mList = new ArrayList<>();
     private List<Integer> mListForId = new ArrayList<>();
+    private boolean isFirst = true;//用于没网时不加载更多
+    private int currentPage = 0;
 
 
     @Override
@@ -169,11 +174,39 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             mListForId.add(data.getStories().get(i).getId());
         }
         setListView(mList);
+
     }
 
     @Override
     public void onError() {
 
+    }
+
+    @Override
+    public void onNoConnected() {
+        if (IOUtils.getInstance().isFileIsExist("home" + String.valueOf(currentPage))) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String s = IOUtils.getInstance().readSDFile("home" + String.valueOf(currentPage));
+                    Gson gson = new Gson();
+                    final HomeBean homeBean = gson.fromJson(s, HomeBean.class);
+                    currentPage++;
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            setData(homeBean);
+                        }
+                    });
+                }
+            }).start();
+
+        }
+//        if (isRefresh) {
+//            isRefresh = false;
+//            mSwipeRefreshLayout.setRefreshing(isRefresh);
+//            Utils.getInstance().ToastShort(getResources().getString(R.string.no_connected));
+//        }
     }
 
     @Override
@@ -190,6 +223,7 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
             mList = new ArrayList<>();
             mListForId = new ArrayList<>();
             mHomePresenter.getHomeList("http://news-at.zhihu.com/api/4/news/latest");
+            currentPage=0;
             EventBus.getDefault().post(new ChangeToolbarTextEvent(getResources().getString(R.string.drawer_home)));
         }
     }

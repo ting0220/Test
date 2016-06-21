@@ -30,7 +30,7 @@
             android:ellipsize="end"
             android:maxLength="5"
             android:singleLine="true"
-            android:text="texttttttt"
+            android:text="@string/unlogin"
             android:textColor="@color/white_home"
             android:textSize="@dimen/sp_18"/>
     </LinearLayout>

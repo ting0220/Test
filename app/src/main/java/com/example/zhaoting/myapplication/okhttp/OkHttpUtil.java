@@ -3,6 +3,7 @@ package com.example.zhaoting.myapplication.okhttp;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.zhaoting.utils.NetUtils;
 import com.example.zhaoting.utils.Utils;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -38,7 +39,7 @@ public class OkHttpUtil {
         return SingletonHolder.instance;
     }
 
-    public void get(String url, Map<String, String> map, Callback responseCallback,NoConnected mNoConnected) {
+    public void get(String url, Map<String, String> map, Callback responseCallback, NoConnected mNoConnected) {
         StringBuilder builder = new StringBuilder(url);
         builder.append("?");
         Set<String> keys = map.keySet();
@@ -56,17 +57,17 @@ public class OkHttpUtil {
             }
         }
         Log.i("tag", builder.toString());
-        get(builder.toString(), responseCallback,mNoConnected);
+        get(builder.toString(), responseCallback, mNoConnected);
 
     }
 
 
-    public void get(String url, Callback responseCallback,NoConnected mNoConnected) {
-        if (Utils.getInstance().isNetConnected()) {
+    public void get(String url, Callback responseCallback, NoConnected mNoConnected) {
+        if (NetUtils.getInstance().isNetConnected()) {
             Request request = new Request.Builder().url(url).build();
             mOkHttpClient.newCall(request).enqueue(responseCallback);
         } else {
-            Utils.getInstance().ToastShort("网络连接错误");
+            Utils.getInstance().ToastShort("网络连接错误，请检查您的网络设置");
             mNoConnected.noConnected();
         }
     }

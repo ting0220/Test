@@ -68,6 +68,7 @@ public abstract class HomeEndlessScrollListener extends RecyclerView.OnScrollLis
                 loading = false;
                 previousTotalItemCount = totalItemCount;
             }
+
         }
 
         if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {

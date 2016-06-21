@@ -7,6 +7,7 @@ import com.example.zhaoting.myapplication.bean.DrawerBean;
 import com.example.zhaoting.myapplication.model.OnListener;
 import com.example.zhaoting.myapplication.okhttp.NoConnected;
 import com.example.zhaoting.myapplication.okhttp.OkHttpUtil;
+import com.example.zhaoting.utils.IOUtils;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -43,6 +44,7 @@ public class DrawerModelImpl implements DrawerModel {
             @Override
             public void onResponse(Response response) throws IOException {
                 String result = response.body().string();
+                IOUtils.getInstance().write2SDFromInput(result,"drawer");
                 Gson gson = new Gson();
                 DrawerBean drawerBean = gson.fromJson(result, DrawerBean.class);
                 final List<DrawerBean.OthersBean> list = drawerBean.getOthers();

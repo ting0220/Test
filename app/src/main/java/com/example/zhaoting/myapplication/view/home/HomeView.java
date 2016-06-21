@@ -12,4 +12,5 @@ public interface HomeView {
     void setData(HomeBean data);
 
     void onError();
+    void onNoConnected();
 }

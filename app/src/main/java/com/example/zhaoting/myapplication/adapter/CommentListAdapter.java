@@ -1,7 +1,6 @@
 package com.example.zhaoting.myapplication.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +18,7 @@ import com.example.zhaoting.myapplication.viewHolder.CommentEmptyHolder;
 import com.example.zhaoting.myapplication.viewHolder.CommentExtraHolder;
 import com.example.zhaoting.myapplication.viewHolder.CommentListHolder;
 import com.example.zhaoting.myapplication.widget.onViewClickListener;
-import com.example.zhaoting.utils.Utils;
+import com.example.zhaoting.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -68,7 +67,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     Picasso.with(mContext).load(mList.get(position - 1).getAvatar()).into(((CommentListHolder) holder).mCircleImageView);
                     ((CommentListHolder) holder).mCommentOwner.setText(mList.get(position - 1).getAuthor());
                     ((CommentListHolder) holder).mCommentContent.setText(mList.get(position - 1).getContent());
-                    String date = Utils.getInstance().dateLongToString(mList.get(position - 1).getTime());
+                    String date = DateUtils.getInstance().dateLongToString(mList.get(position - 1).getTime());
                     ((CommentListHolder) holder).mCommentDate.setText(date);
                     ((CommentListHolder) holder).mCommentLike.setText(String.valueOf(mList.get(position - 1).getLikes()));
                     if (mList.get(position - 1).getReply_to() != null) {
@@ -114,7 +113,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         Picasso.with(mContext).load(mList.get(position - 3).getAvatar()).into(((CommentListHolder) holder).mCircleImageView);
                         ((CommentListHolder) holder).mCommentOwner.setText(mList.get(position - 3).getAuthor());
                         ((CommentListHolder) holder).mCommentContent.setText(mList.get(position - 3).getContent());
-                        String date = Utils.getInstance().dateLongToString(mList.get(position - 3).getTime());
+                        String date = DateUtils.getInstance().dateLongToString(mList.get(position - 3).getTime());
                         ((CommentListHolder) holder).mCommentDate.setText(date);
                         ((CommentListHolder) holder).mCommentLike.setText(String.valueOf(mList.get(position - 3).getLikes()));
 
@@ -161,7 +160,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         Picasso.with(mContext).load(mList.get(position - 2).getAvatar()).into(((CommentListHolder) holder).mCircleImageView);
                         ((CommentListHolder) holder).mCommentOwner.setText(mList.get(position - 2).getAuthor());
                         ((CommentListHolder) holder).mCommentContent.setText(mList.get(position - 2).getContent());
-                        String date = Utils.getInstance().dateLongToString(mList.get(position - 2).getTime());
+                        String date = DateUtils.getInstance().dateLongToString(mList.get(position - 2).getTime());
                         ((CommentListHolder) holder).mCommentDate.setText(date);
                         ((CommentListHolder) holder).mCommentLike.setText(String.valueOf(mList.get(position - 2).getLikes()));
 
