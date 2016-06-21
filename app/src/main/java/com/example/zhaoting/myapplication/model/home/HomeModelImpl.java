@@ -36,10 +36,10 @@ public class HomeModelImpl implements HomeModel {
                 final HomeBean homeBean = gson.fromJson(result, HomeBean.class);
                 if (homeBean.getTop_stories() != null) {
                     IOUtils.getInstance().deleteFile();
-                    IOUtils.getInstance().write2SDFromInput(result, "home" + String.valueOf(i));
+                    IOUtils.getInstance().write2SDFromInput(result, "home" + String.valueOf(i),"home");
                     i++;
                 } else {
-                    IOUtils.getInstance().write2SDFromInput(result, "home" + String.valueOf(i));
+                    IOUtils.getInstance().write2SDFromInput(result, "home" + String.valueOf(i),"home");
                     i++;
                 }
                 new Handler(Looper.getMainLooper()).post(new Runnable() {

@@ -184,11 +184,11 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
 
     @Override
     public void onNoConnected() {
-        if (IOUtils.getInstance().isFileIsExist("home" + String.valueOf(currentPage))) {
+        if (IOUtils.getInstance().isFileIsExist("home" + String.valueOf(currentPage),"home")) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    String s = IOUtils.getInstance().readSDFile("home" + String.valueOf(currentPage));
+                    String s = IOUtils.getInstance().readSDFile("home" + String.valueOf(currentPage),"home");
                     Gson gson = new Gson();
                     final HomeBean homeBean = gson.fromJson(s, HomeBean.class);
                     currentPage++;

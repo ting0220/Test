@@ -48,7 +48,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
     public int isChangeMenu = 0;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private String toolTitle = "首页";
-    private boolean isFirst = true;//用于没网时不加载更多
 
 
 
@@ -206,13 +205,12 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
 
     @Override
     public void onNoConnected() {
-        if (IOUtils.getInstance().isFileIsExist("drawer")) {
-            if (isFirst) {
-                isFirst = false;
+        if (IOUtils.getInstance().isFileIsExist("drawer","drawer")) {
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        String s = IOUtils.getInstance().readSDFile("drawer");
+                        String s = IOUtils.getInstance().readSDFile("drawer","drawer");
                         Gson gson = new Gson();
                         DrawerBean drawerBean = gson.fromJson(s, DrawerBean.class);
                         final List<DrawerBean.OthersBean> list = drawerBean.getOthers();
@@ -224,7 +222,6 @@ public class MainActivity extends BaseActivity implements MainView, Toolbar.OnMe
                         });
                     }
                 }).start();
-            }
         }
 
     }

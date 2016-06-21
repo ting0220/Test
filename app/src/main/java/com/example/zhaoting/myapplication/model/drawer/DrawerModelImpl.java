@@ -44,7 +44,7 @@ public class DrawerModelImpl implements DrawerModel {
             @Override
             public void onResponse(Response response) throws IOException {
                 String result = response.body().string();
-                IOUtils.getInstance().write2SDFromInput(result,"drawer");
+                IOUtils.getInstance().write2SDFromInput(result,"drawer","drawer");
                 Gson gson = new Gson();
                 DrawerBean drawerBean = gson.fromJson(result, DrawerBean.class);
                 final List<DrawerBean.OthersBean> list = drawerBean.getOthers();

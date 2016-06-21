@@ -77,8 +77,12 @@ public class IOUtils {
     /**
      * 下载文件到sd卡
      */
-    public void write2SDFromInput(String s, String name) {
-        File file = new File(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), name + ".txt");
+    public void write2SDFromInput(String s, String name, String first) {
+        File file2 = new File(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), first);
+        if (!file2.exists()) {
+            file2.mkdir();
+        }
+        File file = new File(file2, name + ".txt");
         try {
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(s.getBytes());
@@ -91,24 +95,28 @@ public class IOUtils {
         }
     }
 
-    /**
-     * 在文件末尾添加文件
-     */
-    public void add2SdFromString(String s, String name) {
-        String str = readSDFile(name);
-        StringBuilder string = new StringBuilder(str);
-        string.delete(string.length() - 3, string.length() - 1);
-
-        string.append(s);
-        write2SDFromInput(string.toString(), name);
-    }
+//    /**
+//     * 在文件末尾添加文件
+//     */
+//    public void add2SdFromString(String s, String name) {
+//        String str = readSDFile(name);
+//        StringBuilder string = new StringBuilder(str);
+//        string.delete(string.length() - 3, string.length() - 1);
+//
+//        string.append(s);
+//        write2SDFromInput(string.toString(), name);
+//    }
 
     /**
      * 读取sd卡中的文件
      */
-    public String readSDFile(String fileName) {
+    public String readSDFile(String fileName, String first) {
         String str = null;
-        File file = new File(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), fileName + ".txt");
+        File file2 = new File(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), first);
+        if (!file2.exists()) {
+            file2.mkdir();
+        }
+        File file = new File(file2, fileName + ".txt");
         try {
             FileInputStream fis = new FileInputStream(file);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -134,7 +142,7 @@ public class IOUtils {
      * 针对home
      */
     public void deleteFile() {
-        File file = new File(String.valueOf(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)));
+        File file = new File(String.valueOf(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "home"));
         if (file.exists() == false) {
             return;
         } else {
@@ -161,8 +169,12 @@ public class IOUtils {
      *
      * @return
      */
-    public boolean isFileIsExist(String fileName) {
-        File file = new File(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), fileName + ".txt");
+    public boolean isFileIsExist(String fileName, String first) {
+        File file2 = new File(mContext.getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), first);
+        if (!file2.exists()) {
+            file2.mkdir();
+        }
+        File file = new File(file2, fileName + ".txt");
         if (file.exists()) {
             return true;
         } else {
