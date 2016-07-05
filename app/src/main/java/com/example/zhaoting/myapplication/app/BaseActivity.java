@@ -18,8 +18,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected BaseFragment currentFragment;
     private int flag = -1;
 
-
-
     public BaseFragment getCurrentFragment() {
         return currentFragment;
     }
@@ -84,6 +82,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 
     public void jumpActivity(Class clazz, boolean isFinish) {
         jumpActivity(clazz, null, isFinish);

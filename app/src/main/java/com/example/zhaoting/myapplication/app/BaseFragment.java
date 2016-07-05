@@ -7,29 +7,35 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.zhaoting.myapplication.utils.SharedPManager;
-
 
 /**
  * Created by zhaoting on 15/11/25.
  */
-public abstract class BaseFragment extends Fragment  implements View.OnTouchListener{
+public abstract class BaseFragment extends Fragment implements View.OnTouchListener {
     public View mRootView;
+    protected Context mContext;
 
     private static Bundle mBundle;
+
+    public Context getHoldingContext() {
+        return mContext;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final Context contextTheme = new ContextThemeWrapper(getActivity(), SharedPManager.getInstance().getTheme());
-        LayoutInflater localInflater = inflater.cloneInContext(contextTheme);
-        mRootView = localInflater.inflate(getFragmentLayout(), container, false);
+        mRootView = inflater.inflate(getFragmentLayout(), container, false);
         initViews();
         initDatas();
         return mRootView;
@@ -67,7 +73,7 @@ public abstract class BaseFragment extends Fragment  implements View.OnTouchList
 
 
     public <T extends BaseFragment> void replaceFragment(Class<T> clazz, String tag, Bundle bundle) {
-        int layout = ((BaseActivity) getActivity()).getFragmentContainerId();
+        int layout = ((BaseActivity) getHoldingContext()).getFragmentContainerId();
         if (layout == 0) {
             return;
         }
@@ -78,8 +84,8 @@ public abstract class BaseFragment extends Fragment  implements View.OnTouchList
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
-        if (((BaseActivity) getActivity()).currentFragment != null) {
-            if (tag.equals(((BaseActivity) getActivity()).currentFragment.getTag())) {
+        if (((BaseActivity) getHoldingContext()).currentFragment != null) {
+            if (tag.equals(((BaseActivity) getHoldingContext()).currentFragment.getTag())) {
                 return;
             }
         }
@@ -88,7 +94,7 @@ public abstract class BaseFragment extends Fragment  implements View.OnTouchList
                 .replace(layout, fragment, tag)
                 .addToBackStack(tag)
                 .commit();
-        ((BaseActivity) getActivity()).currentFragment = fragment;
+        ((BaseActivity) getHoldingContext()).currentFragment = fragment;
     }
 
     @Override
@@ -102,14 +108,6 @@ public abstract class BaseFragment extends Fragment  implements View.OnTouchList
         return true;
     }
 
-//    public Bundle getBundle() {
-//        return mBundle;
-//    }
-//
-//    public void setBundle(Bundle bundle) {
-//        mBundle = null;
-//        mBundle = bundle;
-//    }
 
     //抽象方法
 
