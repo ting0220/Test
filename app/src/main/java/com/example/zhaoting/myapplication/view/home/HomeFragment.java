@@ -56,7 +56,6 @@ public class HomeFragment extends BaseFragment implements HomeView, SwipeRefresh
     private boolean isRefresh = false;
     private List<StoriesBean> mList = new ArrayList<>();
     private List<Integer> mListForId = new ArrayList<>();
-    private boolean isFirst = true;//用于没网时不加载更多
     private int currentPage = 0;
 
 
